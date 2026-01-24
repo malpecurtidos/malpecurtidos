@@ -1,3 +1,4 @@
+import { NotFound } from "~/components/NotFound";
 import {
   isRouteErrorResponse,
   Links,
@@ -59,6 +60,10 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return <NotFound />;
+  }
+
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
@@ -76,13 +81,15 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
+      <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-6 mt-20">
+        <h1 className="text-2xl font-bold text-red-500 mb-2">{message}</h1>
+        <p className="text-gray-300 mb-4">{details}</p>
+        {stack && (
+          <pre className="w-full p-4 overflow-x-auto bg-black/50 rounded text-sm text-gray-400">
+            <code>{stack}</code>
+          </pre>
+        )}
+      </div>
     </main>
   );
 }

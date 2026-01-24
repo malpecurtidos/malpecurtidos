@@ -34,7 +34,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "wx-brandy",
         variantName: "Brandy",
         colorHex: "#874C05",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       },
       {
         skinId: "wx-pu-008",
@@ -42,7 +42,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "wx-olive",
         variantName: "Oliva",
         colorHex: "#556B2F",
-        productImage: "/home-imgs/hero/hero-2.webp"
+        productImage: ""
       },
       {
         skinId: "pl-pu-002",
@@ -50,7 +50,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-brown",
         variantName: "Marrón",
         colorHex: "#8B5A2B",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       }
     ],
     tags: ["trabajo", "industrial", "resistente"],
@@ -68,7 +68,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-chestnut",
         variantName: "Castaño",
         colorHex: "#954535",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       },
       {
         skinId: "pl-pu-002",
@@ -76,7 +76,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-brown",
         variantName: "Marrón",
         colorHex: "#8B5A2B",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "emb-croc-045",
@@ -84,7 +84,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "croc-black",
         variantName: "Black Gloss",
         colorHex: "#1A1A1A",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       }
     ],
     tags: ["formal", "ejecutivo", "elegante"],
@@ -102,7 +102,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "nb-chocolate",
         variantName: "Chocolate",
         colorHex: "#7B3F00",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "nb-sd-005",
@@ -110,7 +110,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "nb-sand",
         variantName: "Arena",
         colorHex: "#C2B280",
-        productImage: "/home-imgs/hero/hero-2.webp"
+        productImage: ""
       },
       {
         skinId: "pl-pu-002",
@@ -118,7 +118,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-tan",
         variantName: "Beige",
         colorHex: "#D2B48C",
-        productImage: "/home-imgs/hero/hero-2.webp"
+        productImage: ""
       }
     ],
     tags: ["casual", "versátil", "moderno"],
@@ -138,7 +138,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-brown",
         variantName: "Marrón",
         colorHex: "#8B5A2B",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "emb-croc-045",
@@ -146,7 +146,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "croc-black",
         variantName: "Black Gloss",
         colorHex: "#1A1A1A",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "emb-croc-045",
@@ -154,7 +154,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "croc-brown",
         variantName: "Brown Matte",
         colorHex: "#5D4037",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       }
     ],
     tags: ["ejecutivo", "moderno", "profesional"],
@@ -172,7 +172,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "croc-black",
         variantName: "Black Gloss",
         colorHex: "#1A1A1A",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "pl-pu-002",
@@ -180,7 +180,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-chestnut",
         variantName: "Castaño",
         colorHex: "#954535",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       },
       {
         skinId: "nb-sd-005",
@@ -188,7 +188,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "nb-grey",
         variantName: "Gris",
         colorHex: "#808080",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       }
     ],
     tags: ["elegante", "moda", "clásico"],
@@ -206,7 +206,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-brown",
         variantName: "Marrón",
         colorHex: "#8B5A2B",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "emb-croc-045",
@@ -214,7 +214,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "croc-brown",
         variantName: "Brown Matte",
         colorHex: "#5D4037",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       }
     ],
     tags: ["compacto", "funcional", "accesorio"],
@@ -234,7 +234,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pa-cognac",
         variantName: "Coñac",
         colorHex: "#9A463D",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "prem-an-015",
@@ -242,7 +242,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pa-mocha",
         variantName: "Moca",
         colorHex: "#3B2F2F",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       },
       {
         skinId: "sa-soft-020",
@@ -250,7 +250,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "sa-cream",
         variantName: "Crema",
         colorHex: "#FFFDD0",
-        productImage: "/home-imgs/hero/hero-2.webp"
+        productImage: ""
       }
     ],
     tags: ["moderno", "hogar", "lujo"],
@@ -268,7 +268,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "auto-black",
         variantName: "Negro",
         colorHex: "#000000",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "auto-an-012",
@@ -276,7 +276,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "auto-red",
         variantName: "Rojo Deportivo",
         colorHex: "#FF0000",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       },
       {
         skinId: "auto-an-012",
@@ -284,7 +284,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "auto-beige",
         variantName: "Beige",
         colorHex: "#F5F5DC",
-        productImage: "/home-imgs/hero/hero-2.webp"
+        productImage: ""
       }
     ],
     tags: ["automotriz", "deportivo", "premium"],
@@ -302,7 +302,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "sa-taupe",
         variantName: "Taupe",
         colorHex: "#483C32",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       },
       {
         skinId: "prem-an-015",
@@ -310,7 +310,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pa-cognac",
         variantName: "Coñac",
         colorHex: "#9A463D",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       }
     ],
     tags: ["oficina", "ejecutivo", "confort"],
@@ -330,7 +330,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "nb-chocolate",
         variantName: "Chocolate",
         colorHex: "#7B3F00",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       },
       {
         skinId: "nb-sd-005",
@@ -338,7 +338,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "nb-grey",
         variantName: "Gris",
         colorHex: "#808080",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       },
       {
         skinId: "pl-pu-002",
@@ -346,7 +346,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-brown",
         variantName: "Marrón",
         colorHex: "#8B5A2B",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: ""
       }
     ],
     tags: ["bomber", "clásico", "moda"],
@@ -364,7 +364,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-brown",
         variantName: "Marrón",
         colorHex: "#8B5A2B",
-        productImage: "/home-imgs/hero/hero-1.webp"
+        productImage: " "
       },
       {
         skinId: "pl-pu-002",
@@ -372,7 +372,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-chestnut",
         variantName: "Castaño",
         colorHex: "#954535",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       },
       {
         skinId: "wx-pu-008",
@@ -380,7 +380,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "wx-brandy",
         variantName: "Brandy",
         colorHex: "#874C05",
-        productImage: "/home-imgs/hero/hero-3.webp"
+        productImage: ""
       }
     ],
     tags: ["biker", "rebelde", "resistente"],
@@ -398,7 +398,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "nb-sand",
         variantName: "Arena",
         colorHex: "#C2B280",
-        productImage: "/home-imgs/hero/hero-2.webp"
+        productImage: ""
       },
       {
         skinId: "pl-pu-002",
@@ -406,7 +406,7 @@ export const showroomProducts: ShowroomProduct[] = [
         variantId: "pu-tan",
         variantName: "Beige",
         colorHex: "#D2B48C",
-        productImage: "/home-imgs/hero/hero-2.webp"
+        productImage: ""
       }
     ],
     tags: ["casual", "versátil", "ligero"],

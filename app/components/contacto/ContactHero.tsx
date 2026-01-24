@@ -1,6 +1,6 @@
 export function ContactHero() {
   return (
-    <section className="relative h-[40vh] min-h-[400px] w-full overflow-hidden flex items-center justify-center">
+    <section className="relative h-[40vh] min-h-[500px] w-full overflow-hidden flex items-center justify-center">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img

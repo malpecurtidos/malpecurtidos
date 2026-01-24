@@ -1,3 +1,5 @@
+import { Button } from "~/ui/button";
+
 export function ContactForm() {
   return (
     <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-8 shadow-2xl">
@@ -37,8 +39,8 @@ export function ContactForm() {
         <div className="space-y-2">
           <label htmlFor="subject" className="text-sm font-medium text-gray-300 ml-1">Asunto</label>
           <select
-             id="subject"
-             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10 [&>option]:bg-[#1a1a1a]"
+            id="subject"
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10 [&>option]:bg-[#1a1a1a]"
           >
             <option value="" disabled selected>Selecciona un asunto</option>
             <option value="ventas">Ventas / Cotización</option>
@@ -58,13 +60,14 @@ export function ContactForm() {
           />
         </div>
 
-        <button
+        <Button
+          variant="primary"
           type="submit"
-          className="w-full bg-[#D4AF37] text-[#2A2522] font-bold py-4 rounded-xl hover:bg-[#F2C94C] transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#D4AF37]/20 flex items-center justify-center gap-2"
+          className="w-full py-4 flex items-center justify-center gap-2"
         >
           <span>Enviar Mensaje</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+        </Button>
       </form>
     </div>
   );

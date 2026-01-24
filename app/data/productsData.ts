@@ -35,19 +35,19 @@ export const products: Product[] = [
         id: "pu-brown",
         name: "Marrón",
         colorHex: "#8B5A2B",
-        images: ["/home-imgs/hero/hero-1.webp"] // Imágenes placeholder por ahora
+        images: [""] // Imágenes placeholder por ahora
       },
       {
         id: "pu-tan",
         name: "Beige",
         colorHex: "#D2B48C",
-        images: ["/home-imgs/hero/hero-2.webp"]
+        images: [""]
       },
       {
         id: "pu-chestnut",
         name: "Castaño",
         colorHex: "#954535",
-        images: ["/home-imgs/hero/hero-3.webp"]
+        images: [""]
       }
     ],
     tags: ["vintage", "patina", "duradero"],
@@ -67,19 +67,19 @@ export const products: Product[] = [
         id: "nb-sand",
         name: "Arena",
         colorHex: "#C2B280",
-        images: ["/home-imgs/hero/hero-2.webp"]
+        images: [""]
       },
       {
         id: "nb-chocolate",
         name: "Chocolate",
         colorHex: "#7B3F00",
-        images: ["/home-imgs/hero/hero-1.webp"]
+        images: [""]
       },
       {
         id: "nb-grey",
         name: "Gris",
         colorHex: "#808080",
-        images: ["/home-imgs/hero/hero-3.webp"]
+        images: [""]
       }
     ],
     tags: ["suave", "lujo", "terciopelo"],
@@ -99,13 +99,13 @@ export const products: Product[] = [
         id: "wx-brandy",
         name: "Brandy",
         colorHex: "#874C05",
-        images: ["/home-imgs/hero/hero-3.webp"]
+        images: [""]
       },
       {
         id: "wx-olive",
         name: "Oliva",
         colorHex: "#556B2F",
-        images: ["/home-imgs/hero/hero-2.webp"]
+        images: [""]
       }
     ],
     tags: ["resistente-al-agua", "resistente", "botas"],
@@ -125,19 +125,19 @@ export const products: Product[] = [
         id: "auto-black",
         name: "Negro",
         colorHex: "#000000",
-        images: ["/home-imgs/hero/hero-1.webp"]
+        images: [""]
       },
       {
         id: "auto-beige",
         name: "Beige",
         colorHex: "#F5F5DC",
-        images: ["/home-imgs/hero/hero-2.webp"]
+        images: [""]
       },
       {
         id: "auto-red",
         name: "Rojo Deportivo",
         colorHex: "#FF0000",
-        images: ["/home-imgs/hero/hero-3.webp"]
+        images: [""]
       }
     ],
     tags: ["automotriz", "resistente-uv", "duradero"],
@@ -157,13 +157,13 @@ export const products: Product[] = [
         id: "pa-cognac",
         name: "Coñac",
         colorHex: "#9A463D",
-        images: ["/home-imgs/hero/hero-1.webp"]
+        images: [""]
       },
       {
         id: "pa-mocha",
         name: "Moca",
         colorHex: "#3B2F2F",
-        images: ["/home-imgs/hero/hero-3.webp"]
+        images: [""]
       }
     ],
     tags: ["grano-completo", "premium", "muebles"],
@@ -183,13 +183,13 @@ export const products: Product[] = [
         id: "sa-cream",
         name: "Crema",
         colorHex: "#FFFDD0",
-        images: ["/home-imgs/hero/hero-2.webp"]
+        images: [""]
       },
       {
         id: "sa-taupe",
         name: "Taupe",
         colorHex: "#483C32",
-        images: ["/home-imgs/hero/hero-3.webp"]
+        images: [""]
       }
     ],
     tags: ["protegido", "suave", "muebles"],
@@ -209,13 +209,13 @@ export const products: Product[] = [
         id: "belt-natural",
         name: "Natural",
         colorHex: "#E6C288",
-        images: ["/home-imgs/hero/hero-2.webp"]
+        images: [""]
       },
       {
         id: "belt-black",
         name: "Negro",
         colorHex: "#111111",
-        images: ["/home-imgs/hero/hero-1.webp"]
+        images: [""]
       }
     ],
     tags: ["peso-pesado", "cinturones", "curtido-vegetal"],
@@ -235,13 +235,13 @@ export const products: Product[] = [
         id: "croc-black",
         name: "Black Gloss",
         colorHex: "#1A1A1A",
-        images: ["/home-imgs/hero/hero-1.webp"]
+        images: [""]
       },
       {
         id: "croc-brown",
         name: "Brown Matte",
         colorHex: "#5D4037",
-        images: ["/home-imgs/hero/hero-3.webp"]
+        images: [""]
       }
     ],
     tags: ["exótico", "grabado", "moda"],
