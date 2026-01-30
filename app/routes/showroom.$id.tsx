@@ -90,7 +90,7 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
           <div>
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-gray-100">
               <img
-                src={selectedSkin.productImage}
+                src={selectedSkin.productImage || product.defaultImage}
                 alt={`${product.name} con ${selectedSkin.skinName}`}
                 className="w-full h-full object-cover transition-all duration-500"
               />
@@ -148,15 +148,15 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
                         <button
                           onClick={() => setSelectedSkin(option)}
                           className={`relative group focus:outline-none transition-all duration-200 ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
-                              ? "scale-110"
-                              : "hover:scale-105"
+                            ? "scale-110"
+                            : "hover:scale-105"
                             }`}
                           aria-label={`Seleccionar color ${option.variantName}`}
                         >
                           <div
                             className={`w-14 h-14 rounded-full border-2 transition-all duration-200 ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
-                                ? "border-[#8B5A2B] ring-2 ring-[#8B5A2B]/20 shadow-md"
-                                : "border-gray-200 hover:border-gray-400"
+                              ? "border-[#8B5A2B] ring-2 ring-[#8B5A2B]/20 shadow-md"
+                              : "border-gray-200 hover:border-gray-400"
                               }`}
                             style={{ backgroundColor: option.colorHex }}
                           />
@@ -180,8 +180,8 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
                           )}
                         </button>
                         <span className={`text-[10px] font-sans transition-colors ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
-                            ? "text-[#8B5A2B] font-semibold"
-                            : "text-gray-500"
+                          ? "text-[#8B5A2B] font-semibold"
+                          : "text-gray-500"
                           }`}>
                           {option.variantName}
                         </span>

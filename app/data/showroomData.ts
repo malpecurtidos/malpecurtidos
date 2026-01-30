@@ -18,6 +18,7 @@ export interface SkinCollection {
 
 export interface ShowroomProduct {
   id: string;
+  defaultImage: string;
   name: string;
   description: string;
   category: "calzado" | "marroquineria";
@@ -30,6 +31,7 @@ export const showroomProducts: ShowroomProduct[] = [
   // ============ CALZADO ============
   {
     id: "bota-western",
+    defaultImage: "/showroom-imgs/bota_western/bota_western.webp",
     name: "Bota Western",
     description: "Bota estilo vaquero con acabados artesanales. Visualiza cómo nuestras pieles premium resaltan el diseño western tradicional.",
     category: "calzado",
@@ -62,6 +64,7 @@ export const showroomProducts: ShowroomProduct[] = [
   },
   {
     id: "bota-dama",
+    defaultImage: "/showroom-imgs/bota_dama/bota_dama.webp",
     name: "Bota de Dama",
     description: "Calzado femenino elegante y versátil. Descubre la sofisticación de nuestras pieles en diseños de moda contemporánea.",
     category: "calzado",
@@ -94,6 +97,7 @@ export const showroomProducts: ShowroomProduct[] = [
   },
   {
     id: "sneaker-urbano",
+    defaultImage: "/showroom-imgs/sneaker_casual/sneaker_casual.webp",
     name: "Sneaker Urbano",
     description: "Calzado casual para el día a día. Combina el estilo urbano con la durabilidad y confort de nuestras pieles genuinas.",
     category: "calzado",
@@ -125,9 +129,10 @@ export const showroomProducts: ShowroomProduct[] = [
     featured: true
   },
   {
-    id: "sneaker-deportivo",
-    name: "Sneaker Deportivo",
-    description: "Diseño deportivo de alto rendimiento. Visualiza la aplicación de nuestras pieles técnicas en calzado dinámico.",
+    id: "sneaker-formal",
+    defaultImage: "/showroom-imgs/sneaker_formal/sneaker_formal.webp",
+    name: "Sneaker Formal",
+    description: "Diseño formal casual. Visualiza la aplicación de nuestras pieles técnicas en calzado dinámico.",
     category: "calzado",
     collections: [
       {
@@ -153,13 +158,14 @@ export const showroomProducts: ShowroomProduct[] = [
         ]
       }
     ],
-    tags: ["deportivo", "tecnico", "performance"],
+    tags: ["formal", "casual", "urbano"],
     featured: true
   },
 
   // ============ MARROQUINERÍA ============
   {
     id: "bolsa",
+    defaultImage: "/showroom-imgs/bolsa/bolsa.webp",
     name: "Bolsa",
     description: "Accesorio de moda esencial para dama. Nuestras pieles ofrecen el tacto y la caída perfecta para bolsos de alta gama.",
     category: "marroquineria",
@@ -192,6 +198,7 @@ export const showroomProducts: ShowroomProduct[] = [
   },
   {
     id: "portafolio-mano",
+    defaultImage: "/showroom-imgs/portafolio_mano/portafolio_mano.webp",
     name: "Portafolio de Mano",
     description: "Elegancia profesional para el mundo ejecutivo. Descubre cómo nuestras pieles transmiten distinción y seriedad.",
     category: "marroquineria",
@@ -224,6 +231,7 @@ export const showroomProducts: ShowroomProduct[] = [
   },
   {
     id: "duffle-bag",
+    defaultImage: "/showroom-imgs/duffle_bag/duffle_bag.webp",
     name: "Duffle Bag",
     description: "Maleta de viaje robusta y sofisticada. Ideal para pieles con cuerpo y carácter como nuestros acabados Pull-Up y Waxy.",
     category: "marroquineria",

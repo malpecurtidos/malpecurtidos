@@ -8,7 +8,7 @@ interface ShowroomCardProps {
 export function ShowroomCard({ product }: ShowroomCardProps) {
   // Use first skin option of first collection as main image
   const firstCollection = product.collections[0];
-  const mainImage = firstCollection?.options[0]?.productImage || "/placeholder.jpg";
+  const mainImage = product.defaultImage || firstCollection?.options[0]?.productImage || "/placeholder.jpg";
 
   // Calculate total options for display
   const totalOptions = product.collections.reduce((acc, col) => acc + col.options.length, 0);
@@ -19,7 +19,7 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
   return (
     <Link
       to={`/showroom/${product.id}`}
-      className="group relative overflow-hidden rounded-xl aspect-[4/5] md:aspect-[3/4] cursor-pointer"
+      className="group relative overflow-hidden rounded-xl aspect-[4/5] md:aspect-[4/5] cursor-pointer"
     >
       {/* Image Container */}
       <div className="absolute inset-0 w-full h-full bg-gray-300 flex items-center justify-center overflow-hidden">
