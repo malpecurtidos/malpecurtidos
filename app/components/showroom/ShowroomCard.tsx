@@ -6,9 +6,16 @@ interface ShowroomCardProps {
 }
 
 export function ShowroomCard({ product }: ShowroomCardProps) {
-  // Usar la primera opción de piel como imagen principal
-  const mainImage = product.skinOptions[0]?.productImage || "/placeholder.jpg";
-  
+  // Use first skin option of first collection as main image
+  const firstCollection = product.collections[0];
+  const mainImage = firstCollection?.options[0]?.productImage || "/placeholder.jpg";
+
+  // Calculate total options for display
+  const totalOptions = product.collections.reduce((acc, col) => acc + col.options.length, 0);
+
+  // Get a preview of colors (mix of both collections)
+  const previewColors = product.collections.flatMap(c => c.options).slice(0, 4);
+
   return (
     <Link
       to={`/showroom/${product.id}`}
@@ -31,34 +38,33 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
         <p className="text-sm md:text-base font-sans font-semibold text-[#D4AF37] uppercase tracking-wider mb-2">
           {product.category}
         </p>
-        
+
         {/* Product Name */}
         <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-3">
           {product.name}
         </h3>
-        
-        {/* Skin options count */}
-        <div className="flex items-center gap-3 mb-3">
-          <div className="flex -space-x-2">
-            {product.skinOptions.slice(0, 4).map((option, idx) => (
-              <div 
+
+        {/* Collections info */}
+        <div className="flex flex-col gap-1 mb-4">
+          <div className="flex -space-x-2 mb-2">
+            {previewColors.map((option, idx) => (
+              <div
                 key={idx}
                 className="w-5 h-5 rounded-full border-2 border-white/80 shadow-sm"
                 style={{ backgroundColor: option.colorHex }}
-                title={option.skinName}
               />
             ))}
-            {product.skinOptions.length > 4 && (
+            {totalOptions > 4 && (
               <div className="w-5 h-5 rounded-full border-2 border-white/80 bg-white/20 flex items-center justify-center text-[8px] font-bold text-white">
-                +{product.skinOptions.length - 4}
+                +{totalOptions - 4}
               </div>
             )}
           </div>
-          <span className="text-xs text-white/70 font-sans">
-            {product.skinOptions.length} opciones de piel
-          </span>
+          <p className="text-xs text-white/80 font-sans">
+            Colecciones: <span className="text-white font-semibold">{product.collections.map(c => c.name).join(" + ")}</span>
+          </p>
         </div>
-        
+
         {/* CTA Link */}
         <div className="pt-2 border-t border-white/20">
           <span className="text-sm font-semibold text-white uppercase tracking-wider group-hover:text-[#D4AF37] transition-colors">
