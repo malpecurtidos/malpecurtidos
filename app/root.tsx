@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import Lenis from "lenis";
 import { NotFound } from "~/components/NotFound";
 import {
   isRouteErrorResponse,
@@ -14,6 +16,7 @@ import { Footer } from "./layout/footer";
 import { Navbar } from "./layout/navbar";
 import { QuotationProvider } from "./contexts/QuotationContext";
 import { QuotationCart } from "./components/productos/QuotationCart";
+import "lenis/dist/lenis.css";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -32,7 +35,24 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <html lang="en">
       <head>

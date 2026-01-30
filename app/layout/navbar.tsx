@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router";
 import { useQuotation } from "~/contexts/QuotationContext";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 const navLinks = [
   { to: "/", label: "Inicio" },
   { to: "/nosotros", label: "Nosotros" },
   { to: "/productos", label: "Productos" },
   { to: "/showroom", label: "Showroom" },
-  { to: "/tendencias", label: "Tendencias" },
   { to: "/contacto", label: "Contacto" },
 ];
 
@@ -20,9 +20,21 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState("es");
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const location = useLocation();
   const langDropdownRef = useRef<HTMLDivElement>(null);
-  const { totalItems, setIsOpen } = useQuotation(); // Get cart items count and opener
+  const { totalItems, setIsOpen } = useQuotation();
+
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 150) {
+      setIsHidden(true);
+    } else {
+      setIsHidden(false);
+    }
+  });
 
   // Cerrar dropdown al hacer click fuera
   useEffect(() => {
@@ -50,7 +62,15 @@ export function Navbar() {
   );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <motion.nav
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
+      }}
+      animate={isHidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className="fixed top-0 left-0 right-0 z-50"
+    >
       {/* Glassmorphism Container */}
       <div className="mx-4 mt-4 md:mx-8 lg:mx-12">
         <div
@@ -85,26 +105,23 @@ export function Navbar() {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-all duration-300 rounded-xl group ${
-                      isActive
-                        ? "text-white"
-                        : "text-gray-300 hover:text-white"
-                    }`}
+                    className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-all duration-300 rounded-xl group ${isActive
+                      ? "text-white"
+                      : "text-gray-300 hover:text-white"
+                      }`}
                   >
                     <span className="relative z-10">{link.label}</span>
                     {/* Active/Hover Background */}
                     <span
-                      className={`absolute inset-0 rounded-xl transition-all duration-300 ${
-                        isActive
-                          ? "bg-gradient-to-r from-white/30 to-white/10"
-                          : "bg-white/0 group-hover:bg-white/5"
-                      }`}
+                      className={`absolute inset-0 rounded-xl transition-all duration-300 ${isActive
+                        ? "bg-gradient-to-r from-white/30 to-white/10"
+                        : "bg-white/0 group-hover:bg-white/5"
+                        }`}
                     />
                     {/* Active Indicator Line */}
                     <span
-                      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-white/80 to-white/60 rounded-full transition-all duration-300 ${
-                        isActive ? "w-6" : "w-0 group-hover:w-4"
-                      }`}
+                      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-white/80 to-white/60 rounded-full transition-all duration-300 ${isActive ? "w-6" : "w-0 group-hover:w-4"
+                        }`}
                     />
                   </Link>
                 );
@@ -121,7 +138,7 @@ export function Navbar() {
                   aria-label="Ver cotización"
                 >
                   <span className="relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
                   </span>
                   <span className="font-bold">{totalItems}</span>
                 </button>
@@ -138,9 +155,8 @@ export function Navbar() {
                     {languages.find((l) => l.code === currentLang)?.label}
                   </span>
                   <svg
-                    className={`w-4 h-4 transition-transform duration-300 ease-out ${
-                      isLangOpen ? "rotate-180" : ""
-                    }`}
+                    className={`w-4 h-4 transition-transform duration-300 ease-out ${isLangOpen ? "rotate-180" : ""
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -156,11 +172,10 @@ export function Navbar() {
 
                 {/* Language Dropdown */}
                 <div
-                  className={`absolute top-full right-0 mt-2 py-2 rounded-xl border border-white/10 overflow-hidden transition-all duration-300 ease-out ${
-                    isLangOpen
-                      ? "opacity-100 translate-y-0 scale-100"
-                      : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
-                  }`}
+                  className={`absolute top-full right-0 mt-2 py-2 rounded-xl border border-white/10 overflow-hidden transition-all duration-300 ease-out ${isLangOpen
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
+                    }`}
                   style={{
                     background: "rgba(15, 15, 15, 0.95)",
                     backdropFilter: "blur(20px)",
@@ -174,11 +189,10 @@ export function Navbar() {
                         setCurrentLang(lang.code);
                         setIsLangOpen(false);
                       }}
-                      className={`flex items-center justify-center w-full px-4 py-2 text-sm transition-colors ${
-                        currentLang === lang.code
-                          ? "text-white bg-white/20"
-                          : "text-gray-300 hover:text-white hover:bg-white/5"
-                      }`}
+                      className={`flex items-center justify-center w-full px-4 py-2 text-sm transition-colors ${currentLang === lang.code
+                        ? "text-white bg-white/20"
+                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                        }`}
                     >
                       <span>{lang.label}</span>
                     </button>
@@ -242,9 +256,8 @@ export function Navbar() {
 
           {/* Mobile Menu */}
           <div
-            className={`lg:hidden overflow-hidden transition-all duration-300 ${
-              isMenuOpen ? "max-h-64 mt-4 pt-4 border-t border-white/10" : "max-h-0"
-            }`}
+            className={`lg:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? "max-h-64 mt-4 pt-4 border-t border-white/10" : "max-h-0"
+              }`}
           >
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => {
@@ -254,11 +267,10 @@ export function Navbar() {
                     key={link.to}
                     to={link.to}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
-                      isActive
-                        ? "text-white bg-gradient-to-r from-white/30 to-white/10"
-                        : "text-gray-300 hover:text-white hover:bg-white/5"
-                    }`}
+                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${isActive
+                      ? "text-white bg-gradient-to-r from-white/30 to-white/10"
+                      : "text-gray-300 hover:text-white hover:bg-white/5"
+                      }`}
                   >
                     {link.label}
                   </Link>
@@ -268,6 +280,6 @@ export function Navbar() {
           </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

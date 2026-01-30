@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -6,72 +7,63 @@ const testimonials = [
       "Trabajar con Malpe ha llevado a nuestra empresa al siguiente nivel que deseábamos hace tiempo. La consistencia en el color es inigualable.",
     company: "CARIBU",
     role: "GERENCIA DE VENTAS",
-    initial: "C",
+    logo: "/logos/testimonials-logos/caribu.png",
   },
   {
     quote:
       "Requeríamos desde hace tiempo una piel muy particular que sólo Malpe nos la pudo desarrollar con exactitud y entrega a tiempo.",
     company: "LOBO SOLO",
     role: "DIRECCIÓN DE COMPRAS",
-    initial: "L",
+    logo: "/logos/testimonials-logos/lobo_solo.png",
   },
   {
     quote:
       "Llevamos más de 5 años trabajando con Malpe y seguramente duraremos muchos más. La atención al cliente es excelente.",
     company: "SANTINI",
     role: "ÁREA DE DISEÑO",
-    initial: "S",
-  },
-  {
-    quote:
-      "La calidad de los cueros de Malpe supera todas nuestras expectativas. Cada lote mantiene estándares excepcionales que nos permiten crear productos premium.",
-    company: "CHRISTIAN GALLERY",
-    role: "DIRECCIÓN GENERAL",
-    initial: "C",
-  },
-  {
-    quote:
-      "Malpe no solo nos provee cuero, nos brinda soluciones. Su equipo técnico siempre está disponible para asesorarnos en nuestros proyectos más complejos.",
-    company: "ARTESANOS DEL CUERO",
-    role: "GERENCIA DE PRODUCCIÓN",
-    initial: "A",
-  },
-  {
-    quote:
-      "La puntualidad en las entregas y la flexibilidad para adaptarse a nuestros pedidos especiales hacen de Malpe nuestro proveedor preferido desde hace años.",
-    company: "MARROQUINERÍA FINA",
-    role: "DIRECCIÓN DE OPERACIONES",
-    initial: "M",
-  },
-  {
-    quote:
-      "El acabado y la textura de las pieles que recibimos de Malpe son perfectos para nuestras colecciones de lujo. Nuestros clientes siempre quedan impresionados.",
-    company: "CUERO PREMIUM",
-    role: "ÁREA DE CALIDAD",
-    initial: "C",
-  },
-  {
-    quote:
-      "Trabajar con Malpe ha sido una experiencia excepcional. Su compromiso con la sostenibilidad y la calidad nos alinea perfectamente con nuestros valores corporativos.",
-    company: "ECO LEATHER",
-    role: "GERENCIA DE SUSTENTABILIDAD",
-    initial: "E",
-  },
-  {
-    quote:
-      "La variedad de colores y texturas que ofrece Malpe nos permite ser creativos en nuestros diseños. Es el socio perfecto para nuestra marca innovadora.",
-    company: "DESIGN LEATHER",
-    role: "DIRECCIÓN CREATIVA",
-    initial: "D",
+    logo: "/logos/testimonials-logos/santini.png",
   },
 ];
 
 const brandLogos = [
-  { name: "SANTINI", style: "font-bold tracking-[0.3em]" },
-  { name: "CARIBU", style: "font-bold tracking-[0.2em]" },
-  { name: "Lobo Solo", style: "font-serif italic tracking-wide" },
-  { name: "CHRISTIAN GALLERY", style: "font-light tracking-[0.25em]" },
+  { name: "Ariat", path: "/logos/logomarquee/ariat.png" },
+  { name: "Boot Barn", path: "/logos/logomarquee/boot_barn.png" },
+  { name: "Christian Gallery", path: "/logos/logomarquee/christian_gallery.png" },
+  { name: "Llompart", path: "/logos/logomarquee/llompart.png" },
+  { name: "Lobo Solo", path: "/logos/logomarquee/lobo_solo.png" },
+  { name: "Magnus Leather Company", path: "/logos/logomarquee/magnus_leather_company.png" },
+  { name: "Portland Leather Goods", path: "/logos/logomarquee/portland_leather_goods.png" },
+  { name: "Steve Madden", path: "/logos/logomarquee/steve_madden.png" },
+  { name: "Caribu", path: "/logos/logomarquee/caribu.png" },
 ];
+
+// Marquee helper components
+const TranslateWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <motion.div
+      initial={{ translateX: "0%" }}
+      animate={{ translateX: "-100%" }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+      className="flex gap-8 md:gap-12 px-4 md:px-6 min-w-max"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const LogoItems = ({ logos }: { logos: typeof brandLogos }) => (
+  <div className="flex gap-8 md:gap-12">
+    {logos.map((logo) => (
+      <div key={logo.name} className="flex items-center">
+        <img
+          src={logo.path}
+          alt={logo.name}
+          className="h-8 md:h-12 w-auto object-contain opacity-50 grayscale brightness-[2.5] hover:grayscale-0 hover:opacity-100 hover:brightness-100 transition-all duration-500"
+        />
+      </div>
+    ))}
+  </div>
+);
 
 export function Testimonials() {
   // Calculate number of sets (3 testimonials per set)
@@ -80,6 +72,7 @@ export function Testimonials() {
   const [activeSetIndex, setActiveSetIndex] = useState(0);
 
   useEffect(() => {
+    if (totalSets <= 1) return;
     const interval = setInterval(() => {
       setActiveSetIndex((prev) => (prev + 1) % totalSets);
     }, 6000);
@@ -121,7 +114,7 @@ export function Testimonials() {
           {[0, 1, 2].map((position) => {
             const setStartIndex = getSetStartIndex(activeSetIndex);
             const testimonialIndexInSet = setStartIndex + position;
-            
+
             return (
               <div key={position} className="relative min-h-[280px]">
                 {/* Overlay all testimonials for this position */}
@@ -133,15 +126,10 @@ export function Testimonials() {
                   return (
                     <div
                       key={testimonialIndex}
-                      className={`absolute inset-0 p-8 rounded-2xl transition-all duration-1000 ease-in-out ${
-                        isCenter
-                          ? "bg-[#2a2520] border border-[#8B5A2B]/30"
-                          : "bg-[#1a1917] border border-white/5"
-                      } ${
-                        isVisible
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-8 pointer-events-none"
-                      }`}
+                      className={`absolute inset-0 p-8 rounded-2xl transition-all duration-1000 ease-in-out bg-[#1a1917] border border-white/5 ${isVisible
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-8 pointer-events-none"
+                        }`}
                     >
                       {/* Quote */}
                       <blockquote className="mb-8">
@@ -153,13 +141,13 @@ export function Testimonials() {
                       {/* Author */}
                       <div className="flex items-center gap-4">
                         <div
-                          className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-500 ${
-                            isCenter
-                              ? "bg-[#8B5A2B] text-white"
-                              : "bg-[#2a2520] text-gray-300 border border-white/10"
-                          }`}
+                          className="w-12 h-12 rounded-full flex items-center justify-center bg-[#2a2520] border border-white/10 overflow-hidden"
                         >
-                          {testimonial.initial}
+                          <img
+                            src={testimonial.logo}
+                            alt={testimonial.company}
+                            className="w-full h-full object-contain p-2"
+                          />
                         </div>
                         <div>
                           <h4 className="text-white font-bold text-sm tracking-wide">
@@ -184,67 +172,42 @@ export function Testimonials() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="flex justify-center gap-2 mb-16">
-          {Array.from({ length: totalSets }).map((_, setIndex) => (
-            <button
-              key={setIndex}
-              onClick={() => handleIndicatorClick(setIndex)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                setIndex === activeSetIndex
+        {totalSets > 1 && (
+          <div className="flex justify-center gap-2 mb-16">
+            {Array.from({ length: totalSets }).map((_, setIndex) => (
+              <button
+                key={setIndex}
+                onClick={() => handleIndicatorClick(setIndex)}
+                className={`h-2 rounded-full transition-all duration-300 ${setIndex === activeSetIndex
                   ? "w-8 bg-[#8B5A2B]"
                   : "w-2 bg-white/20 hover:bg-white/40"
-              }`}
-              aria-label={`Go to testimonial set ${setIndex + 1}`}
-            />
-          ))}
-        </div>
+                  }`}
+                aria-label={`Go to testimonial set ${setIndex + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Logo Marquee */}
       <div className="relative border-t border-b border-white/5 py-10 overflow-hidden">
-        {/* Gradient overlays for seamless effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none"></div>
+        {/* Gradient overlays */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none"></div>
 
-        {/* Marquee container */}
-        <div className="flex animate-marquee">
-          {/* First set of logos */}
-          {[...Array(4)].map((_, setIndex) => (
-            <div key={setIndex} className="flex shrink-0">
-              {brandLogos.map((brand, index) => (
-                <div
-                  key={`${setIndex}-${index}`}
-                  className="flex items-center justify-center px-12 md:px-20"
-                >
-                  <span
-                    className={`text-gray-500 hover:text-[#8B5A2B] transition-colors duration-300 text-lg md:text-xl whitespace-nowrap ${brand.style}`}
-                  >
-                    {brand.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          ))}
+        {/* Marquee container with framer-motion */}
+        <div className="flex w-full overflow-hidden">
+          <TranslateWrapper>
+            <LogoItems logos={brandLogos} />
+          </TranslateWrapper>
+          <TranslateWrapper>
+            <LogoItems logos={brandLogos} />
+          </TranslateWrapper>
+          <TranslateWrapper>
+            <LogoItems logos={brandLogos} />
+          </TranslateWrapper>
         </div>
       </div>
-
-      {/* CSS for animations */}
-      <style>{`
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-25%);
-          }
-        }
-        .animate-marquee {
-          animation: marquee 20s linear infinite;
-        }
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 }
