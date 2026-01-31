@@ -8,7 +8,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   // Use the first variant's image as the main image
   const mainImage = product.variants[0]?.images[0] || "/placeholder.jpg";
-  
+
   return (
     <Link
       to={`/productos/${product.id}`}
@@ -32,17 +32,17 @@ export function ProductCard({ product }: ProductCardProps) {
         <p className="text-sm md:text-base font-sans font-semibold text-[#D4AF37] uppercase tracking-wider mb-2">
           {product.category.replace("-", " ")}
         </p>
-        
+
         {/* Product Name */}
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-3">
+        <h3 className="text-2xl md:text-2xl lg:text-2xl font-semibold text-white leading-tight mb-3">
           {product.name}
         </h3>
-        
+
         {/* Variants and Finish */}
         <div className="flex items-center gap-3 mb-3">
           <div className="flex -space-x-2">
             {product.variants.slice(0, 4).map((variant) => (
-              <div 
+              <div
                 key={variant.id}
                 className="w-5 h-5 rounded-full border-2 border-white/80 shadow-sm"
                 style={{ backgroundColor: variant.colorHex }}
@@ -59,7 +59,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.variants.length} colores • {product.finish}
           </span>
         </div>
-        
+
         {/* CTA Link */}
         <div className="pt-2 border-t border-white/20">
           <span className="text-sm font-semibold text-white uppercase tracking-wider group-hover:text-[#D4AF37] transition-colors">

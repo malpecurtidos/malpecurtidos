@@ -19,56 +19,60 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
   return (
     <Link
       to={`/showroom/${product.id}`}
-      className="group relative overflow-hidden rounded-xl aspect-[4/5] md:aspect-[4/5] cursor-pointer"
+      className="group block"
     >
       {/* Image Container */}
-      <div className="absolute inset-0 w-full h-full bg-gray-300 flex items-center justify-center overflow-hidden">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#F9F7F2] mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
         <img
           src={mainImage}
           alt={product.name}
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
       </div>
 
-      {/* Text Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10">
+      {/* Content Below */}
+      <div className="px-1">
         {/* Category Badge */}
-        <p className="text-sm md:text-base font-sans font-semibold text-[#D4AF37] uppercase tracking-wider mb-2">
+        <p className="text-xs font-sans font-bold text-[#D4AF37] uppercase tracking-[0.2em] mb-2">
           {product.category}
         </p>
 
         {/* Product Name */}
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-3">
+        <h3 className="text-2xl md:text-3xl font-semibold text-[#2A2522] leading-tight mb-4 group-hover:text-[#D4AF37] transition-colors">
           {product.name}
         </h3>
 
         {/* Collections info */}
-        <div className="flex flex-col gap-1 mb-4">
-          <div className="flex -space-x-2 mb-2">
-            {previewColors.map((option, idx) => (
-              <div
-                key={idx}
-                className="w-5 h-5 rounded-full border-2 border-white/80 shadow-sm"
-                style={{ backgroundColor: option.colorHex }}
-              />
-            ))}
-            {totalOptions > 4 && (
-              <div className="w-5 h-5 rounded-full border-2 border-white/80 bg-white/20 flex items-center justify-center text-[8px] font-bold text-white">
-                +{totalOptions - 4}
-              </div>
-            )}
+        <div className="flex flex-col gap-3 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="flex -space-x-1.5">
+              {previewColors.map((option, idx) => (
+                <div
+                  key={idx}
+                  className="w-5 h-5 rounded-full border border-white shadow-sm ring-1 ring-black/5"
+                  style={{ backgroundColor: option.colorHex }}
+                />
+              ))}
+              {totalOptions > 4 && (
+                <div className="w-5 h-5 rounded-full border border-white bg-gray-100 flex items-center justify-center text-[8px] font-bold text-gray-500 ring-1 ring-black/5">
+                  +{totalOptions - 4}
+                </div>
+              )}
+            </div>
+            <p className="text-xs text-gray-400 font-sans uppercase tracking-widest">
+              Gama de Colores
+            </p>
           </div>
-          <p className="text-xs text-white/80 font-sans">
-            Colecciones: <span className="text-white font-semibold">{product.collections.map(c => c.name).join(" + ")}</span>
+          <p className="text-xs text-gray-600 font-sans border-l-2 border-[#D4AF37] pl-3 py-0.5">
+            Colecciones: <span className="text-[#2A2522] font-semibold">{product.collections.map(c => c.name).join(" + ")}</span>
           </p>
         </div>
 
         {/* CTA Link */}
-        <div className="pt-2 border-t border-white/20">
-          <span className="text-sm font-semibold text-white uppercase tracking-wider group-hover:text-[#D4AF37] transition-colors">
-            Ver Aplicaciones →
+        <div className="pt-2 border-t border-gray-100">
+          <span className="text-sm font-bold text-[#2A2522] uppercase tracking-widest group-hover:text-[#8B5A2B] transition-colors inline-flex items-center gap-2">
+            Ver Aplicaciones <span className="transform group-hover:translate-x-1 transition-transform">→</span>
           </span>
         </div>
       </div>

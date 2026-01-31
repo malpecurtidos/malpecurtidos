@@ -17,17 +17,17 @@ export function AboutHero() {
       {/* Content */}
       <div className="relative z-10 max-w-[85%] mx-auto px-4 md:px-8 py-20 text-center">
         {/* Subtitle */}
-        <p className="text-sm md:text-base font-semibold uppercase tracking-wider text-[#D3D3D3] mb-6 md:mb-8">
+        <p className="text-sm md:text-base font-semibold uppercase tracking-wider text-[#D3D3D3] mb-6 md:mb-6">
           EXCELENCIA EN CURTIDOS
         </p>
 
         {/* Main Title */}
-        <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-white leading-tight mb-6 md:mb-8">
+        <h1 className="max-w-4xl text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-tight mb-6 md:mb-6">
           Forjando el carácter de la piel desde 1995
         </h1>
 
         {/* Description */}
-        <p className="text-base md:text-lg lg:text-xl text-[#D3D3D3] font-sans leading-relaxed mb-10 md:mb-12 max-w-3xl mx-auto">
+        <p className="text-base md:text-lg lg:text-xl text-[#D3D3D3] font-sans leading-relaxed mb-10 md:mb-10 max-w-3xl mx-auto">
           Somos líderes en proveeduría de cuero en Latinoamérica, combinando tradición artesanal con innovación tecnológica.
         </p>
 

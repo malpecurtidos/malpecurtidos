@@ -37,7 +37,7 @@ export const showroomProducts: ShowroomProduct[] = [
     category: "calzado",
     collections: [
       {
-        name: "Pull-Up Waxy Heritage",
+        name: "Monaco",
         skinId: "wx-pu-008",
         options: [
           { skinId: "wx-pu-008", skinName: "Pull-Up Waxy", variantId: "wx-brandy", variantName: "Brandy", colorHex: "#874C05", productImage: "" },
@@ -48,7 +48,7 @@ export const showroomProducts: ShowroomProduct[] = [
         ]
       },
       {
-        name: "Pull-Up Efecto Vintage",
+        name: "Wakanda",
         skinId: "pl-pu-002",
         options: [
           { skinId: "pl-pu-002", skinName: "Pull-Up Vintage", variantId: "pu-chestnut", variantName: "Castaño", colorHex: "#954535", productImage: "" },
@@ -70,18 +70,18 @@ export const showroomProducts: ShowroomProduct[] = [
     category: "calzado",
     collections: [
       {
-        name: "Nubuck Gamuza Premium",
+        name: "Monaco",
         skinId: "nb-sd-005",
         options: [
-          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-chocolate", variantName: "Chocolate", colorHex: "#7B3F00", productImage: "" },
+          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-lavanda", variantName: "Lavanda", colorHex: "#A67979", productImage: "" },
           { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-sand", variantName: "Arena", colorHex: "#C2B280", productImage: "" },
           { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-olive", variantName: "Oliva", colorHex: "#556B2F", productImage: "" },
           { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-grey", variantName: "Gris", colorHex: "#808080", productImage: "" },
-          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-black", variantName: "Negro Profundo", colorHex: "#0F0F0F", productImage: "" },
+          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-monaco", variantName: "Negro Monaco", colorHex: "#000000", productImage: "/showroom-imgs/bota_dama/variants/monaco/bota_dama_negro_monaco.png" },
         ]
       },
       {
-        name: "Pull-Up Efecto Vintage",
+        name: "Wakanda",
         skinId: "pl-pu-002",
         options: [
           { skinId: "pl-pu-002", skinName: "Pull-Up Vintage", variantId: "pu-tan", variantName: "Beige", colorHex: "#D2B48C", productImage: "" },
@@ -103,25 +103,25 @@ export const showroomProducts: ShowroomProduct[] = [
     category: "calzado",
     collections: [
       {
-        name: "Nubuck Gamuza Premium",
+        name: "Monaco",
         skinId: "nb-sd-005",
         options: [
-          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-grey", variantName: "Gris", colorHex: "#808080", productImage: "" },
-          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-black", variantName: "Negro Profundo", colorHex: "#0F0F0F", productImage: "" },
-          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-navy", variantName: "Azul Medianoche", colorHex: "#101820", productImage: "" },
-          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-chocolate", variantName: "Chocolate", colorHex: "#7B3F00", productImage: "" },
-          { skinId: "nb-sd-005", skinName: "Nubuck Premium", variantId: "nb-sand", variantName: "Arena", colorHex: "#C2B280", productImage: "" },
+          { skinId: "nb-sd-005", skinName: "Monaco", variantId: "nb-grey", variantName: "Gris", colorHex: "#808080", productImage: "" },
+          { skinId: "nb-sd-005", skinName: "Monaco", variantId: "nb-black", variantName: "Negro Profundo", colorHex: "#0F0F0F", productImage: "" },
+          { skinId: "nb-sd-005", skinName: "Monaco", variantId: "nb-navy", variantName: "Azul Medianoche", colorHex: "#101820", productImage: "" },
+          { skinId: "nb-sd-005", skinName: "Monaco", variantId: "nb-lavanda", variantName: "Lavanda", colorHex: "#634555", productImage: "" },
+          { skinId: "nb-sd-005", skinName: "Monaco", variantId: "nb-sand", variantName: "Arena", colorHex: "#C2B280", productImage: "" },
         ]
       },
       {
-        name: "Pull-Up Efecto Vintage",
+        name: "Wakanda",
         skinId: "pl-pu-002",
         options: [
-          { skinId: "pl-pu-002", skinName: "Pull-Up Vintage", variantId: "pu-brown", variantName: "Marrón", colorHex: "#8B5A2B", productImage: "" },
-          { skinId: "pl-pu-002", skinName: "Pull-Up Vintage", variantId: "pu-chestnut", variantName: "Castaño", colorHex: "#954535", productImage: "" },
-          { skinId: "pl-pu-002", skinName: "Pull-Up Vintage", variantId: "pu-tan", variantName: "Beige", colorHex: "#D2B48C", productImage: "" },
-          { skinId: "pl-pu-002", skinName: "Pull-Up Vintage", variantId: "pu-black", variantName: "Negro", colorHex: "#1A1A1A", productImage: "" },
-          { skinId: "pl-pu-002", skinName: "Pull-Up Vintage", variantId: "pu-navy", variantName: "Azul Marino", colorHex: "#1B2432", productImage: "" },
+          { skinId: "pl-pu-002", skinName: "Wakanda", variantId: "pu-brown", variantName: "Marrón", colorHex: "#8B5A2B", productImage: "" },
+          { skinId: "pl-pu-002", skinName: "Wakanda", variantId: "pu-chestnut", variantName: "Castaño", colorHex: "#954535", productImage: "" },
+          { skinId: "pl-pu-002", skinName: "Wakanda", variantId: "pu-tan", variantName: "Beige", colorHex: "#D2B48C", productImage: "" },
+          { skinId: "pl-pu-002", skinName: "Wakanda", variantId: "pu-black", variantName: "Negro", colorHex: "#1A1A1A", productImage: "" },
+          { skinId: "pl-pu-002", skinName: "Wakanda", variantId: "pu-navy", variantName: "Azul Marino", colorHex: "#1B2432", productImage: "" },
         ]
       }
     ],
@@ -136,7 +136,7 @@ export const showroomProducts: ShowroomProduct[] = [
     category: "calzado",
     collections: [
       {
-        name: "Anilina Grado Automotriz",
+        name: "Monaco",
         skinId: "auto-an-012",
         options: [
           { skinId: "auto-an-012", skinName: "Anilina Performance", variantId: "auto-black", variantName: "Negro", colorHex: "#000000", productImage: "" },
@@ -147,7 +147,7 @@ export const showroomProducts: ShowroomProduct[] = [
         ]
       },
       {
-        name: "Semi-Anilina Tacto Suave",
+        name: "Wakanda",
         skinId: "sa-soft-020",
         options: [
           { skinId: "sa-soft-020", skinName: "Semi-Anilina", variantId: "sa-grey", variantName: "Gris Perla", colorHex: "#E5E4E2", productImage: "" },
