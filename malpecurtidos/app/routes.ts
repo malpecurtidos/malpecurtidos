@@ -8,5 +8,7 @@ export default [
   route("showroom", "routes/showroom.tsx"),
   route("showroom/:id", "routes/showroom.$id.tsx"),
   route("contacto", "routes/contacto.tsx"),
+  route("blog", "routes/blog.list.tsx"),
+  route("blog/:slug", "routes/blog.post.tsx"),
   route("api/quotation", "routes/api.quotation.tsx"),
 ] satisfies RouteConfig;

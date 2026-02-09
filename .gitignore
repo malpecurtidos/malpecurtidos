@@ -1,7 +1,16 @@
+# General
 .DS_Store
 .env
-/node_modules/
+.env.local
+node_modules/
+*.log
 
-# React Router
-/.react-router/
-/build/
+# Sanity
+sanity/.sanity/
+sanity/dist/
+sanity/package-lock.json
+
+# React Router / Frontend
+malpecurtidos/.react-router/
+malpecurtidos/build/
+malpecurtidos/package-lock.json
