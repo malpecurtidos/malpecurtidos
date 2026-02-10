@@ -32,7 +32,7 @@ export function PostCard({ post }: PostCardProps) {
                     </>
                 ) : (
                     <div className="w-full h-full flex items-center justify-center text-zinc-500 bg-zinc-900">
-                        <span className="italic font-serif text-zinc-600">Malpe Curtidos</span>
+                        <span className="italic font-sans text-zinc-600">Malpe Curtidos</span>
                     </div>
                 )}
             </div>
@@ -44,7 +44,7 @@ export function PostCard({ post }: PostCardProps) {
                         </span>
                     ))}
                 </div>
-                <h3 className="text-xl font-serif font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors duration-300 line-clamp-2 leading-snug">
+                <h3 className="text-xl font-sans font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors duration-300 line-clamp-2 leading-snug">
                     {post.title}
                 </h3>
                 {post.excerpt && (

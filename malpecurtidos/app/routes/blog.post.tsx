@@ -57,7 +57,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
                             </span>
                         ))}
                     </div>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-8 leading-tight">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-white mb-8 leading-tight">
                         {post.title}
                     </h1>
 
@@ -92,7 +92,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
                     </div>
                 )}
 
-                <div className="prose prose-invert prose-lg max-w-none mx-auto text-gray-300 prose-headings:font-serif prose-headings:text-white prose-a:text-[#D4AF37] prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-blockquote:border-l-[#D4AF37] prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic">
+                <div className="prose prose-invert prose-lg max-w-none mx-auto text-gray-300 prose-headings:font-sans prose-headings:text-white prose-a:text-[#D4AF37] prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-blockquote:border-l-[#D4AF37] prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic">
                     {post.body ? <PortableText value={post.body} components={components} /> : null}
                 </div>
             </div>

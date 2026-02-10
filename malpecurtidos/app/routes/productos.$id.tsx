@@ -74,14 +74,14 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
       <div className="max-w-[85%] mx-auto px-4 md:px-8 pt-24 md:pt-32 pb-12 md:pb-16">
         {/* Breadcrumb */}
         <nav className="mb-10 md:mb-12" aria-label="Breadcrumb">
-          <ol className="flex items-center space-x-2 md:space-x-3">
-            <li>
+          <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-x-3 md:gap-y-1.5">
+            <li className="flex items-center shrink-0">
               <Link 
                 to="/" 
                 className="group flex items-center text-sm md:text-base text-gray-500 hover:text-[#8B5A2B] transition-all duration-200 font-medium"
               >
                 <svg 
-                  className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-[#8B5A2B] transition-colors" 
+                  className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-[#8B5A2B] transition-colors shrink-0" 
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
@@ -91,7 +91,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
                 Inicio
               </Link>
             </li>
-            <li>
+            <li className="shrink-0">
               <svg 
                 className="w-4 h-4 text-gray-300" 
                 fill="none" 
@@ -101,7 +101,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </li>
-            <li>
+            <li className="shrink-0">
               <Link 
                 to="/productos" 
                 className="text-sm md:text-base text-gray-500 hover:text-[#8B5A2B] transition-all duration-200 font-medium"
@@ -109,7 +109,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
                 Catálogo
               </Link>
             </li>
-            <li>
+            <li className="shrink-0">
               <svg 
                 className="w-4 h-4 text-gray-300" 
                 fill="none" 
@@ -119,8 +119,8 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </li>
-            <li>
-              <span className="text-sm md:text-base text-[#2A2522] font-semibold truncate max-w-[200px] md:max-w-none">
+            <li className="min-w-0">
+              <span className="text-sm md:text-base text-[#2A2522] font-semibold break-words">
                 {product.name}
               </span>
             </li>
