@@ -6,18 +6,21 @@ const cards = [
     label: "INTERNACIONAL",
     title: "Eventos",
     link: "/eventos",
+    image: "/home-imgs/cards/eventos.webp",
   },
   {
     id: "productos",
-    label: "CATÁLOGO",
+    label: "PRODUCTOS",
     title: "Productos",
-    link: "/catálogo",
+    link: "/productos",
+    image: "/home-imgs/cards/productos.webp",
   },
   {
-    id: "novedades",
+    id: "showroom",
     label: "INNOVACIÓN",
-    title: "Novedades",
-    link: "/tendencias",
+    title: "Showroom",
+    link: "/showroom",
+    image: "/showroom-imgs/bota_dama/bota_dama.webp",
   },
 ];
 
@@ -45,9 +48,7 @@ export function Cards() {
             >
               {/* Image Container */}
               <div className="absolute inset-0 w-full h-full bg-gray-300 flex items-center justify-center">
-                <svg className="w-20 h-20 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
+                <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
                 {/* Dark gradient overlay at bottom */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
               </div>
