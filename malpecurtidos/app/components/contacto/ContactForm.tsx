@@ -1,6 +1,29 @@
+import { useState, useRef, useEffect } from "react";
 import { Button } from "~/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
+
+const subjectOptions = [
+  { value: "ventas", label: "Ventas / Cotización" },
+  { value: "informacion", label: "Información General" },
+  { value: "proveedores", label: "Proveedores" },
+  { value: "otro", label: "Otro" },
+];
 
 export function ContactForm() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<typeof subjectOptions[0] | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-8 shadow-2xl">
       <h3 className="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4">Envíanos un mensaje</h3>
@@ -26,28 +49,74 @@ export function ContactForm() {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="phone" className="text-sm font-medium text-gray-300 ml-1">Teléfono</label>
-          <input
-            type="tel"
-            id="phone"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10"
-            placeholder="(477) 000 0000"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label htmlFor="phone" className="text-sm font-medium text-gray-300 ml-1">Teléfono</label>
+            <input
+              type="tel"
+              id="phone"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10"
+              placeholder="(477) 000 0000"
+            />
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="company" className="text-sm font-medium text-gray-300 ml-1">Empresa</label>
+            <input
+              type="text"
+              id="company"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10"
+              placeholder="Nombre de tu empresa"
+            />
+          </div>
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="subject" className="text-sm font-medium text-gray-300 ml-1">Asunto</label>
-          <select
-            id="subject"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10 [&>option]:bg-[#1a1a1a]"
-          >
-            <option value="" disabled selected>Selecciona un asunto</option>
-            <option value="ventas">Ventas / Cotización</option>
-            <option value="informacion">Información General</option>
-            <option value="proveedores">Proveedores</option>
-            <option value="otro">Otro</option>
-          </select>
+          <label className="text-sm font-medium text-gray-300 ml-1">Asunto</label>
+          <div className="relative" ref={dropdownRef}>
+            <div
+              onClick={() => setIsOpen(!isOpen)}
+              className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white flex items-center justify-between cursor-pointer transition-all hover:bg-white/10 ${isOpen ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]' : ''
+                }`}
+            >
+              <span className={selectedOption ? "text-white" : "text-gray-500"}>
+                {selectedOption ? selectedOption.label : "Selecciona un asunto"}
+              </span>
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-gray-400"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+              </motion.div>
+            </div>
+
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 4 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute z-50 w-full bg-[#1a1a1a] border border-white/10 rounded-xl mt-1 shadow-2xl overflow-hidden py-2"
+                >
+                  {subjectOptions.map((option) => (
+                    <div
+                      key={option.value}
+                      onClick={() => {
+                        setSelectedOption(option);
+                        setIsOpen(false);
+                      }}
+                      className={`px-4 py-3 text-sm cursor-pointer transition-colors hover:bg-[#D4AF37]/10 hover:text-[#D4AF37] ${selectedOption?.value === option.value ? "text-[#D4AF37] bg-[#D4AF37]/5" : "text-gray-300"
+                        }`}
+                    >
+                      {option.label}
+                    </div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <input type="hidden" name="subject" value={selectedOption?.value || ""} />
+          </div>
         </div>
 
         <div className="space-y-2">

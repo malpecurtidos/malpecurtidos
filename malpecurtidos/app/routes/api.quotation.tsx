@@ -2,7 +2,7 @@ import type { ActionFunctionArgs } from "react-router";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  
+
   // Anti-spam check (honeypot)
   const gotcha = formData.get("_gotcha");
   if (gotcha) {
@@ -30,12 +30,12 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   // Construct email body
-  const itemsList = items.map((item: any) => 
-    `- ${item.productName} (${item.variantName})\n  Grosor: ${item.thickness}, Tamaño: ${item.size}\n  Cantidad: ${item.quantity}\n  Notas: ${item.notes || "N/A"}`
+  const itemsList = items.map((item: any) =>
+    `- ${item.productName} (${item.variantName})\n  Grosor: ${item.thickness}\n  Notas: ${item.notes || "N/A"}`
   ).join("\n\n");
 
   const emailContent = `
-Nueva Solicitud de Cotización
+Nueva Solicitud de Muestras
 
 Cliente: ${name}
 Empresa: ${company || "Particular"}
@@ -45,13 +45,13 @@ Teléfono: ${phone}
 Mensaje:
 ${message}
 
-Productos Solicitados:
+Productos Solicitados (Muestras):
 ------------------------
 ${itemsList}
 ------------------------
   `;
 
-  console.log("=== NEW QUOTATION REQUEST ===");
+  console.log("=== NEW SAMPLE REQUEST ===");
   console.log(emailContent);
 
   // Example integration with Resend (if API key exists)
@@ -64,9 +64,9 @@ ${itemsList}
           "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          from: "Cotizaciones MALPE <onboarding@resend.dev>", // Update with verified domain
+          from: "Solicitudes MALPE <onboarding@resend.dev>", // Update with verified domain
           to: ["ventas@malpe.com.mx"], // Update with real email
-          subject: `Nueva Cotización: ${name} - ${company}`,
+          subject: `Solicitud de Muestras: ${name} - ${company}`,
           text: emailContent,
         }),
       });

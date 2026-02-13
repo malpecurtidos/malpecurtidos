@@ -5,8 +5,6 @@ export interface QuotationItem {
   productId: string;
   variantId: string;
   thickness: string;
-  size: string;
-  quantity: number;
   notes?: string;
   // Denormalized data for display
   productName: string;
@@ -19,7 +17,6 @@ interface QuotationContextType {
   items: QuotationItem[];
   addToQuotation: (item: QuotationItem) => void;
   removeFromQuotation: (productId: string, variantId: string) => void;
-  updateQuantity: (productId: string, variantId: string, quantity: number) => void;
   clearQuotation: () => void;
   totalItems: number;
   isOpen: boolean;
@@ -63,16 +60,11 @@ export function QuotationProvider({ children }: { children: ReactNode }) {
         (item) =>
           item.productId === newItem.productId &&
           item.variantId === newItem.variantId &&
-          item.thickness === newItem.thickness &&
-          item.size === newItem.size
+          item.thickness === newItem.thickness
       );
 
       if (existingItemIndex > -1) {
-        return prevItems.map((item, index) =>
-          index === existingItemIndex
-            ? { ...item, quantity: item.quantity + newItem.quantity }
-            : item
-        );
+        return prevItems; // Already in cart, do nothing special as we don't track quantity
       }
 
       return [...prevItems, newItem];
@@ -88,27 +80,13 @@ export function QuotationProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const updateQuantity = (productId: string, variantId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromQuotation(productId, variantId);
-      return;
-    }
-    
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.productId === productId && item.variantId === variantId
-          ? { ...item, quantity }
-          : item
-      )
-    );
-  };
 
   const clearQuotation = () => {
     setItems([]);
     sessionStorage.removeItem(STORAGE_KEY);
   };
 
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = items.length;
 
   return (
     <QuotationContext.Provider
@@ -116,7 +94,6 @@ export function QuotationProvider({ children }: { children: ReactNode }) {
         items,
         addToQuotation,
         removeFromQuotation,
-        updateQuantity,
         clearQuotation,
         totalItems,
         isOpen,

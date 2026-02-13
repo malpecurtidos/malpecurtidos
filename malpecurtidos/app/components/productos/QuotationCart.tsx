@@ -4,7 +4,7 @@ import { useQuotation } from "~/contexts/QuotationContext";
 import { Button } from "~/ui/button";
 
 export function QuotationCart() {
-  const { items, isOpen, setIsOpen, removeFromQuotation, updateQuantity, totalItems, clearQuotation } = useQuotation();
+  const { items, isOpen, setIsOpen, removeFromQuotation, totalItems, clearQuotation } = useQuotation();
   const [showForm, setShowForm] = useState(false);
   const fetcher = useFetcher();
 
@@ -46,7 +46,7 @@ export function QuotationCart() {
         <button
           onClick={() => setIsOpen(true)}
           className="fixed bottom-8 right-8 z-40 bg-[#8B5A2B] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
-          aria-label="Ver cotización"
+          aria-label="Ver solicitud de muestras"
         >
           <div className="relative">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
@@ -83,7 +83,7 @@ export function QuotationCart() {
               ) : (
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
-                  <span>Cotización</span>
+                  <span>Muestras</span>
                   <span className="text-[#D4AF37]">({totalItems})</span>
                 </>
               )}
@@ -105,7 +105,7 @@ export function QuotationCart() {
               {items.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50">
                   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
-                  <p>Tu lista de cotización está vacía</p>
+                  <p>Tu lista de muestras está vacía</p>
                   <Button onClick={() => setIsOpen(false)} variant="link" className="text-[#8B5A2B]">
                     Volver al catálogo
                   </Button>
@@ -139,30 +139,9 @@ export function QuotationCart() {
                           </button>
                         </div>
                         <p className="text-xs text-gray-600 mb-3 font-sans font-medium">
-                          {item.variantName} • {item.thickness} • {item.size}
+                          {item.variantName} • {item.thickness}
                         </p>
 
-                        <div className="flex items-center gap-2 md:gap-3">
-                          <div className="flex items-center border-2 border-gray-300 rounded-lg bg-gray-50 overflow-hidden h-10 md:h-11 shadow-sm hover:border-[#8B5A2B] transition-colors">
-                            <button
-                              type="button"
-                              onClick={() => updateQuantity(item.productId, item.variantId, item.quantity - 1)}
-                              className="px-3 md:px-4 py-2.5 md:py-3 text-gray-700 hover:text-[#8B5A2B] hover:bg-white transition-colors font-bold text-base md:text-lg leading-none disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
-                              disabled={item.quantity <= 1}
-                            >
-                              −
-                            </button>
-                            <span className="px-3 md:px-4 py-2.5 md:py-3 text-xs md:text-sm font-bold min-w-[2.5rem] md:min-w-[3rem] text-center bg-white border-x border-gray-300 text-gray-800">{item.quantity}</span>
-                            <button
-                              type="button"
-                              onClick={() => updateQuantity(item.productId, item.variantId, item.quantity + 1)}
-                              className="px-3 md:px-4 py-2.5 md:py-3 text-gray-700 hover:text-[#8B5A2B] hover:bg-white transition-colors font-bold text-base md:text-lg leading-none flex-shrink-0"
-                            >
-                              +
-                            </button>
-                          </div>
-                          <span className="text-xs text-gray-600 font-sans font-semibold uppercase tracking-wider">piezas</span>
-                        </div>
                       </div>
                     </div>
                   ))}
@@ -178,7 +157,7 @@ export function QuotationCart() {
                 </div>
 
                 <Button onClick={() => setShowForm(true)} className="w-full bg-[#8B5A2B] hover:bg-[#A67C52] text-white py-6 text-lg font-bold shadow-lg uppercase tracking-wider">
-                  Solicitar Cotización
+                  Solicitar Muestras
                 </Button>
               </div>
             )}
@@ -188,7 +167,7 @@ export function QuotationCart() {
           <div className="flex-1 overflow-y-auto p-6">
             {/* Resumen */}
             <div className="mb-6 p-4 bg-[#F9F7F2] rounded-lg border border-[#8B5A2B]/20">
-              <p className="text-sm font-semibold text-[#2A2522] mb-1 font-sans">Solicitud de Cotización</p>
+              <p className="text-sm font-semibold text-[#2A2522] mb-1 font-sans">Solicitud de Muestras</p>
               <p className="text-base text-[#8B5A2B] font-bold font-sans">{items.length} productos seleccionados</p>
             </div>
 
@@ -213,7 +192,7 @@ export function QuotationCart() {
                 <p className="text-lg font-semibold text-[#2A2522] mb-2 font-sans">
                   ¡Solicitud Enviada!
                 </p>
-                <p className="text-gray-600 font-sans">Te contactaremos pronto con tu cotización.</p>
+                <p className="text-gray-600 font-sans">Te contactaremos pronto para coordinar el envío de tus muestras.</p>
               </div>
             ) : (
               <fetcher.Form method="post" action="/api/quotation" className="space-y-6">
@@ -255,7 +234,7 @@ export function QuotationCart() {
                     className="mt-1 w-4 h-4 text-[#8B5A2B] border-gray-300 rounded focus:ring-2 focus:ring-[#8B5A2B]"
                   />
                   <label htmlFor="privacy-cart" className="text-xs text-gray-600 font-sans leading-relaxed">
-                    Acepto que mis datos sean procesados por MALPE Curtidos para generar esta cotización, de acuerdo con su <a href="#" className="underline hover:text-[#8B5A2B] transition-colors">Política de Privacidad</a>.
+                    Acepto que mis datos sean procesados por MALPE Curtidos para gestionar esta solicitud, de acuerdo con su <a href="#" className="underline hover:text-[#8B5A2B] transition-colors">Política de Privacidad</a>.
                   </label>
                 </div>
 
