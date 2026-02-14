@@ -53,15 +53,15 @@ export function AboutPilares() {
       <div className="max-w-[80%] mx-auto relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6">
           <div className="max-w-2xl">
-            <div className="inline-block px-4 py-1.5 bg-[#8B5A2B]/10 rounded-full mb-6">
-              <span className="text-[#8B5A2B] text-xs font-bold tracking-[0.2em] uppercase">Nuestros Pilares</span>
+            <div className="inline-block px-4 py-1.5 bg-[#4A3728]/10 rounded-full mb-6">
+              <span className="text-[#4A3728] text-xs font-bold tracking-[0.2em] uppercase">Nuestros Pilares</span>
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight">
               Por qué somos la <br />
-              <span className="text-[#8B5A2B]">mejor opción</span>
+              <span className="text-[#4A3728]">mejor opción</span>
             </h2>
           </div>
-          <p className="text-gray-500 max-w-sm text-lg leading-relaxed border-l-2 border-[#8B5A2B]/20 pl-6 hidden md:block">
+          <p className="text-gray-500 max-w-sm text-lg leading-relaxed border-l-2 border-[#4A3728]/20 pl-6 hidden md:block">
             Nuestra base se construye sobre la excelencia y el compromiso con cada detalle.
           </p>
         </div>
@@ -73,18 +73,18 @@ export function AboutPilares() {
               className="group relative bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden"
             >
               {/* Pillar Number - Background Decoration */}
-              <span className="absolute -top-0 right-2 text-8xl font-black text-gray-50 group-hover:text-[#8B5A2B]/5 transition-colors duration-500 pointer-events-none select-none">
+              <span className="absolute -top-0 right-2 text-8xl font-black text-gray-50 group-hover:text-[#4A3728]/5 transition-colors duration-500 pointer-events-none select-none">
                 {pilar.id}
               </span>
 
               <div className="relative z-10">
-                <div className="w-14 h-14 rounded-2xl bg-[#8B5A2B] flex items-center justify-center mb-8 shadow-lg shadow-[#8B5A2B]/20">
+                <div className="w-14 h-14 rounded-2xl bg-[#4A3728] flex items-center justify-center mb-8 shadow-lg shadow-[#4A3728]/20">
                   <div className="w-7 h-7 text-white">
                     {pilar.icon}
                   </div>
                 </div>
 
-                <h4 className="text-xl font-bold text-gray-900 mb-4 tracking-tight group-hover:text-[#8B5A2B] transition-colors duration-300">
+                <h4 className="text-xl font-bold text-gray-900 mb-4 tracking-tight group-hover:text-[#4A3728] transition-colors duration-300">
                   {pilar.title}
                 </h4>
                 
@@ -93,8 +93,8 @@ export function AboutPilares() {
                 </p>
                 
                 {/* Decorative Line that grows on hover */}
-                <div className="mt-8 h-1 w-10 bg-[#8B5A2B]/20 rounded-full overflow-hidden">
-                  <div className="h-full w-full bg-[#8B5A2B] -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out"></div>
+                <div className="mt-8 h-1 w-10 bg-[#4A3728]/20 rounded-full overflow-hidden">
+                  <div className="h-full w-full bg-[#4A3728] -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out"></div>
                 </div>
               </div>
             </div>
@@ -104,3 +104,4 @@ export function AboutPilares() {
     </section>
   );
 }
+

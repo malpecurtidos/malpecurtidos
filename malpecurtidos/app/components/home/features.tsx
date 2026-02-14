@@ -139,7 +139,7 @@ export function Features() {
   ];
 
   return (
-    <section className="bg-[#F9F7F2] py-16 md:py-24 px-4 md:px-8">
+    <section className="bg-[#F5F2ED] py-16 md:py-24 px-4 md:px-8">
       <div className="max-w-[85%] mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Section - Text Content */}
@@ -149,10 +149,10 @@ export function Features() {
                 Innovación y Tradición
               </h2>
               <div className="flex flex-col">
-                <h3 className="text-2xl md:text-3xl font-semibold text-[#8B5A2B] mb-2">
+                <h3 className="text-2xl md:text-3xl font-semibold text-[#4A3728] mb-2">
                   Nuestra Empresa
                 </h3>
-                <div className="w-16 h-0.5 bg-[#8B5A2B]"></div>
+                <div className="w-16 h-0.5 bg-[#4A3728]"></div>
               </div>
             </div>
             <div className="space-y-4 text-gray-700 leading-relaxed">
@@ -177,7 +177,7 @@ export function Features() {
                 key={index}
                 className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
               >
-                <div className="w-14 h-14 rounded-full bg-[#8B5A2B]/10 flex items-center justify-center mb-4 text-[#8B5A2B]">
+                <div className="w-14 h-14 rounded-full bg-[#4A3728]/10 flex items-center justify-center mb-4 text-[#4A3728]">
                   <div className="w-8 h-8">{feature.icon}</div>
                 </div>
                 <h4 className="text-xl font-bold text-gray-900 mb-2">
@@ -194,3 +194,4 @@ export function Features() {
     </section>
   );
 }
+

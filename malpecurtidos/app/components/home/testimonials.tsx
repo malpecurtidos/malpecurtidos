@@ -96,7 +96,7 @@ export function Testimonials() {
       <div className="max-w-[85%] mx-auto px-4 md:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="text-[#D4AF37] text-xs md:text-sm font-semibold uppercase tracking-[0.3em] mb-4 block">
+          <span className="text-[#967D59] text-xs md:text-sm font-semibold uppercase tracking-[0.3em] mb-4 block">
             Testimonios
           </span>
           <h2 className="font-semibold text-4xl md:text-5xl lg:text-6xl text-white mb-6">
@@ -160,7 +160,7 @@ export function Testimonials() {
                       </div>
 
                       {/* Decorative corner */}
-                      <div className="absolute top-6 right-6 text-[#8B5A2B]/20 text-6xl font-serif leading-none">
+                      <div className="absolute top-6 right-6 text-[#4A3728]/20 text-6xl font-serif leading-none">
                         "
                       </div>
                     </div>
@@ -179,7 +179,7 @@ export function Testimonials() {
                 key={setIndex}
                 onClick={() => handleIndicatorClick(setIndex)}
                 className={`h-2 rounded-full transition-all duration-300 ${setIndex === activeSetIndex
-                  ? "w-8 bg-[#8B5A2B]"
+                  ? "w-8 bg-[#4A3728]"
                   : "w-2 bg-white/20 hover:bg-white/40"
                   }`}
                 aria-label={`Go to testimonial set ${setIndex + 1}`}
@@ -211,3 +211,4 @@ export function Testimonials() {
     </section>
   );
 }
+

@@ -32,13 +32,13 @@ export function ShowroomGrid() {
               <div key={categoryKey} className="relative">
                 {/* Category Header */}
                 <div className="flex flex-col items-center text-center mb-16 relative z-10">
-                  <span className="text-[#D4AF37] text-xs font-bold uppercase tracking-[0.2em] mb-3">
+                  <span className="text-[#967D59] text-xs font-bold uppercase tracking-[0.2em] mb-3">
                     Showroom Destacado
                   </span>
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#2A2522] mb-6">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1A1816] mb-6">
                     {categoryLabels[categoryKey]}
                   </h2>
-                  <div className="w-px h-16 bg-gradient-to-b from-[#8B5A2B] to-transparent mb-6"></div>
+                  <div className="w-px h-16 bg-gradient-to-b from-[#4A3728] to-transparent mb-6"></div>
                   <p className="text-gray-500 font-sans text-lg md:text-xl max-w-2xl leading-relaxed">
                     {categoryDescriptions[categoryKey] || "Productos destacados"}
                   </p>
@@ -56,9 +56,9 @@ export function ShowroomGrid() {
         </div>
 
         {/* Call to Action Footer in Grid */}
-        <div className="mt-32 text-center bg-[#F9F7F2] rounded-3xl p-12 md:p-20 relative overflow-hidden">
+        <div className="mt-32 text-center bg-[#F5F2ED] rounded-3xl p-12 md:p-20 relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h3 className="text-3xl md:text-4xl font-semibold text-[#2A2522] mb-6">
+            <h3 className="text-3xl md:text-4xl font-semibold text-[#1A1816] mb-6">
               ¿Tienes un diseño en mente?
             </h3>
             <p className="text-gray-600 mb-8 font-sans text-lg">
@@ -66,16 +66,17 @@ export function ShowroomGrid() {
             </p>
             <a
               href="/contacto"
-              className="inline-block bg-[#2A2522] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#8B5A2B] transition-colors duration-300 uppercase tracking-wider text-sm"
+              className="inline-block bg-[#1A1816] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#4A3728] transition-colors duration-300 uppercase tracking-wider text-sm"
             >
               Contactar a Ventas
             </a>
           </div>
           {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-32 h-32 bg-[#D4AF37]/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#8B5A2B]/5 rounded-full translate-x-1/2 translate-y-1/2"></div>
+          <div className="absolute top-0 left-0 w-32 h-32 bg-[#967D59]/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#4A3728]/5 rounded-full translate-x-1/2 translate-y-1/2"></div>
         </div>
       </div>
     </section>
   );
 }
+

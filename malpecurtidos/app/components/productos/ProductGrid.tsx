@@ -100,7 +100,7 @@ export function ProductGrid() {
         <div className="lg:w-3/4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
             <p className="text-black hidden md:block font-sans text-sm">
-              Mostrando <span className="font-semibold text-[#2A2522]">{currentProducts.length}</span> de <span className="font-semibold text-[#2A2522]">{filteredProducts.length}</span> productos encontrados
+              Mostrando <span className="font-semibold text-[#1A1816]">{currentProducts.length}</span> de <span className="font-semibold text-[#1A1816]">{filteredProducts.length}</span> productos encontrados
             </p>
           </div>
 
@@ -111,9 +111,9 @@ export function ProductGrid() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 bg-[#F9F7F2] rounded-xl border-2 border-dashed border-[#8B5A2B]/30">
+            <div className="text-center py-20 bg-[#F5F2ED] rounded-xl border-2 border-dashed border-[#4A3728]/30">
               <p className="text-xl text-black mb-4 font-sans">No se encontraron productos</p>
-              <Button onClick={clearFilters} variant="outline" className="text-[#8B5A2B] border-[#8B5A2B] hover:bg-[#8B5A2B] hover:text-white">
+              <Button onClick={clearFilters} variant="outline" className="text-[#4A3728] border-[#4A3728] hover:bg-[#4A3728] hover:text-white">
                 Limpiar filtros
               </Button>
             </div>
@@ -130,3 +130,4 @@ export function ProductGrid() {
     </section>
   );
 }
+

@@ -41,12 +41,12 @@ export function AboutValores() {
 
           {/* Left Side: Text Content */}
           <div className="space-y-6">
-            <div className="inline-block px-4 py-1.5 bg-[#8B5A2B]/10 rounded-full">
-              <span className="text-[#8B5A2B] text-xs font-bold tracking-[0.2em] uppercase">Nuestra Identidad</span>
+            <div className="inline-block px-4 py-1.5 bg-[#4A3728]/10 rounded-full">
+              <span className="text-[#4A3728] text-xs font-bold tracking-[0.2em] uppercase">Nuestra Identidad</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
               Tradición que <br />
-              <span className="text-[#8B5A2B]">Transforma</span>
+              <span className="text-[#4A3728]">Transforma</span>
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
               Malpe es una empresa dedicada a la transformación de la piel en cuero para corte y tapicería.
@@ -65,7 +65,7 @@ export function AboutValores() {
                     key={i}
                     x1="200" y1="200"
                     x2={200 + v.x} y2={200 + v.y}
-                    stroke="#8B5A2B"
+                    stroke="#4A3728"
                     strokeWidth="1.5"
                     strokeOpacity="0.3"
                   />
@@ -75,7 +75,7 @@ export function AboutValores() {
                 <path
                   d="M200 80 L304 140 L304 260 L200 320 L96 260 L96 140 Z"
                   fill="none"
-                  stroke="#8B5A2B"
+                  stroke="#4A3728"
                   strokeWidth="2"
                   strokeOpacity="0.5"
                 />
@@ -84,7 +84,7 @@ export function AboutValores() {
                 <path
                   d="M200 80 L304 260 L96 260 Z M96 140 L304 140 L200 320 Z"
                   fill="none"
-                  stroke="#8B5A2B"
+                  stroke="#4A3728"
                   strokeWidth="1"
                   strokeOpacity="0.2"
                 />
@@ -92,9 +92,9 @@ export function AboutValores() {
             </div>
 
             {/* Central Value */}
-            <div className="relative z-20 w-28 h-28 md:w-32 md:h-32 rounded-full bg-white shadow-[0_0_50px_rgba(139,90,43,0.15)] border-2 border-[#8B5A2B] flex items-center justify-center p-4 text-center group transition-transform duration-500 hover:scale-110">
+            <div className="relative z-20 w-28 h-28 md:w-32 md:h-32 rounded-full bg-white shadow-[0_0_50px_rgba(139,90,43,0.15)] border-2 border-[#4A3728] flex items-center justify-center p-4 text-center group transition-transform duration-500 hover:scale-110">
               <div className="relative">
-                <span className="block text-[#8B5A2B] text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Eje Central</span>
+                <span className="block text-[#4A3728] text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Eje Central</span>
                 <span className="block text-lg md:text-xl font-black text-gray-900 tracking-tighter uppercase">Calidad</span>
               </div>
             </div>
@@ -110,7 +110,7 @@ export function AboutValores() {
               >
                 <div className="relative flex items-center justify-center">
                   {/* Small point */}
-                  <div className="w-2 h-2 rounded-full bg-[#8B5A2B] shadow-lg shadow-[#8B5A2B]/40 group-hover:scale-150 transition-all duration-300"></div>
+                  <div className="w-2 h-2 rounded-full bg-[#4A3728] shadow-lg shadow-[#4A3728]/40 group-hover:scale-150 transition-all duration-300"></div>
 
                   {/* Label - Improved positioning and visibility */}
                   <div className={`absolute whitespace-nowrap px-4 py-2 md:bg-white md:rounded-lg md:shadow-xl md:border md:border-gray-100 transition-all duration-300
@@ -130,3 +130,4 @@ export function AboutValores() {
     </section>
   );
 }
+

@@ -44,15 +44,15 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
     const { post } = loaderData;
 
     return (
-        <article className="min-h-screen bg-black text-white pt-24 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-[#D4AF37] selection:text-black">
+        <article className="min-h-screen bg-black text-white pt-24 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-[#967D59] selection:text-black">
             {/* Background elements */}
-            <div className="fixed top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#8B5A2B]/10 to-transparent pointer-events-none" />
+            <div className="fixed top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#4A3728]/10 to-transparent pointer-events-none" />
 
             <div className="max-w-3xl mx-auto relative z-10">
                 <header className="mb-12 text-center">
                     <div className="flex justify-center flex-wrap gap-2 mb-8">
                         {post.categories?.map((category: string) => (
-                            <span key={category} className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/20">
+                            <span key={category} className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 bg-[#967D59]/10 text-[#967D59] border border-[#967D59]/20">
                                 {category}
                             </span>
                         ))}
@@ -66,7 +66,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
                             <img
                                 src={urlFor(post.author.image).width(60).height(60).fit("crop").url()}
                                 alt={post.author.name}
-                                className="w-12 h-12 rounded-full object-cover border border-[#D4AF37]/30"
+                                className="w-12 h-12 rounded-full object-cover border border-[#967D59]/30"
                             />
                         )}
                         <div className="flex flex-col items-start text-xs uppercase tracking-wider">
@@ -92,10 +92,11 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
                     </div>
                 )}
 
-                <div className="prose prose-invert prose-lg max-w-none mx-auto text-gray-300 prose-headings:font-sans prose-headings:text-white prose-a:text-[#D4AF37] prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-blockquote:border-l-[#D4AF37] prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic">
+                <div className="prose prose-invert prose-lg max-w-none mx-auto text-gray-300 prose-headings:font-sans prose-headings:text-white prose-a:text-[#967D59] prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-blockquote:border-l-[#967D59] prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic">
                     {post.body ? <PortableText value={post.body} components={components} /> : null}
                 </div>
             </div>
         </article>
     );
 }
+

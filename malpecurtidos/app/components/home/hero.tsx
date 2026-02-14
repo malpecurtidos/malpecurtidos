@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "../../ui/button";
+import { Link } from "react-router";
 
 const heroSlides = [
   {
@@ -78,7 +79,7 @@ export function Hero() {
                       return (
                         <span key={i}>
                           {shouldHighlight ? (
-                            <span className="text-[#D4AF37] italic">{word}</span>
+                            <span className="text-[#967D59] italic">{word}</span>
                           ) : (
                             word
                           )}
@@ -103,7 +104,7 @@ export function Hero() {
                       : "opacity-0 translate-y-4"
                       }`}
                   >
-                    <h2 className="text-[#D4AF37] text-xs md:text-sm font-semibold uppercase tracking-wider mb-2">
+                    <h2 className="text-[#967D59] text-xs md:text-sm font-semibold uppercase tracking-wider mb-2">
                       {slide.smallTitle}
                     </h2>
                     <p className="text-gray-200 leading-relaxed text-sm md:text-base">
@@ -113,12 +114,16 @@ export function Hero() {
                 ))}
               </div>
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center sm:justify-start lg:justify-end">
-                <Button variant="glassmorphism">
-                  Explorar Catálogo
-                </Button>
-                <Button variant="secondary">
-                  Descubre más
-                </Button>
+                <Link to="/productos">
+                  <Button variant="glassmorphism">
+                    Explorar Catálogo
+                  </Button>
+                </Link>
+                <Link to="/showroom">
+                  <Button variant="secondary">
+                    Descubre más
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -130,7 +135,7 @@ export function Hero() {
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${index === currentSlide
-                  ? "w-8 bg-[#8B5A2B]"
+                  ? "w-8 bg-[#4A3728]"
                   : "w-2 bg-white/50 hover:bg-white/75"
                   }`}
                 aria-label={`Go to slide ${index + 1}`}
@@ -142,3 +147,4 @@ export function Hero() {
     </div>
   );
 }
+

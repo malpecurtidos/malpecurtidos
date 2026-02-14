@@ -17,7 +17,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   return (
     <div className="space-y-4">
-      <div className="aspect-square bg-[#F9F7F2] rounded-2xl overflow-hidden relative shadow-lg border border-[#8B5A2B]/10">
+      <div className="aspect-square bg-[#F5F2ED] rounded-2xl overflow-hidden relative shadow-lg border border-[#4A3728]/10">
         <img
           src={selectedImage}
           alt={productName}
@@ -33,8 +33,8 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               onClick={() => setSelectedImage(img)}
               className={`aspect-square rounded-xl overflow-hidden border-2 transition-all duration-200 ${
                 selectedImage === img
-                  ? "border-[#8B5A2B] ring-2 ring-[#8B5A2B]/20"
-                  : "border-transparent hover:border-[#8B5A2B]/50"
+                  ? "border-[#4A3728] ring-2 ring-[#4A3728]/20"
+                  : "border-transparent hover:border-[#4A3728]/50"
               }`}
             >
               <img
@@ -49,3 +49,4 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
     </div>
   );
 }
+

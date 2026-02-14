@@ -29,7 +29,7 @@ export function Cta2() {
           {/* Benefits */}
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 pt-4">
             <div className="flex flex-col items-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#FFFFFF]/10 flex items-center justify-center border border-[#8B5A2B]/20">
+              <div className="w-12 h-12 rounded-full bg-[#FFFFFF]/10 flex items-center justify-center border border-[#4A3728]/20">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -68,7 +68,7 @@ export function Cta2() {
             </div>
 
             <div className="flex flex-col items-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#FFFFFF]/10 flex items-center justify-center border border-[#8B5A2B]/20">
+              <div className="w-12 h-12 rounded-full bg-[#FFFFFF]/10 flex items-center justify-center border border-[#4A3728]/20">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -100,7 +100,7 @@ export function Cta2() {
             </div>
 
             <div className="flex flex-col items-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#FFFFFF]/10 flex items-center justify-center border border-[#8B5A2B]/20">
+              <div className="w-12 h-12 rounded-full bg-[#FFFFFF]/10 flex items-center justify-center border border-[#4A3728]/20">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -136,7 +136,7 @@ export function Cta2() {
           <div className="pt-6">
             <Button
               variant="primary"
-              className="hover:scale-110 hover:shadow-2xl hover:shadow-[#8B5A2B]/30 text-base md:text-lg px-8 py-4 tracking-wide"
+              className="hover:scale-110 hover:shadow-2xl hover:shadow-[#4A3728]/30 text-base md:text-lg px-8 py-4 tracking-wide"
             >
               Solicitar Cotización Gratuita
             </Button>
@@ -146,3 +146,4 @@ export function Cta2() {
     </section>
   );
 }
+

@@ -29,7 +29,7 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* Text Overlay */}
       <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10">
         {/* Category Label */}
-        <p className="text-sm md:text-base font-sans font-semibold text-[#D4AF37] uppercase tracking-wider mb-2">
+        <p className="text-sm md:text-base font-sans font-semibold text-[#967D59] uppercase tracking-wider mb-2">
           {product.category.replace("-", " ")}
         </p>
 
@@ -62,7 +62,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* CTA Link */}
         <div className="pt-2 border-t border-white/20">
-          <span className="text-sm font-semibold text-white uppercase tracking-wider group-hover:text-[#D4AF37] transition-colors">
+          <span className="text-sm font-semibold text-white uppercase tracking-wider group-hover:text-[#967D59] transition-colors">
             Ver Detalles →
           </span>
         </div>
@@ -70,3 +70,4 @@ export function ProductCard({ product }: ProductCardProps) {
     </Link>
   );
 }
+

@@ -17,7 +17,7 @@ export function PostCard({ post }: PostCardProps) {
     return (
         <Link
             to={`/blog/${post.slug.current}`}
-            className="group flex flex-col h-full bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-[#D4AF37]/50 transition-all duration-500"
+            className="group flex flex-col h-full bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-[#967D59]/50 transition-all duration-500"
         >
             <div className="aspect-[16/9] w-full overflow-hidden bg-zinc-900 relative">
                 {post.mainImage ? (
@@ -39,12 +39,12 @@ export function PostCard({ post }: PostCardProps) {
             <div className="p-6 flex flex-col flex-grow relative">
                 <div className="flex flex-wrap gap-2 mb-4">
                     {post.categories?.map((category) => (
-                        <span key={category} className="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/20">
+                        <span key={category} className="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 bg-[#967D59]/10 text-[#967D59] border border-[#967D59]/20">
                             {category}
                         </span>
                     ))}
                 </div>
-                <h3 className="text-xl font-sans font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors duration-300 line-clamp-2 leading-snug">
+                <h3 className="text-xl font-sans font-bold text-white mb-3 group-hover:text-[#967D59] transition-colors duration-300 line-clamp-2 leading-snug">
                     {post.title}
                 </h3>
                 {post.excerpt && (
@@ -66,3 +66,4 @@ export function PostCard({ post }: PostCardProps) {
         </Link>
     );
 }
+

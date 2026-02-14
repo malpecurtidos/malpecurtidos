@@ -60,10 +60,10 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
             <li className="flex items-center shrink-0">
               <Link
                 to="/"
-                className="group flex items-center text-sm md:text-base text-gray-500 hover:text-[#8B5A2B] transition-all duration-200 font-medium"
+                className="group flex items-center text-sm md:text-base text-gray-500 hover:text-[#4A3728] transition-all duration-200 font-medium"
               >
                 <svg
-                  className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-[#8B5A2B] transition-colors shrink-0"
+                  className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-[#4A3728] transition-colors shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -86,7 +86,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
             <li className="shrink-0">
               <Link
                 to="/productos"
-                className="text-sm md:text-base text-gray-500 hover:text-[#8B5A2B] transition-all duration-200 font-medium"
+                className="text-sm md:text-base text-gray-500 hover:text-[#4A3728] transition-all duration-200 font-medium"
               >
                 Catálogo
               </Link>
@@ -102,7 +102,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
               </svg>
             </li>
             <li className="min-w-0">
-              <span className="text-sm md:text-base text-[#2A2522] font-semibold break-words">
+              <span className="text-sm md:text-base text-[#1A1816] font-semibold break-words">
                 {product.name}
               </span>
             </li>
@@ -130,11 +130,11 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
           <div className="space-y-8">
             <div>
               <div className="mb-4">
-                <span className="text-[#D4AF37] text-xs font-semibold uppercase tracking-wider">
+                <span className="text-[#967D59] text-xs font-semibold uppercase tracking-wider">
                   {product.category.replace("-", " ")}
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#2A2522] mb-3 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1A1816] mb-3 leading-tight">
                 {product.name}
               </h1>
               <p className="text-gray-600 text-sm font-sans">SKU: {product.sku}</p>
@@ -175,7 +175,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Especifique requerimientos especiales..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#8B5A2B] focus:border-[#8B5A2B] h-20 resize-none text-sm text-black placeholder:text-gray-400"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#4A3728] focus:border-[#4A3728] h-20 resize-none text-sm text-black placeholder:text-gray-400"
                 />
               </div>
             </div>
@@ -184,14 +184,14 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 onClick={handleAddToSamples}
-                className="flex-1 bg-[#8B5A2B] hover:bg-[#A67C52] text-white py-6 rounded-xl text-lg font-bold shadow-lg shadow-[#8B5A2B]/20 transition-all hover:-translate-y-1"
+                className="flex-1 bg-[#4A3728] hover:bg-[#A67C52] text-white py-6 rounded-xl text-lg font-bold shadow-lg shadow-[#4A3728]/20 transition-all hover:-translate-y-1"
               >
                 Agregar a Solicitud de Muestras
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setRequestType("tech_sheet")}
-                className="flex-1 border-gray-300 hover:border-[#8B5A2B] hover:text-[#8B5A2B] py-6 rounded-xl text-lg font-semibold transition-all"
+                className="flex-1 border-gray-300 hover:border-[#4A3728] hover:text-[#4A3728] py-6 rounded-xl text-lg font-semibold transition-all"
               >
                 Solicitar Ficha Técnica
               </Button>
@@ -212,3 +212,4 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
     </div>
   );
 }
+

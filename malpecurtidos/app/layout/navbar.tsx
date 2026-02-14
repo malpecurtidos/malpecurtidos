@@ -135,7 +135,7 @@ export function Navbar() {
               {totalItems > 0 && (
                 <button
                   onClick={() => setIsOpen(true)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-[#2A2522] bg-[#D4AF37] hover:bg-[#F2C94C] transition-all duration-300 shadow-lg shadow-[#D4AF37]/20 group"
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-[#1A1816] bg-[#967D59] hover:bg-[#F2C94C] transition-all duration-300 shadow-lg shadow-[#967D59]/20 group"
                   aria-label="Ver cotización"
                 >
                   <span className="relative">
@@ -284,3 +284,4 @@ export function Navbar() {
     </motion.nav>
   );
 }
+

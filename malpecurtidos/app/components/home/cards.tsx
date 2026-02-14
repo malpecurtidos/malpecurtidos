@@ -56,7 +56,7 @@ export function Cards() {
               {/* Text Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                 {card.label && (
-                  <p className="text-sm md:text-base font-sans font-semibold text-[#D4AF37] uppercase tracking-wider mb-2">
+                  <p className="text-sm md:text-base font-sans font-semibold text-[#967D59] uppercase tracking-wider mb-2">
                     {card.label}
                   </p>
                 )}
@@ -71,3 +71,4 @@ export function Cards() {
     </section>
   );
 }
+

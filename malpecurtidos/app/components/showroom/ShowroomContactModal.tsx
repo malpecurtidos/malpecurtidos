@@ -76,7 +76,7 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
       {/* Trigger Button */}
       <Button
         onClick={() => setIsOpen(true)}
-        className="w-full bg-[#8B5A2B] hover:bg-[#A67C52] text-white py-6 rounded-xl text-lg font-bold shadow-lg shadow-[#8B5A2B]/20 transition-all hover:-translate-y-1"
+        className="w-full bg-[#4A3728] hover:bg-[#A67C52] text-white py-6 rounded-xl text-lg font-bold shadow-lg shadow-[#4A3728]/20 transition-all hover:-translate-y-1"
       >
         Contactar sobre este Producto
       </Button>
@@ -137,9 +137,9 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6">
           {/* Resumen del producto */}
-          <div className="mb-6 p-4 bg-[#F9F7F2] rounded-lg border border-[#8B5A2B]/20">
-            <p className="text-sm font-semibold text-[#2A2522] mb-2 font-sans">Producto de Interés:</p>
-            <p className="text-base text-[#8B5A2B] font-bold font-sans">{product.name}</p>
+          <div className="mb-6 p-4 bg-[#F5F2ED] rounded-lg border border-[#4A3728]/20">
+            <p className="text-sm font-semibold text-[#1A1816] mb-2 font-sans">Producto de Interés:</p>
+            <p className="text-base text-[#4A3728] font-bold font-sans">{product.name}</p>
             <p className="text-sm text-gray-600 mt-1 font-sans">
               Piel: {selectedSkin.skinName} - {selectedSkin.variantName}
             </p>
@@ -163,7 +163,7 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <p className="text-lg font-semibold text-[#2A2522] mb-2 font-sans">
+              <p className="text-lg font-semibold text-[#1A1816] mb-2 font-sans">
                 ¡Solicitud Enviada!
               </p>
               <p className="text-gray-600 font-sans">Te contactaremos pronto.</p>
@@ -182,7 +182,7 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
                     required
                     name="name"
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] font-sans transition-all text-black placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400"
                     placeholder="Tu nombre"
                   />
                 </div>
@@ -194,7 +194,7 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
                     required
                     name="company"
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] font-sans transition-all text-black placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400"
                     placeholder="Nombre de tu empresa"
                   />
                 </div>
@@ -206,7 +206,7 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
                     required
                     name="email"
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] font-sans transition-all text-black placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400"
                     placeholder="correo@empresa.com"
                   />
                 </div>
@@ -218,7 +218,7 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
                     required
                     name="phone"
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] font-sans transition-all text-black placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400"
                     placeholder="+52 (477) 123-4567"
                   />
                 </div>
@@ -231,23 +231,23 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
                 <textarea
                   name="message"
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] resize-none font-sans transition-all text-black placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] resize-none font-sans transition-all text-black placeholder:text-gray-400"
                   placeholder="¿Alguna especificación o duda particular sobre este producto o la piel seleccionada?"
                 />
               </div>
 
-              <div className="flex items-start gap-3 p-4 bg-[#F9F7F2] rounded-lg border border-[#8B5A2B]/20">
+              <div className="flex items-start gap-3 p-4 bg-[#F5F2ED] rounded-lg border border-[#4A3728]/20">
                 <input
                   required
                   type="checkbox"
                   id="privacy-showroom"
                   name="privacy"
-                  className="mt-1 w-4 h-4 text-[#8B5A2B] border-gray-300 rounded focus:ring-2 focus:ring-[#8B5A2B]"
+                  className="mt-1 w-4 h-4 text-[#4A3728] border-gray-300 rounded focus:ring-2 focus:ring-[#4A3728]"
                 />
                 <label htmlFor="privacy-showroom" className="text-xs text-gray-600 font-sans leading-relaxed">
                   Acepto que mis datos sean procesados por MALPE Curtidos para contactarme sobre este producto, de
                   acuerdo con su{" "}
-                  <a href="#" className="underline hover:text-[#8B5A2B] transition-colors">
+                  <a href="#" className="underline hover:text-[#4A3728] transition-colors">
                     Política de Privacidad
                   </a>
                   .
@@ -257,7 +257,7 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#8B5A2B] hover:bg-[#6B4423] text-white py-6 text-base font-bold shadow-lg uppercase tracking-wider transition-all"
+                className="w-full bg-[#4A3728] hover:bg-[#6B4423] text-white py-6 text-base font-bold shadow-lg uppercase tracking-wider transition-all"
               >
                 {isSubmitting ? "Enviando..." : "Enviar Solicitud"}
               </Button>
@@ -268,3 +268,4 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
     </>
   );
 }
+

@@ -22,11 +22,11 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
       className="group block"
     >
       {/* Image Container */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#F9F7F2] mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#F5F2ED] mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
         <img
           src={mainImage}
           alt={product.name}
-          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+          className="w-full h-full object-cover transform group-hover:scale-103 transition-transform duration-700"
           loading="lazy"
         />
       </div>
@@ -34,12 +34,12 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
       {/* Content Below */}
       <div className="px-1">
         {/* Category Badge */}
-        <p className="text-xs font-sans font-bold text-[#D4AF37] uppercase tracking-[0.2em] mb-2">
+        <p className="text-xs font-sans font-bold text-[#967D59] uppercase tracking-[0.2em] mb-2">
           {product.category}
         </p>
 
         {/* Product Name */}
-        <h3 className="text-2xl md:text-3xl font-semibold text-[#2A2522] leading-tight mb-4 group-hover:text-[#D4AF37] transition-colors">
+        <h3 className="text-2xl md:text-3xl font-semibold text-[#1A1816] leading-tight mb-4 group-hover:text-[#967D59] transition-colors">
           {product.name}
         </h3>
 
@@ -64,14 +64,14 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
               Gama de Colores
             </p>
           </div>
-          <p className="text-xs text-gray-600 font-sans border-l-2 border-[#D4AF37] pl-3 py-0.5">
-            Colecciones: <span className="text-[#2A2522] font-semibold">{product.collections.map(c => c.name).join(" + ")}</span>
+          <p className="text-xs text-gray-600 font-sans border-l-2 border-[#967D59] pl-3 py-0.5">
+            Colecciones: <span className="text-[#1A1816] font-semibold">{product.collections.map(c => c.name).join(" + ")}</span>
           </p>
         </div>
 
         {/* CTA Link */}
         <div className="pt-2 border-t border-gray-100">
-          <span className="text-sm font-bold text-[#2A2522] uppercase tracking-widest group-hover:text-[#8B5A2B] transition-colors inline-flex items-center gap-2">
+          <span className="text-sm font-bold text-[#1A1816] uppercase tracking-widest group-hover:text-[#4A3728] transition-colors inline-flex items-center gap-2">
             Ver Aplicaciones <span className="transform group-hover:translate-x-1 transition-transform">→</span>
           </span>
         </div>
@@ -79,3 +79,4 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
     </Link>
   );
 }
+

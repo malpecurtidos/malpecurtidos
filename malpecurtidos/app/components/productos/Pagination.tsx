@@ -16,7 +16,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         variant="outline"
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="border-gray-300 text-black hover:bg-[#F9F7F2] hover:border-[#8B5A2B] hover:text-[#8B5A2B] disabled:opacity-40 disabled:cursor-not-allowed font-sans"
+        className="border-gray-300 text-black hover:bg-[#F5F2ED] hover:border-[#4A3728] hover:text-[#4A3728] disabled:opacity-40 disabled:cursor-not-allowed font-sans"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -36,14 +36,14 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
       </Button>
       
       <span className="text-sm font-medium text-black font-sans">
-        Página <span className="text-[#8B5A2B] font-bold">{currentPage}</span> de {totalPages}
+        Página <span className="text-[#4A3728] font-bold">{currentPage}</span> de {totalPages}
       </span>
       
       <Button
         variant="outline"
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="border-gray-300 text-black hover:bg-[#F9F7F2] hover:border-[#8B5A2B] hover:text-[#8B5A2B] disabled:opacity-40 disabled:cursor-not-allowed font-sans"
+        className="border-gray-300 text-black hover:bg-[#F5F2ED] hover:border-[#4A3728] hover:text-[#4A3728] disabled:opacity-40 disabled:cursor-not-allowed font-sans"
       >
         Siguiente
         <svg
@@ -64,3 +64,4 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
     </div>
   );
 }
+

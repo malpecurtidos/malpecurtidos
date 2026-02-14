@@ -37,7 +37,7 @@ export function ShowroomFilters({
         <h3 className="text-lg font-semibold text-black uppercase tracking-wider">Filtros</h3>
         <button
           onClick={clearFilters}
-          className="text-xs text-black hover:text-[#D4AF37] uppercase tracking-wider font-semibold transition-colors"
+          className="text-xs text-black hover:text-[#967D59] uppercase tracking-wider font-semibold transition-colors"
         >
           Limpiar Todo
         </button>
@@ -53,9 +53,9 @@ export function ShowroomFilters({
                 type="checkbox"
                 checked={filters.category.includes(category)}
                 onChange={() => handleCheckboxChange("category", category)}
-                className="w-4 h-4 rounded border-gray-300 text-[#8B5A2B] focus:ring-[#8B5A2B] focus:ring-2"
+                className="w-4 h-4 rounded border-gray-300 text-[#4A3728] focus:ring-[#4A3728] focus:ring-2"
               />
-              <span className="text-sm text-black group-hover:text-[#8B5A2B] transition-colors capitalize font-sans">
+              <span className="text-sm text-black group-hover:text-[#4A3728] transition-colors capitalize font-sans">
                 {category.replace("-", " ")}
               </span>
             </label>
@@ -65,3 +65,4 @@ export function ShowroomFilters({
     </div>
   );
 }
+

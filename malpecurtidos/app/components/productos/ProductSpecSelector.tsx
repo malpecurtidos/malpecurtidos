@@ -24,8 +24,8 @@ export function ProductSpecSelector({
             onClick={() => onSelectOption(option)}
             className={`px-4 py-2 rounded-lg text-sm border transition-all duration-200 ${
               selectedOption === option
-                ? "border-[#8B5A2B] bg-[#8B5A2B]/5 text-[#8B5A2B] font-semibold"
-                : "border-gray-200 text-black hover:border-[#8B5A2B] hover:text-[#8B5A2B]"
+                ? "border-[#4A3728] bg-[#4A3728]/5 text-[#4A3728] font-semibold"
+                : "border-gray-200 text-black hover:border-[#4A3728] hover:text-[#4A3728]"
             }`}
           >
             {option}
@@ -35,3 +35,4 @@ export function ProductSpecSelector({
     </div>
   );
 }
+

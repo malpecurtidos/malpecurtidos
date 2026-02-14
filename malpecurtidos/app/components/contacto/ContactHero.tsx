@@ -13,7 +13,7 @@ export function ContactHero() {
 
       <div className="relative z-10 container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-          Hablemos de <span className="text-[#D4AF37]">Calidad</span>
+          Hablemos de <span className="text-[#967D59]">Calidad</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light leading-relaxed">
           Estamos aquí para responder tus dudas y ayudarte a encontrar la piel perfecta para tus proyectos.
@@ -22,3 +22,4 @@ export function ContactHero() {
     </section>
   );
 }
+

@@ -6,8 +6,8 @@ export function NotFound() {
         <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center relative overflow-hidden px-4">
             {/* Background Elements */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-0 w-96 h-96 bg-[#8B5A2B]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-                <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8B5A2B]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+                <div className="absolute top-0 left-0 w-96 h-96 bg-[#4A3728]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#4A3728]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
             </div>
 
@@ -36,3 +36,4 @@ export function NotFound() {
         </div>
     );
 }
+

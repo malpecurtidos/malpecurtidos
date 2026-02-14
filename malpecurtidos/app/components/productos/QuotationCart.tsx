@@ -45,12 +45,12 @@ export function QuotationCart() {
       {!isOpen && items.length > 0 && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-8 right-8 z-40 bg-[#8B5A2B] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
+          className="fixed bottom-8 right-8 z-40 bg-[#4A3728] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
           aria-label="Ver solicitud de muestras"
         >
           <div className="relative">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
-            <span className="absolute -top-3 -right-3 bg-[#D4AF37] text-[#2A2522] text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#2A2522]">
+            <span className="absolute -top-3 -right-3 bg-[#967D59] text-[#1A1816] text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#1A1816]">
               {totalItems}
             </span>
           </div>
@@ -84,7 +84,7 @@ export function QuotationCart() {
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
                   <span>Muestras</span>
-                  <span className="text-[#D4AF37]">({totalItems})</span>
+                  <span className="text-[#967D59]">({totalItems})</span>
                 </>
               )}
             </h2>
@@ -106,7 +106,7 @@ export function QuotationCart() {
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50">
                   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
                   <p>Tu lista de muestras está vacía</p>
-                  <Button onClick={() => setIsOpen(false)} variant="link" className="text-[#8B5A2B]">
+                  <Button onClick={() => setIsOpen(false)} variant="link" className="text-[#4A3728]">
                     Volver al catálogo
                   </Button>
                 </div>
@@ -129,7 +129,7 @@ export function QuotationCart() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start mb-2">
-                          <h3 className="font-semibold text-[#2A2522] truncate pr-8 text-sm">{item.productName}</h3>
+                          <h3 className="font-semibold text-[#1A1816] truncate pr-8 text-sm">{item.productName}</h3>
                           <button
                             onClick={() => removeFromQuotation(item.productId, item.variantId)}
                             className="text-gray-400 hover:text-red-500 absolute top-4 right-4 p-1.5 hover:bg-red-50 rounded-full transition-all"
@@ -151,12 +151,12 @@ export function QuotationCart() {
 
             {items.length > 0 && (
               <div className="p-6 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] space-y-4">
-                <div className="flex items-start gap-3 p-4 bg-[#F9F7F2] text-black rounded-lg text-sm border border-[#8B5A2B]/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#8B5A2B] shrink-0 mt-0.5"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg>
+                <div className="flex items-start gap-3 p-4 bg-[#F5F2ED] text-black rounded-lg text-sm border border-[#4A3728]/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#4A3728] shrink-0 mt-0.5"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg>
                   <p className="font-sans text-black">Los precios y tiempos de entrega se confirmarán en la propuesta formal.</p>
                 </div>
 
-                <Button onClick={() => setShowForm(true)} className="w-full bg-[#8B5A2B] hover:bg-[#A67C52] text-white py-6 text-lg font-bold shadow-lg uppercase tracking-wider">
+                <Button onClick={() => setShowForm(true)} className="w-full bg-[#4A3728] hover:bg-[#A67C52] text-white py-6 text-lg font-bold shadow-lg uppercase tracking-wider">
                   Solicitar Muestras
                 </Button>
               </div>
@@ -166,9 +166,9 @@ export function QuotationCart() {
           // --- FORM VIEW ---
           <div className="flex-1 overflow-y-auto p-6">
             {/* Resumen */}
-            <div className="mb-6 p-4 bg-[#F9F7F2] rounded-lg border border-[#8B5A2B]/20">
-              <p className="text-sm font-semibold text-[#2A2522] mb-1 font-sans">Solicitud de Muestras</p>
-              <p className="text-base text-[#8B5A2B] font-bold font-sans">{items.length} productos seleccionados</p>
+            <div className="mb-6 p-4 bg-[#F5F2ED] rounded-lg border border-[#4A3728]/20">
+              <p className="text-sm font-semibold text-[#1A1816] mb-1 font-sans">Solicitud de Muestras</p>
+              <p className="text-base text-[#4A3728] font-bold font-sans">{items.length} productos seleccionados</p>
             </div>
 
             {isSuccess ? (
@@ -189,7 +189,7 @@ export function QuotationCart() {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                <p className="text-lg font-semibold text-[#2A2522] mb-2 font-sans">
+                <p className="text-lg font-semibold text-[#1A1816] mb-2 font-sans">
                   ¡Solicitud Enviada!
                 </p>
                 <p className="text-gray-600 font-sans">Te contactaremos pronto para coordinar el envío de tus muestras.</p>
@@ -204,44 +204,44 @@ export function QuotationCart() {
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">Nombre Completo *</label>
-                    <input required name="name" type="text" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] font-sans transition-all text-black placeholder:text-gray-400" placeholder="Tu nombre" />
+                    <input required name="name" type="text" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400" placeholder="Tu nombre" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">Empresa (Opcional)</label>
-                    <input name="company" type="text" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] font-sans transition-all text-black placeholder:text-gray-400" placeholder="Nombre de tu empresa" />
+                    <input name="company" type="text" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400" placeholder="Nombre de tu empresa" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">Email Corporativo *</label>
-                    <input required name="email" type="email" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] font-sans transition-all text-black placeholder:text-gray-400" placeholder="correo@empresa.com" />
+                    <input required name="email" type="email" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400" placeholder="correo@empresa.com" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">Teléfono / WhatsApp *</label>
-                    <input required name="phone" type="tel" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] font-sans transition-all text-black placeholder:text-gray-400" placeholder="+52 (477) 123-4567" />
+                    <input required name="phone" type="tel" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400" placeholder="+52 (477) 123-4567" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">Mensaje Adicional</label>
-                  <textarea name="message" rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B5A2B] focus:border-[#8B5A2B] resize-none font-sans transition-all text-black placeholder:text-gray-400" placeholder="¿Alguna especificación o duda particular?"></textarea>
+                  <textarea name="message" rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] resize-none font-sans transition-all text-black placeholder:text-gray-400" placeholder="¿Alguna especificación o duda particular?"></textarea>
                 </div>
 
-                <div className="flex items-start gap-3 p-4 bg-[#F9F7F2] rounded-lg border border-[#8B5A2B]/20">
+                <div className="flex items-start gap-3 p-4 bg-[#F5F2ED] rounded-lg border border-[#4A3728]/20">
                   <input
                     required
                     type="checkbox"
                     id="privacy-cart"
                     name="privacy"
-                    className="mt-1 w-4 h-4 text-[#8B5A2B] border-gray-300 rounded focus:ring-2 focus:ring-[#8B5A2B]"
+                    className="mt-1 w-4 h-4 text-[#4A3728] border-gray-300 rounded focus:ring-2 focus:ring-[#4A3728]"
                   />
                   <label htmlFor="privacy-cart" className="text-xs text-gray-600 font-sans leading-relaxed">
-                    Acepto que mis datos sean procesados por MALPE Curtidos para gestionar esta solicitud, de acuerdo con su <a href="#" className="underline hover:text-[#8B5A2B] transition-colors">Política de Privacidad</a>.
+                    Acepto que mis datos sean procesados por MALPE Curtidos para gestionar esta solicitud, de acuerdo con su <a href="#" className="underline hover:text-[#4A3728] transition-colors">Política de Privacidad</a>.
                   </label>
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-[#8B5A2B] hover:bg-[#6B4423] text-white py-6 text-base font-bold shadow-lg uppercase tracking-wider transition-all"
+                  className="w-full bg-[#4A3728] hover:bg-[#6B4423] text-white py-6 text-base font-bold shadow-lg uppercase tracking-wider transition-all"
                 >
                   {isSubmitting ? "Enviando..." : "Enviar Solicitud"}
                 </Button>
@@ -253,3 +253,4 @@ export function QuotationCart() {
     </>
   );
 }
+

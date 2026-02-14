@@ -36,10 +36,10 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
             <li className="flex items-center shrink-0">
               <Link
                 to="/"
-                className="group flex items-center text-sm md:text-base text-gray-500 hover:text-[#8B5A2B] transition-all duration-200 font-medium"
+                className="group flex items-center text-sm md:text-base text-gray-500 hover:text-[#4A3728] transition-all duration-200 font-medium"
               >
                 <svg
-                  className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-[#8B5A2B] transition-colors shrink-0"
+                  className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-[#4A3728] transition-colors shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -62,7 +62,7 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
             <li className="shrink-0">
               <Link
                 to="/showroom"
-                className="text-sm md:text-base text-gray-500 hover:text-[#8B5A2B] transition-all duration-200 font-medium"
+                className="text-sm md:text-base text-gray-500 hover:text-[#4A3728] transition-all duration-200 font-medium"
               >
                 Showroom
               </Link>
@@ -78,7 +78,7 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
               </svg>
             </li>
             <li className="min-w-0">
-              <span className="text-sm md:text-base text-[#2A2522] font-semibold break-words">
+              <span className="text-sm md:text-base text-[#1A1816] font-semibold break-words">
                 {product.name}
               </span>
             </li>
@@ -99,17 +99,25 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
                 Producto Ejemplo
               </div>
             </div>
+            {/* Mobile Skin Selector */}
+            <div className="mt-8 lg:hidden">
+              <SkinSelector
+                product={product}
+                selectedSkin={selectedSkin}
+                setSelectedSkin={setSelectedSkin}
+              />
+            </div>
           </div>
 
           {/* Right Column: Details & Skin Selector */}
           <div className="space-y-8">
             <div>
               <div className="mb-4">
-                <span className="text-[#D4AF37] text-xs font-semibold uppercase tracking-wider">
+                <span className="text-[#967D59] text-xs font-semibold uppercase tracking-wider">
                   {categoryLabels[product.category] || product.category}
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#2A2522] mb-3 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1A1816] mb-3 leading-tight">
                 {product.name}
               </h1>
               <p className="text-gray-600 text-sm font-sans">Showroom Virtual B2B</p>
@@ -122,74 +130,12 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
             <div className="h-px bg-gray-200" />
 
             {/* Skin Selector Groups */}
-            <div className="space-y-8">
-              <label className="block text-sm font-medium text-black">
-                Piel Aplicada: <span className="font-bold text-[#8B5A2B]">{selectedSkin.skinName} - {selectedSkin.variantName}</span>
-              </label>
-
-              {product.collections.map((collection, colIdx) => (
-                <div key={colIdx} className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
-                      {collection.name}
-                    </span>
-                    <div className="h-px bg-gray-200 flex-grow"></div>
-                    <Link
-                      to={`/productos/${collection.skinId}`}
-                      className="text-xs text-[#8B5A2B] hover:underline font-medium"
-                    >
-                      Ver ficha técnica
-                    </Link>
-                  </div>
-
-                  <div className="flex flex-wrap gap-4">
-                    {collection.options.map((option) => (
-                      <div key={`${option.skinId}-${option.variantId}`} className="flex flex-col items-center gap-2">
-                        <button
-                          onClick={() => setSelectedSkin(option)}
-                          className={`relative group focus:outline-none transition-all duration-200 ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
-                            ? "scale-110"
-                            : "hover:scale-105"
-                            }`}
-                          aria-label={`Seleccionar color ${option.variantName}`}
-                        >
-                          <div
-                            className={`w-14 h-14 rounded-full border-2 transition-all duration-200 ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
-                              ? "border-[#8B5A2B] ring-2 ring-[#8B5A2B]/20 shadow-md"
-                              : "border-gray-200 hover:border-gray-400"
-                              }`}
-                            style={{ backgroundColor: option.colorHex }}
-                          />
-                          {/* Checkmark */}
-                          {selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId && (
-                            <span className="absolute inset-0 flex items-center justify-center text-white drop-shadow-md">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="3"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              >
-                                <polyline points="20 6 9 17 4 12" />
-                              </svg>
-                            </span>
-                          )}
-                        </button>
-                        <span className={`text-[10px] font-sans transition-colors ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
-                          ? "text-[#8B5A2B] font-semibold"
-                          : "text-gray-500"
-                          }`}>
-                          {option.variantName}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            <div className="hidden lg:block">
+              <SkinSelector
+                product={product}
+                selectedSkin={selectedSkin}
+                setSelectedSkin={setSelectedSkin}
+              />
             </div>
 
             <div className="h-px bg-gray-200 mt-8" />
@@ -199,7 +145,7 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
 
             {/* Info box */}
             <div className="bg-gray-50 p-4 rounded-lg text-sm text-gray-600 font-sans flex items-start gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#8B5A2B] shrink-0 mt-0.5"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="16" y2="12" /><line x1="12" x2="12.01" y1="8" y2="8" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#4A3728] shrink-0 mt-0.5"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="16" y2="12" /><line x1="12" x2="12.01" y1="8" y2="8" /></svg>
               <p>
                 Este es un producto ejemplo para mostrar aplicaciones de nuestras pieles.
                 Contáctanos para discutir tus necesidades específicas de fabricación.
@@ -211,3 +157,78 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
     </div>
   );
 }
+
+function SkinSelector({ product, selectedSkin, setSelectedSkin }: { product: any, selectedSkin: any, setSelectedSkin: (skin: any) => void }) {
+  return (
+    <div className="space-y-8">
+      <label className="block text-sm font-medium text-black">
+        Piel Aplicada: <span className="font-bold text-[#4A3728]">{selectedSkin.skinName} - {selectedSkin.variantName}</span>
+      </label>
+
+      {product.collections.map((collection: any, colIdx: number) => (
+        <div key={colIdx} className="space-y-4">
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
+              {collection.name}
+            </span>
+            <div className="h-px bg-gray-200 flex-grow"></div>
+            <Link
+              to={`/productos/${collection.skinId}`}
+              className="text-xs text-[#4A3728] hover:underline font-medium"
+            >
+              Ver ficha técnica
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap gap-4">
+            {collection.options.map((option: any) => (
+              <div key={`${option.skinId}-${option.variantId}`} className="flex flex-col items-center gap-2">
+                <button
+                  onClick={() => setSelectedSkin(option)}
+                  className={`relative group focus:outline-none transition-all duration-200 ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
+                    ? "scale-110"
+                    : "hover:scale-105"
+                    }`}
+                  aria-label={`Seleccionar color ${option.variantName}`}
+                >
+                  <div
+                    className={`w-10 h-10 rounded-full border-2 transition-all duration-200 ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
+                      ? "border-[#4A3728] ring-2 ring-[#4A3728]/20 shadow-md"
+                      : "border-gray-200 hover:border-gray-400"
+                      }`}
+                    style={{ backgroundColor: option.colorHex }}
+                  />
+                  {/* Checkmark */}
+                  {selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId && (
+                    <span className="absolute inset-0 flex items-center justify-center text-white drop-shadow-md">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>
+                  )}
+                </button>
+                <span className={`text-[10px] font-sans transition-colors ${selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId
+                  ? "text-[#4A3728] font-semibold"
+                  : "text-gray-500"
+                  }`}>
+                  {option.variantName}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+

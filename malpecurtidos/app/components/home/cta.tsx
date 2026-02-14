@@ -145,20 +145,20 @@ export function Cta() {
   ];
 
   return (
-    <section className="bg-[#F9F7F2] py-16 md:py-24 px-4 md:px-8 overflow-hidden">
+    <section className="bg-[#F5F2ED] py-16 md:py-24 px-4 md:px-8 overflow-hidden">
       <div className="max-w-[85%] mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
               Contar con pieles desarrolladas en Malpe, simplemente{" "}
-              <span className="text-[#8B5A2B]">marca la diferencia.</span>
+              <span className="text-[#4A3728]">marca la diferencia.</span>
             </h2>
 
             <div className="space-y-6">
               {highlights.map((item, index) => (
                 <div key={index} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#8B5A2B]/10 flex items-center justify-center text-[#8B5A2B]">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#4A3728]/10 flex items-center justify-center text-[#4A3728]">
                     {item.icon}
                   </div>
                   <div>
@@ -223,3 +223,4 @@ export function Cta() {
     </section>
   );
 }
+

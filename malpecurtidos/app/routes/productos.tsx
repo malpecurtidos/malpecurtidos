@@ -33,7 +33,7 @@ export default function Productos() {
 
           {/* Main Title */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-tight mb-6 md:mb-8">
-            Productos de <br /><span className="text-[#D4AF37] italic">Calidad Superior</span>
+            Productos de <br /><span className="text-[#967D59] italic">Calidad Superior</span>
           </h1>
 
           {/* Description */}
@@ -47,3 +47,4 @@ export default function Productos() {
     </div>
   );
 }
+

@@ -114,3 +114,4 @@ export function DialogTitle({ children, className = "" }: { children: React.Reac
 export function DialogDescription({ children, className = "" }: { children: React.ReactNode, className?: string }) {
   return <p className={`text-sm text-gray-500 ${className}`}>{children}</p>;
 }
+

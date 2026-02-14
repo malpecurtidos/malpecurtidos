@@ -32,17 +32,17 @@ export default function BlogList({ loaderData }: Route.ComponentProps) {
     const { posts } = loaderData;
 
     return (
-        <div className="min-h-screen bg-black text-white pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative selection:bg-[#D4AF37] selection:text-black">
+        <div className="min-h-screen bg-black text-white pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative selection:bg-[#967D59] selection:text-black">
             {/* Background elements */}
-            <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#8B5A2B]/10 to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-[#4A3728]/10 to-transparent pointer-events-none" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 <header className="mb-20 pt-10 text-center">
-                    <span className="block text-[#D4AF37] text-sm font-bold tracking-[0.2em] uppercase mb-4">
+                    <span className="block text-[#967D59] text-sm font-bold tracking-[0.2em] uppercase mb-4">
                         Actualidad & Tendencias
                     </span>
                     <h1 className="text-5xl md:text-6xl font-sans font-bold text-white mb-6">
-                        Nuestro <span className="text-[#D4AF37]">Blog</span>
+                        Nuestro <span className="text-[#967D59]">Blog</span>
                     </h1>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
                         Explora nuestros últimos artículos, noticias y actualizaciones del mundo del cuero y la curtiduría de excelencia.
@@ -64,3 +64,4 @@ export default function BlogList({ loaderData }: Route.ComponentProps) {
         </div>
     );
 }
+

@@ -34,7 +34,7 @@ export function ContactForm() {
             <input
               type="text"
               id="name"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#967D59] focus:ring-1 focus:ring-[#967D59] transition-all hover:bg-white/10"
               placeholder="Tu nombre"
             />
           </div>
@@ -43,7 +43,7 @@ export function ContactForm() {
             <input
               type="email"
               id="email"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#967D59] focus:ring-1 focus:ring-[#967D59] transition-all hover:bg-white/10"
               placeholder="tu@email.com"
             />
           </div>
@@ -55,7 +55,7 @@ export function ContactForm() {
             <input
               type="tel"
               id="phone"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#967D59] focus:ring-1 focus:ring-[#967D59] transition-all hover:bg-white/10"
               placeholder="(477) 000 0000"
             />
           </div>
@@ -64,7 +64,7 @@ export function ContactForm() {
             <input
               type="text"
               id="company"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all hover:bg-white/10"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#967D59] focus:ring-1 focus:ring-[#967D59] transition-all hover:bg-white/10"
               placeholder="Nombre de tu empresa"
             />
           </div>
@@ -75,7 +75,7 @@ export function ContactForm() {
           <div className="relative" ref={dropdownRef}>
             <div
               onClick={() => setIsOpen(!isOpen)}
-              className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white flex items-center justify-between cursor-pointer transition-all hover:bg-white/10 ${isOpen ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]' : ''
+              className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white flex items-center justify-between cursor-pointer transition-all hover:bg-white/10 ${isOpen ? 'border-[#967D59] ring-1 ring-[#967D59]' : ''
                 }`}
             >
               <span className={selectedOption ? "text-white" : "text-gray-500"}>
@@ -106,7 +106,7 @@ export function ContactForm() {
                         setSelectedOption(option);
                         setIsOpen(false);
                       }}
-                      className={`px-4 py-3 text-sm cursor-pointer transition-colors hover:bg-[#D4AF37]/10 hover:text-[#D4AF37] ${selectedOption?.value === option.value ? "text-[#D4AF37] bg-[#D4AF37]/5" : "text-gray-300"
+                      className={`px-4 py-3 text-sm cursor-pointer transition-colors hover:bg-[#967D59]/10 hover:text-[#967D59] ${selectedOption?.value === option.value ? "text-[#967D59] bg-[#967D59]/5" : "text-gray-300"
                         }`}
                     >
                       {option.label}
@@ -124,7 +124,7 @@ export function ContactForm() {
           <textarea
             id="message"
             rows={4}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all resize-none hover:bg-white/10"
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#967D59] focus:ring-1 focus:ring-[#967D59] transition-all resize-none hover:bg-white/10"
             placeholder="¿Cómo podemos ayudarte?"
           />
         </div>
@@ -141,3 +141,4 @@ export function ContactForm() {
     </div>
   );
 }
+
