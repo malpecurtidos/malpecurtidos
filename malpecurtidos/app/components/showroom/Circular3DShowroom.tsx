@@ -121,7 +121,7 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
             // But here we just want smooth drag.
 
             // Preventing text selection
-            e.preventDefault();
+            // e.preventDefault(); // Removed to allow scrolling
         };
 
         const handlePointerMove = (e: React.PointerEvent) => {
@@ -151,7 +151,7 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
                 role="region"
                 aria-label="Galería 3D Circular"
                 className={cn(
-                    "relative w-full h-full flex items-center justify-center touch-none",
+                    "relative w-full h-full flex items-center justify-center touch-pan-y",
                     isDragging ? "cursor-grabbing" : "cursor-grab",
                     className
                 )}
@@ -160,6 +160,7 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerLeave={handlePointerUp}
+                onPointerCancel={handlePointerUp}
                 {...props}
             >
                 <div
