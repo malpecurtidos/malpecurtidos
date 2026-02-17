@@ -16,7 +16,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         variant="outline"
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="border-gray-300 text-black hover:bg-[#F5F2ED] hover:border-[#4A3728] hover:text-[#4A3728] disabled:opacity-40 disabled:cursor-not-allowed font-sans"
+        className="border-zinc-700 text-white hover:bg-zinc-800 hover:border-[#967D59] hover:text-[#967D59] disabled:opacity-40 disabled:cursor-not-allowed font-sans bg-transparent"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -34,16 +34,16 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         </svg>
         Anterior
       </Button>
-      
-      <span className="text-sm font-medium text-black font-sans">
-        Página <span className="text-[#4A3728] font-bold">{currentPage}</span> de {totalPages}
+
+      <span className="text-sm font-medium text-white font-sans">
+        Página <span className="text-[#967D59] font-bold">{currentPage}</span> de {totalPages}
       </span>
-      
+
       <Button
         variant="outline"
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="border-gray-300 text-black hover:bg-[#F5F2ED] hover:border-[#4A3728] hover:text-[#4A3728] disabled:opacity-40 disabled:cursor-not-allowed font-sans"
+        className="border-zinc-700 text-white hover:bg-zinc-800 hover:border-[#967D59] hover:text-[#967D59] disabled:opacity-40 disabled:cursor-not-allowed font-sans bg-transparent"
       >
         Siguiente
         <svg

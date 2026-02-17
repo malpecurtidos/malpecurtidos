@@ -23,7 +23,7 @@ export function ProductCard({ product }: ProductCardProps) {
           loading="lazy"
         />
         {/* Dark gradient overlay at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#121111]/80 via-[#121111]/40 to-transparent"></div>
       </div>
 
       {/* Text Overlay */}

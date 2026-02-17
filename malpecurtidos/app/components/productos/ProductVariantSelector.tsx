@@ -14,19 +14,18 @@ export function ProductVariantSelector({
 }: ProductVariantSelectorProps) {
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-black">
-        Color: <span className="font-bold text-black">{selectedVariant.name}</span>
+      <label className="block text-sm font-medium text-white">
+        Color: <span className="font-bold text-white">{selectedVariant.name}</span>
       </label>
       <div className="flex flex-wrap gap-3">
         {variants.map((variant) => (
           <button
             key={variant.id}
             onClick={() => onSelectVariant(variant)}
-            className={`w-10 h-10 rounded-full border-2 transition-all duration-200 relative group focus:outline-none ${
-              selectedVariant.id === variant.id
+            className={`w-10 h-10 rounded-full border-2 transition-all duration-200 relative group focus:outline-none ${selectedVariant.id === variant.id
                 ? "border-[#4A3728] ring-2 ring-[#4A3728]/20 scale-110"
                 : "border-gray-200 hover:scale-105"
-            }`}
+              }`}
             style={{ backgroundColor: variant.colorHex }}
             title={variant.name}
             aria-label={`Select color ${variant.name}`}
@@ -48,7 +47,7 @@ export function ProductVariantSelector({
                 </svg>
               </span>
             )}
-            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-[#1A1816] text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
+            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-zinc-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10 border border-zinc-700">
               {variant.name}
             </span>
           </button>

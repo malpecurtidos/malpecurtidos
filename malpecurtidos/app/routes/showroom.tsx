@@ -15,7 +15,7 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function Showroom() {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-[#121111] min-h-screen">
       {/* ── Circular Gallery Hero Section (Modular) ── */}
       <Circular3DShowroom />
 

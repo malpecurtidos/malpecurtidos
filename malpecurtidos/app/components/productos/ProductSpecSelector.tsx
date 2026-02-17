@@ -14,7 +14,7 @@ export function ProductSpecSelector({
 }: ProductSpecSelectorProps) {
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-black">
+      <label className="block text-sm font-medium text-white">
         {label}:
       </label>
       <div className="flex flex-wrap gap-2">
@@ -22,11 +22,10 @@ export function ProductSpecSelector({
           <button
             key={option}
             onClick={() => onSelectOption(option)}
-            className={`px-4 py-2 rounded-lg text-sm border transition-all duration-200 ${
-              selectedOption === option
-                ? "border-[#4A3728] bg-[#4A3728]/5 text-[#4A3728] font-semibold"
-                : "border-gray-200 text-black hover:border-[#4A3728] hover:text-[#4A3728]"
-            }`}
+            className={`px-4 py-2 rounded-lg text-sm border transition-all duration-200 ${selectedOption === option
+                ? "border-[#967D59] bg-[#967D59]/10 text-[#967D59] font-semibold"
+                : "border-zinc-700 text-gray-300 hover:border-[#967D59] hover:text-[#967D59]"
+              }`}
           >
             {option}
           </button>

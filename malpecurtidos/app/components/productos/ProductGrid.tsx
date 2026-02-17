@@ -13,7 +13,7 @@ export function ProductGrid() {
     finish: [] as string[],
     thickness: [] as string[],
   });
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
@@ -65,67 +65,67 @@ export function ProductGrid() {
   };
 
   return (
-    <section className="bg-white py-16 md:py-24 px-4 md:px-8">
+    <section className="bg-[#121111] py-16 md:py-24 px-4 md:px-8">
       <div className="max-w-[85%] mx-auto">
         <div className="flex flex-col lg:flex-row gap-12">
-        {/* Mobile Filter Toggle */}
-        <div className="lg:hidden flex justify-between items-center mb-8 pb-6 border-b border-gray-200">
-          <Button
-            variant="outline"
-            onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
-            className="flex items-center gap-2 font-sans"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-            Filtros
-          </Button>
-          <span className="text-sm text-black font-sans font-semibold">{filteredProducts.length} productos</span>
-        </div>
-
-        {/* Sidebar Filters */}
-        <aside className={`lg:w-1/4 ${isMobileFiltersOpen ? 'block' : 'hidden'} lg:block`}>
-          <ProductFilters
-            filters={filters}
-            setFilters={(val) => {
-              setFilters(val);
-              setCurrentPage(1); // Reset page on filter change
-            }}
-            clearFilters={clearFilters}
-            availableCategories={availableCategories}
-            availableFinishes={availableFinishes}
-            availableThicknesses={availableThicknesses}
-          />
-        </aside>
-
-        {/* Main Grid */}
-        <div className="lg:w-3/4">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
-            <p className="text-black hidden md:block font-sans text-sm">
-              Mostrando <span className="font-semibold text-[#1A1816]">{currentProducts.length}</span> de <span className="font-semibold text-[#1A1816]">{filteredProducts.length}</span> productos encontrados
-            </p>
+          {/* Mobile Filter Toggle */}
+          <div className="lg:hidden flex justify-between items-center mb-8 pb-6 border-b border-gray-200">
+            <Button
+              variant="outline"
+              onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
+              className="flex items-center gap-2 font-sans"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg>
+              Filtros
+            </Button>
+            <span className="text-sm text-white font-sans font-semibold">{filteredProducts.length} productos</span>
           </div>
 
-          {currentProducts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {currentProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 bg-[#F5F2ED] rounded-xl border-2 border-dashed border-[#4A3728]/30">
-              <p className="text-xl text-black mb-4 font-sans">No se encontraron productos</p>
-              <Button onClick={clearFilters} variant="outline" className="text-[#4A3728] border-[#4A3728] hover:bg-[#4A3728] hover:text-white">
-                Limpiar filtros
-              </Button>
-            </div>
-          )}
+          {/* Sidebar Filters */}
+          <aside className={`lg:w-1/4 ${isMobileFiltersOpen ? 'block' : 'hidden'} lg:block`}>
+            <ProductFilters
+              filters={filters}
+              setFilters={(val) => {
+                setFilters(val);
+                setCurrentPage(1); // Reset page on filter change
+              }}
+              clearFilters={clearFilters}
+              availableCategories={availableCategories}
+              availableFinishes={availableFinishes}
+              availableThicknesses={availableThicknesses}
+            />
+          </aside>
 
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
+          {/* Main Grid */}
+          <div className="lg:w-3/4">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+              <p className="text-white hidden md:block font-sans text-sm">
+                Mostrando <span className="font-semibold text-white">{currentProducts.length}</span> de <span className="font-semibold text-white">{filteredProducts.length}</span> productos encontrados
+              </p>
+            </div>
+
+            {currentProducts.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {currentProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-20 bg-zinc-900 rounded-xl border-2 border-dashed border-zinc-800">
+                <p className="text-xl text-white mb-4 font-sans">No se encontraron productos</p>
+                <Button onClick={clearFilters} variant="outline" className="text-[#967D59] border-[#967D59] hover:bg-[#967D59] hover:text-white">
+                  Limpiar filtros
+                </Button>
+              </div>
+            )}
+
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
         </div>
-      </div>
       </div>
     </section>
   );

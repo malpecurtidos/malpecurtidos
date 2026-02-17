@@ -32,12 +32,12 @@ export function ShowroomFilters({
   };
 
   return (
-    <div className="space-y-8 bg-white backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 shadow-lg">
-      <div className="flex items-center justify-between pb-4 border-b border-gray-200">
-        <h3 className="text-lg font-semibold text-black uppercase tracking-wider">Filtros</h3>
+    <div className="space-y-8 bg-zinc-900 backdrop-blur-sm rounded-xl p-6 border border-zinc-800 shadow-lg">
+      <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
+        <h3 className="text-lg font-semibold text-white uppercase tracking-wider">Filtros</h3>
         <button
           onClick={clearFilters}
-          className="text-xs text-black hover:text-[#967D59] uppercase tracking-wider font-semibold transition-colors"
+          className="text-xs text-gray-400 hover:text-[#967D59] uppercase tracking-wider font-semibold transition-colors"
         >
           Limpiar Todo
         </button>
@@ -45,7 +45,7 @@ export function ShowroomFilters({
 
       {/* Categories */}
       <div className="space-y-4">
-        <h4 className="text-xs font-semibold text-black uppercase tracking-wider">Categoría</h4>
+        <h4 className="text-xs font-semibold text-white uppercase tracking-wider">Categoría</h4>
         <div className="space-y-3">
           {availableCategories.map((category) => (
             <label key={category} className="flex items-center gap-3 cursor-pointer group">
@@ -53,9 +53,9 @@ export function ShowroomFilters({
                 type="checkbox"
                 checked={filters.category.includes(category)}
                 onChange={() => handleCheckboxChange("category", category)}
-                className="w-4 h-4 rounded border-gray-300 text-[#4A3728] focus:ring-[#4A3728] focus:ring-2"
+                className="w-4 h-4 rounded border-zinc-700 bg-black text-[#967D59] focus:ring-[#967D59] focus:ring-2"
               />
-              <span className="text-sm text-black group-hover:text-[#4A3728] transition-colors capitalize font-sans">
+              <span className="text-sm text-gray-300 group-hover:text-white transition-colors capitalize font-sans">
                 {category.replace("-", " ")}
               </span>
             </label>

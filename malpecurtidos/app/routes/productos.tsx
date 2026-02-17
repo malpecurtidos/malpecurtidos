@@ -10,9 +10,9 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function Productos() {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-[#121111] min-h-screen">
       {/* Header Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-black pt-20">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-[#121111] pt-20">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">
           <img
@@ -21,7 +21,7 @@ export default function Productos() {
             className="w-full h-full object-cover"
           />
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-[#121111]/60"></div>
         </div>
 
         {/* Content */}

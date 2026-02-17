@@ -181,57 +181,76 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
                         // Make opacity falloff a bit smoother/wider
                         const opacity = Math.max(0.3, 1 - (normalizedAngle / 180) * 0.8);
 
+                        // Check if item is in front (active)
+                        const isFront = normalizedAngle < 15;
+
                         return (
                             <div
                                 key={item.id}
                                 role="group"
                                 aria-label={item.name}
-                                className="absolute w-[260px] h-[350px] sm:w-[300px] sm:h-[400px] select-none"
+                                className="absolute w-[240px] h-[400px] sm:w-[280px] sm:h-[480px] select-none"
                                 style={{
                                     transform: `rotateY(${itemAngle}deg) translateZ(${radius}px)`,
                                     left: "50%",
                                     top: "50%",
-                                    marginLeft: "-130px",
-                                    marginTop: "-175px",
+                                    marginLeft: "-120px", // Updated for w-[240px]
+                                    marginTop: "-200px",  // Updated for h-[400px]
                                     opacity: opacity,
-                                    // Remove CSS transition for opacity when dragging to avoid fighting with JS updates,
-                                    // but keep it otherwise? With rapid JS updates, CSS transition might lag.
-                                    // Best to just let JS handle it or keep it very fast.
-                                    transition: isDragging ? "none" : "opacity 0.2s linear",
+                                    // Smooth transition for opacity
+                                    transition: isDragging ? "none" : "opacity 0.3s ease-out",
                                     pointerEvents: "auto"
                                 }}
                             >
                                 <div
-                                    className="block relative w-full h-full rounded-2xl shadow-sm overflow-hidden group"
+                                    className={`block relative w-full h-full rounded-[2rem] overflow-hidden group border border-white/5 shadow-[0_0_30px_rgba(255,255,255,0.03)] transition-colors duration-500
+                                        ${isFront ? "bg-[#111]" : "bg-zinc-900/40 backdrop-blur-md"}
+                                    `}
                                     style={{ transformStyle: "preserve-3d" }}
                                     onDragStart={(e) => e.preventDefault()}
                                 >
-                                    <div className="bg-white absolute top-0 left-0 w-full h-[70%] p-4 pb-0">
-                                        <img
-                                            src={item.photo.url}
-                                            alt={item.photo.text}
-                                            className="w-full h-full object-contain transition-transform duration-500"
-                                            style={{ objectPosition: item.photo.pos || "center" }}
-                                            draggable={false}
-                                        />
+                                    {/* Image Section - Locked RoundSquare Container */}
+                                    <div className="absolute inset-x-0 top-12 h-[50%] flex items-center justify-center">
+                                        <div className="relative w-46 h-46 md:w-56 md:h-56 rounded-lg bg-white flex items-center justify-center overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_20px_rgba(255,255,255,0.1)]">
+                                            {/* Subtle vignette or inner shadow for depth */}
+                                            <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.05)] pointer-events-none" />
+
+                                            <img
+                                                src={item.photo.url}
+                                                alt={item.photo.text}
+                                                className="w-full h-full object-contain"
+                                                style={{ objectPosition: item.photo.pos || "center" }}
+                                                draggable={false}
+                                            />
+                                        </div>
                                     </div>
 
-                                    <div className="absolute top-4 left-4 z-10">
-                                        <span className="bg-[#967D59]/90 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full">
+                                    {/* Category Floating Label - Moved to top center for balance and to avoid overlap */}
+                                    <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10">
+                                        <span className="bg-zinc-800/80 backdrop-blur-xl border border-white/10 text-white text-[10px] font-semibold uppercase px-4 py-1.5 rounded-full shadow-lg">
                                             {categoryLabels[item.category] || item.category}
                                         </span>
                                     </div>
 
-                                    <div className="absolute bottom-0 left-0 w-full h-[35%] p-5 flex flex-col justify-center items-center text-center bg-white/80 backdrop-blur-sm z-10 border-t border-gray-100">
-                                        <h2 className="text-lg sm:text-xl font-semibold mb-2 leading-tight text-gray-900">
-                                            {item.name}
-                                        </h2>
+                                    {/* Content Section - Adjusted for circular image spacing */}
+                                    <div className="absolute bottom-0 left-0 w-full h-[40%] p-8 flex flex-col justify-end">
+                                        <div className="space-y-4 text-center">
+                                            <h2 className="text-xl sm:text-2xl font-semibold leading-tight text-white tracking-tight">
+                                                {item.name}
+                                            </h2>
 
-                                        <Link to={`/showroom/${item.id}`}>
-                                            <Button size="sm" variant="outline">
-                                                Ver producto
-                                            </Button>
-                                        </Link>
+                                            <div className="w-8 h-0.5 bg-[#967D59] opacity-70 mx-auto group-hover:w-24 transition-all duration-700" />
+
+                                            <Link to={`/showroom/${item.id}`} className="block">
+                                                <Button
+                                                    size="sm"
+                                                    variant="outline"
+                                                    className="w-full border-white/10 text-white hover:bg-white hover:text-black transition-all duration-500 rounded-xl py-5 font-bold uppercase tracking-widest text-[10px]"
+                                                >
+                                                    Ver producto
+                                                </Button>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -260,15 +279,18 @@ export const Circular3DShowroom = () => {
     }));
 
     return (
-        <div className="w-full bg-white text-white overflow-hidden relative">
+        <div className="w-full bg-[#121111] text-white overflow-hidden relative">
             <div className="w-full h-screen min-h-[130vh] flex flex-col items-center relative pb-40">
                 {/* Background gradient decor */}
                 <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white rounded-full blur-3xl opacity-50" />
-                    <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white rounded-full blur-3xl opacity-50" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#967D59] rounded-full blur-[120px] opacity-10" />
+                    <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white rounded-full blur-[150px] opacity-[0.03]" />
+
+                    {/* Subtle white shadow/glow from the center to provide the requested aesthetic */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[500px] bg-white rounded-[100%] blur-[180px] opacity-[0.05]" />
 
                     {/* Dark radial gradient to ensure text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#121111] via-transparent to-[#121111] pointer-events-none" />
                 </div>
 
                 {/* Title Section */}
@@ -279,9 +301,9 @@ export const Circular3DShowroom = () => {
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight">
                         <span className="text-[#967D59] italic">Tus Productos</span>
                         <br />
-                        <span className="text-black">con Nuestras Pieles</span>
+                        <span className="text-white">con Nuestras Pieles</span>
                     </h1>
-                    <p className="text-gray-400 font-sans text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-4">
+                    <p className="text-gray-500 font-sans text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-4">
                         Arrastra para girar · Haz clic en un producto para ver detalles
                     </p>
                 </div>

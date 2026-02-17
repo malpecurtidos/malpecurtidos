@@ -22,7 +22,7 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
       className="group block"
     >
       {/* Image Container */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#F5F2ED] mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#111] mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
         <img
           src={mainImage}
           alt={product.name}
@@ -39,7 +39,7 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
         </p>
 
         {/* Product Name */}
-        <h3 className="text-2xl md:text-3xl font-semibold text-[#1A1816] leading-tight mb-4 group-hover:text-[#967D59] transition-colors">
+        <h3 className="text-2xl md:text-3xl font-semibold text-white leading-tight mb-4 group-hover:text-[#967D59] transition-colors">
           {product.name}
         </h3>
 
@@ -55,23 +55,23 @@ export function ShowroomCard({ product }: ShowroomCardProps) {
                 />
               ))}
               {totalOptions > 4 && (
-                <div className="w-5 h-5 rounded-full border border-white bg-gray-100 flex items-center justify-center text-[8px] font-bold text-gray-500 ring-1 ring-black/5">
+                <div className="w-5 h-5 rounded-full border border-zinc-800 bg-zinc-800 flex items-center justify-center text-[8px] font-bold text-gray-300 ring-1 ring-white/10">
                   +{totalOptions - 4}
                 </div>
               )}
             </div>
-            <p className="text-xs text-gray-400 font-sans uppercase tracking-widest">
+            <p className="text-xs text-gray-500 font-sans uppercase tracking-widest">
               Gama de Colores
             </p>
           </div>
-          <p className="text-xs text-gray-600 font-sans border-l-2 border-[#967D59] pl-3 py-0.5">
-            Colecciones: <span className="text-[#1A1816] font-semibold">{product.collections.map(c => c.name).join(" + ")}</span>
+          <p className="text-xs text-gray-400 font-sans border-l-2 border-[#967D59] pl-3 py-0.5">
+            Colecciones: <span className="text-white font-semibold">{product.collections.map(c => c.name).join(" + ")}</span>
           </p>
         </div>
 
         {/* CTA Link */}
-        <div className="pt-2 border-t border-gray-100">
-          <span className="text-sm font-bold text-[#1A1816] uppercase tracking-widest group-hover:text-[#4A3728] transition-colors inline-flex items-center gap-2">
+        <div className="pt-2 border-t border-zinc-800">
+          <span className="text-sm font-bold text-white uppercase tracking-widest group-hover:text-[#4A3728] transition-colors inline-flex items-center gap-2">
             Ver Aplicaciones <span className="transform group-hover:translate-x-1 transition-transform">→</span>
           </span>
         </div>

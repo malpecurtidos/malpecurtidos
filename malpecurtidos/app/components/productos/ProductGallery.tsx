@@ -17,25 +17,24 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   return (
     <div className="space-y-4">
-      <div className="aspect-square bg-[#F5F2ED] rounded-2xl overflow-hidden relative shadow-lg border border-[#4A3728]/10">
+      <div className="aspect-square bg-[#111] rounded-2xl overflow-hidden relative shadow-lg border border-zinc-800">
         <img
           src={selectedImage}
           alt={productName}
           className="w-full h-full object-cover"
         />
       </div>
-      
+
       {images.length > 1 && (
         <div className="grid grid-cols-4 gap-4">
           {images.map((img, idx) => (
             <button
               key={idx}
               onClick={() => setSelectedImage(img)}
-              className={`aspect-square rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                selectedImage === img
-                  ? "border-[#4A3728] ring-2 ring-[#4A3728]/20"
-                  : "border-transparent hover:border-[#4A3728]/50"
-              }`}
+              className={`aspect-square rounded-xl overflow-hidden border-2 transition-all duration-200 ${selectedImage === img
+                  ? "border-[#967D59] ring-2 ring-[#967D59]/20"
+                  : "border-transparent hover:border-zinc-700"
+                }`}
             >
               <img
                 src={img}

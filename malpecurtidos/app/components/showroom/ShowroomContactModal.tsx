@@ -83,17 +83,15 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
 
       {/* Slide-in Panel Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 backdrop-blur-sm ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 backdrop-blur-sm ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
         onClick={() => setIsOpen(false)}
       />
 
       {/* Slide-in Panel */}
       <div
-        className={`fixed inset-y-0 right-0 w-full md:w-[480px] bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed inset-y-0 right-0 w-full md:w-[480px] bg-zinc-900 z-50 shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         {/* Header */}
         <div className="p-6 bg-black text-white flex items-center justify-between shadow-lg border-b border-white/10">
@@ -137,10 +135,10 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6">
           {/* Resumen del producto */}
-          <div className="mb-6 p-4 bg-[#F5F2ED] rounded-lg border border-[#4A3728]/20">
-            <p className="text-sm font-semibold text-[#1A1816] mb-2 font-sans">Producto de Interés:</p>
-            <p className="text-base text-[#4A3728] font-bold font-sans">{product.name}</p>
-            <p className="text-sm text-gray-600 mt-1 font-sans">
+          <div className="mb-6 p-4 bg-[#111] rounded-lg border border-zinc-700">
+            <p className="text-sm font-semibold text-white mb-2 font-sans">Producto de Interés:</p>
+            <p className="text-base text-[#967D59] font-bold font-sans">{product.name}</p>
+            <p className="text-sm text-gray-400 mt-1 font-sans">
               Piel: {selectedSkin.skinName} - {selectedSkin.variantName}
             </p>
           </div>
@@ -163,10 +161,10 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <p className="text-lg font-semibold text-[#1A1816] mb-2 font-sans">
+              <p className="text-lg font-semibold text-white mb-2 font-sans">
                 ¡Solicitud Enviada!
               </p>
-              <p className="text-gray-600 font-sans">Te contactaremos pronto.</p>
+              <p className="text-gray-400 font-sans">Te contactaremos pronto.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -175,79 +173,79 @@ export function ShowroomContactModal({ product, selectedSkin }: ShowroomContactM
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">
+                  <label className="text-xs font-semibold text-gray-300 uppercase tracking-wider font-sans">
                     Nombre Completo *
                   </label>
                   <input
                     required
                     name="name"
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-zinc-700 bg-black rounded-lg focus:ring-2 focus:ring-[#967D59] focus:border-[#967D59] font-sans transition-all text-white placeholder:text-zinc-600"
                     placeholder="Tu nombre"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">
+                  <label className="text-xs font-semibold text-gray-300 uppercase tracking-wider font-sans">
                     Empresa *
                   </label>
                   <input
                     required
                     name="company"
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-zinc-700 bg-black rounded-lg focus:ring-2 focus:ring-[#967D59] focus:border-[#967D59] font-sans transition-all text-white placeholder:text-zinc-600"
                     placeholder="Nombre de tu empresa"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">
+                  <label className="text-xs font-semibold text-gray-300 uppercase tracking-wider font-sans">
                     Email Corporativo *
                   </label>
                   <input
                     required
                     name="email"
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-zinc-700 bg-black rounded-lg focus:ring-2 focus:ring-[#967D59] focus:border-[#967D59] font-sans transition-all text-white placeholder:text-zinc-600"
                     placeholder="correo@empresa.com"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">
+                  <label className="text-xs font-semibold text-gray-300 uppercase tracking-wider font-sans">
                     Teléfono / WhatsApp *
                   </label>
                   <input
                     required
                     name="phone"
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] font-sans transition-all text-black placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border border-zinc-700 bg-black rounded-lg focus:ring-2 focus:ring-[#967D59] focus:border-[#967D59] font-sans transition-all text-white placeholder:text-zinc-600"
                     placeholder="+52 (477) 123-4567"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">
+                <label className="text-xs font-semibold text-gray-300 uppercase tracking-wider font-sans">
                   Mensaje Adicional
                 </label>
                 <textarea
                   name="message"
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] resize-none font-sans transition-all text-black placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-zinc-700 bg-black rounded-lg focus:ring-2 focus:ring-[#967D59] focus:border-[#967D59] resize-none font-sans transition-all text-white placeholder:text-zinc-600"
                   placeholder="¿Alguna especificación o duda particular sobre este producto o la piel seleccionada?"
                 />
               </div>
 
-              <div className="flex items-start gap-3 p-4 bg-[#F5F2ED] rounded-lg border border-[#4A3728]/20">
+              <div className="flex items-start gap-3 p-4 bg-[#111] rounded-lg border border-zinc-700">
                 <input
                   required
                   type="checkbox"
                   id="privacy-showroom"
                   name="privacy"
-                  className="mt-1 w-4 h-4 text-[#4A3728] border-gray-300 rounded focus:ring-2 focus:ring-[#4A3728]"
+                  className="mt-1 w-4 h-4 text-[#967D59] border-zinc-600 bg-black rounded focus:ring-2 focus:ring-[#967D59]"
                 />
-                <label htmlFor="privacy-showroom" className="text-xs text-gray-600 font-sans leading-relaxed">
+                <label htmlFor="privacy-showroom" className="text-xs text-gray-400 font-sans leading-relaxed">
                   Acepto que mis datos sean procesados por MALPE Curtidos para contactarme sobre este producto, de
                   acuerdo con su{" "}
-                  <a href="#" className="underline hover:text-[#4A3728] transition-colors">
+                  <a href="#" className="underline hover:text-[#967D59] transition-colors">
                     Política de Privacidad
                   </a>
                   .

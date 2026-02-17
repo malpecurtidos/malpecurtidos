@@ -21,7 +21,7 @@ export function ShowroomGrid() {
   const categoryOrder = ["calzado", "marroquineria"];
 
   return (
-    <section className="bg-white py-16 md:py-24 px-4 md:px-8">
+    <section className="bg-[#121111] py-16 md:py-24 px-4 md:px-8">
       <div className="max-w-[85%] mx-auto">
         <div className="space-y-32">
           {categoryOrder.map((categoryKey) => {
@@ -35,17 +35,17 @@ export function ShowroomGrid() {
                   <span className="text-[#967D59] text-xs font-bold uppercase tracking-[0.2em] mb-3">
                     Showroom Destacado
                   </span>
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1A1816] mb-6">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6">
                     {categoryLabels[categoryKey]}
                   </h2>
                   <div className="w-px h-16 bg-gradient-to-b from-[#4A3728] to-transparent mb-6"></div>
-                  <p className="text-gray-500 font-sans text-lg md:text-xl max-w-2xl leading-relaxed">
+                  <p className="text-gray-400 font-sans text-lg md:text-xl max-w-2xl leading-relaxed">
                     {categoryDescriptions[categoryKey] || "Productos destacados"}
                   </p>
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                <div className={`grid grid-cols-1 md:grid-cols-2 ${products.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-8 lg:gap-12`}>
                   {products.map((product) => (
                     <ShowroomCard key={product.id} product={product} />
                   ))}
@@ -56,17 +56,17 @@ export function ShowroomGrid() {
         </div>
 
         {/* Call to Action Footer in Grid */}
-        <div className="mt-32 text-center bg-[#F5F2ED] rounded-3xl p-12 md:p-20 relative overflow-hidden">
+        <div className="mt-32 text-center bg-zinc-900 rounded-3xl p-12 md:p-20 relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h3 className="text-3xl md:text-4xl font-semibold text-[#1A1816] mb-6">
+            <h3 className="text-3xl md:text-4xl font-semibold text-white mb-6">
               ¿Tienes un diseño en mente?
             </h3>
-            <p className="text-gray-600 mb-8 font-sans text-lg">
+            <p className="text-gray-400 mb-8 font-sans text-lg">
               Podemos desarrollar la piel perfecta para tu próxima colección. Contáctanos para recibir asesoría personalizada.
             </p>
             <a
               href="/contacto"
-              className="inline-block bg-[#1A1816] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#4A3728] transition-colors duration-300 uppercase tracking-wider text-sm"
+              className="inline-block bg-white text-zinc-900 px-8 py-4 rounded-full font-semibold hover:bg-[#967D59] hover:text-white transition-colors duration-300 uppercase tracking-wider text-sm"
             >
               Contactar a Ventas
             </a>

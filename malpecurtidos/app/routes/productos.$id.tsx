@@ -52,7 +52,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-[#121111] min-h-screen">
       <div className="max-w-[85%] mx-auto px-4 md:px-8 pt-24 md:pt-32 pb-12 md:pb-16">
         {/* Breadcrumb */}
         <nav className="mb-10 md:mb-12" aria-label="Breadcrumb">
@@ -60,7 +60,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
             <li className="flex items-center shrink-0">
               <Link
                 to="/"
-                className="group flex items-center text-sm md:text-base text-gray-500 hover:text-[#4A3728] transition-all duration-200 font-medium"
+                className="group flex items-center text-sm md:text-base text-gray-400 hover:text-white transition-all duration-200 font-medium"
               >
                 <svg
                   className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-[#4A3728] transition-colors shrink-0"
@@ -75,7 +75,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
             </li>
             <li className="shrink-0">
               <svg
-                className="w-4 h-4 text-gray-300"
+                className="w-4 h-4 text-zinc-700"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -86,14 +86,14 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
             <li className="shrink-0">
               <Link
                 to="/productos"
-                className="text-sm md:text-base text-gray-500 hover:text-[#4A3728] transition-all duration-200 font-medium"
+                className="text-sm md:text-base text-gray-400 hover:text-white transition-all duration-200 font-medium"
               >
                 Catálogo
               </Link>
             </li>
             <li className="shrink-0">
               <svg
-                className="w-4 h-4 text-gray-300"
+                className="w-4 h-4 text-zinc-700"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -102,7 +102,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
               </svg>
             </li>
             <li className="min-w-0">
-              <span className="text-sm md:text-base text-[#1A1816] font-semibold break-words">
+              <span className="text-sm md:text-base text-white font-semibold break-words">
                 {product.name}
               </span>
             </li>
@@ -134,17 +134,17 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
                   {product.category.replace("-", " ")}
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1A1816] mb-3 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-3 leading-tight">
                 {product.name}
               </h1>
-              <p className="text-gray-600 text-sm font-sans">SKU: {product.sku}</p>
+              <p className="text-gray-400 text-sm font-sans">SKU: {product.sku}</p>
             </div>
 
-            <p className="text-black leading-relaxed text-base md:text-lg font-sans">
+            <p className="text-gray-300 leading-relaxed text-base md:text-lg font-sans">
               {product.description}
             </p>
 
-            <div className="h-px bg-gray-200" />
+            <div className="h-px bg-zinc-800" />
 
             {/* Selectors */}
             <div className="space-y-6">
@@ -168,14 +168,14 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
 
               {/* Notes */}
               <div className="space-y-3">
-                <label className="block text-sm font-medium text-black">
+                <label className="block text-sm font-medium text-white">
                   Notas adicionales (opcional)
                 </label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Especifique requerimientos especiales..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#4A3728] focus:border-[#4A3728] h-20 resize-none text-sm text-black placeholder:text-gray-400"
+                  className="w-full px-4 py-2 border border-zinc-700 bg-zinc-900 rounded-lg focus:ring-[#967D59] focus:border-[#967D59] h-20 resize-none text-sm text-white placeholder:text-zinc-600"
                 />
               </div>
             </div>
@@ -191,7 +191,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
               <Button
                 variant="outline"
                 onClick={() => setRequestType("tech_sheet")}
-                className="flex-1 border-gray-300 hover:border-[#4A3728] hover:text-[#4A3728] py-6 rounded-xl text-lg font-semibold transition-all"
+                className="flex-1 border-zinc-700 bg-transparent text-white hover:bg-zinc-800 hover:text-white hover:border-zinc-500 py-6 rounded-xl text-lg font-semibold transition-all"
               >
                 Solicitar Ficha Técnica
               </Button>
