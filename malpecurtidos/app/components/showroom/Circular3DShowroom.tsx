@@ -45,6 +45,7 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
 
         const animationFrameRef = useRef<number | null>(null);
         const containerRef = useRef<HTMLDivElement | null>(null);
+        const activePointerIdRef = useRef<number | null>(null);
 
         // Smooth drag settings
         const dragSensitivity = 0.3; // How much mouse move affects target
@@ -104,9 +105,20 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
         }, [isDragging, autoRotateSpeed]);
 
         const handlePointerDown = (e: React.PointerEvent) => {
+            if (e.pointerType === "mouse" && e.button !== 0) return;
+
+            const target = e.target as HTMLElement | null;
+            const isInteractiveTarget =
+                !!target?.closest("a, button, input, textarea, select, label");
+            if (isInteractiveTarget) return;
+
+            if (e.pointerType !== "mouse") e.preventDefault();
+
             setIsDragging(true);
             setStartX(e.clientX);
             setLastDragX(e.clientX);
+            activePointerIdRef.current = e.pointerId;
+            e.currentTarget.setPointerCapture(e.pointerId);
             // Don't reset rotation, we just start influencing targetRotation from where it is
             // However, targetRotation needs to be synced with current visual rotation 
             // to avoid a jump if the user grabs it while it's spinning fast (though here it's slow).
@@ -120,12 +132,13 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
             // Wait, if we sync, we lose the "smooth stop" if we were implementing momentum throw.
             // But here we just want smooth drag.
 
-            // Preventing text selection
-            // e.preventDefault(); // Removed to allow scrolling
+            // Prevent native touch scroll while dragging
         };
 
         const handlePointerMove = (e: React.PointerEvent) => {
             if (!isDragging) return;
+            if (activePointerIdRef.current !== e.pointerId) return;
+            if (e.pointerType !== "mouse") e.preventDefault();
 
             const currentX = e.clientX;
             const deltaX = currentX - lastDragX;
@@ -135,7 +148,21 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
             targetRotation.current += deltaX * dragSensitivity;
         };
 
-        const handlePointerUp = () => {
+        const handlePointerUp = (e: React.PointerEvent) => {
+            if (activePointerIdRef.current !== null && activePointerIdRef.current !== e.pointerId) {
+                return;
+            }
+
+            if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+                e.currentTarget.releasePointerCapture(e.pointerId);
+            }
+
+            activePointerIdRef.current = null;
+            setIsDragging(false);
+        };
+
+        const handleLostPointerCapture = () => {
+            activePointerIdRef.current = null;
             setIsDragging(false);
         };
 
@@ -151,7 +178,7 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
                 role="region"
                 aria-label="Galería 3D Circular"
                 className={cn(
-                    "relative w-full h-full flex items-center justify-center touch-pan-y",
+                    "relative w-full h-full flex items-center justify-center touch-none",
                     isDragging ? "cursor-grabbing" : "cursor-grab",
                     className
                 )}
@@ -159,8 +186,8 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
-                onPointerLeave={handlePointerUp}
                 onPointerCancel={handlePointerUp}
+                onLostPointerCapture={handleLostPointerCapture}
                 {...props}
             >
                 <div
@@ -227,7 +254,7 @@ const CircularGalleryCore = React.forwardRef<HTMLDivElement, CircularGalleryCore
 
                                     {/* Category Floating Label - Moved to top center for balance and to avoid overlap */}
                                     <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10">
-                                        <span className="bg-zinc-800/80 backdrop-blur-xl border border-white/10 text-white text-[10px] font-semibold uppercase px-4 py-1.5 rounded-full shadow-lg">
+                                        <span className="bg-zinc-800/80  border border-white/10 text-white text-[10px] font-semibold uppercase px-4 py-2 rounded-full shadow-lg">
                                             {categoryLabels[item.category] || item.category}
                                         </span>
                                     </div>
@@ -280,7 +307,7 @@ export const Circular3DShowroom = () => {
 
     return (
         <div className="w-full bg-[#121111] text-white overflow-hidden relative">
-            <div className="w-full h-screen min-h-[130vh] flex flex-col items-center relative pb-40">
+            <div className="w-full min-h-[130vh] flex flex-col items-center relative pb-24 md:pb-32">
                 {/* Background gradient decor */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#967D59] rounded-full blur-[120px] opacity-10" />
@@ -294,7 +321,7 @@ export const Circular3DShowroom = () => {
                 </div>
 
                 {/* Title Section */}
-                <div className="text-center z-10 px-4 py-24 md:py-32 shrink-0 relative pointer-events-none">
+                <div className="text-center z-10 px-4 pt-16 pb-12 md:pt-28 md:pb-16 shrink-0 relative pointer-events-none">
                     <p className="text-[#967D59] text-xs md:text-sm font-bold uppercase tracking-[0.25em] mb-4">
                         Showroom Virtual B2B
                     </p>
@@ -309,7 +336,7 @@ export const Circular3DShowroom = () => {
                 </div>
 
                 {/* Gallery Section */}
-                <div className="w-full flex-grow relative flex items-center justify-center z-0 perspective-container">
+                <div className="w-full flex-1 min-h-[560px] sm:min-h-[800px] relative flex items-center justify-center z-0 perspective-container overflow-hidden">
                     <CircularGalleryCore items={galleryData} />
                 </div>
             </div>

@@ -68,7 +68,7 @@ export function Hero() {
                   <h1
                     key={index}
                     style={{ gridArea: "1/1/2/2" }}
-                    className={`text-7xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-none tracking-tighter text-white text-center sm:text-left lg:text-left transition-all duration-1000 ease-in-out ${index === currentSlide
+                    className={`text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-none tracking-tighter text-white text-center sm:text-left lg:text-left transition-all duration-1000 ease-in-out ${index === currentSlide
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-8"
                       }`}
