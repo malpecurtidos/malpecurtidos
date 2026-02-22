@@ -33,7 +33,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
   const [requestType, setRequestType] = useState<"sample" | "tech_sheet" | null>(null);
 
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
-  const [selectedThickness, setSelectedThickness] = useState(product.thickness[0]);
+  const [selectedThickness, setSelectedThickness] = useState(product.thicknessRange.values[0] || "");
   const [notes, setNotes] = useState("");
 
   const { addToQuotation } = useQuotation();
@@ -157,9 +157,13 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
               </div>
 
               <div className="grid grid-cols-1 gap-6">
+                <div className="space-y-2">
+                  <p className="text-sm font-medium text-white">Rango de Grosor:</p>
+                  <p className="text-sm text-gray-300">{product.thickness}</p>
+                </div>
                 <ProductSpecSelector
-                  label="Grosor"
-                  options={product.thickness}
+                  label="Grosor Exacto"
+                  options={product.thicknessRange.values}
                   selectedOption={selectedThickness}
                   onSelectOption={setSelectedThickness}
                 />

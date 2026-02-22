@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import { NotFound } from "~/components/NotFound";
+import { setLenisInstance } from "~/lib/lenis";
+import useScrollToTop from "~/hooks/useScrollToTop";
 import {
   isRouteErrorResponse,
   Links,
@@ -38,8 +40,11 @@ export const links: Route.LinksFunction = () => [
 
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  useScrollToTop();
+
   useEffect(() => {
     const lenis = new Lenis();
+    setLenisInstance(lenis);
 
     function raf(time: number) {
       lenis.raf(time);
@@ -50,6 +55,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
     return () => {
       lenis.destroy();
+      setLenisInstance(null);
     };
   }, []);
 

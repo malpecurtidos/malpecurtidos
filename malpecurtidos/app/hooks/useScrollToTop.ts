@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { getLenisInstance } from './useSmoothScroll';
+import { useEffect } from "react";
+import { useLocation } from "react-router";
+import { getLenisInstance } from "~/lib/lenis";
 
 const useScrollToTop = () => {
   const { pathname } = useLocation();

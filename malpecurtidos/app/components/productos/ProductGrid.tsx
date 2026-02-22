@@ -1,45 +1,46 @@
 import React, { useState, useMemo } from "react";
 import { ProductCard } from "./ProductCard";
-import { ProductFilters } from "./ProductFilters";
+import { ProductFilters, type ProductFilterState } from "./ProductFilters";
 import { Pagination } from "./Pagination";
-import { products, type Product } from "~/data/productsData";
+import { products, PRODUCT_FILTER_OPTIONS } from "~/data/productsData";
 import { Button } from "~/ui/button";
 
 const ITEMS_PER_PAGE = 12;
 
 export function ProductGrid() {
-  const [filters, setFilters] = useState({
-    category: [] as string[],
-    finish: [] as string[],
-    thickness: [] as string[],
+  const [filters, setFilters] = useState<ProductFilterState>({
+    thickness: [],
+    articleType: [],
+    style: [],
+    gloss: [],
+    grainType: [],
   });
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
-  // Derive available options for filters
-  const availableCategories = Array.from(new Set(products.map((p) => p.category)));
-  const availableFinishes = Array.from(new Set(products.map((p) => p.finish)));
-  const availableThicknesses = Array.from(
-    new Set(products.flatMap((p) => p.thickness))
-  ).sort();
-
   // Filter and Sort Logic
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    if (filters.category.length > 0) {
-      result = result.filter((p) => filters.category.includes(p.category));
-    }
-
-    if (filters.finish.length > 0) {
-      result = result.filter((p) => filters.finish.includes(p.finish));
-    }
-
     if (filters.thickness.length > 0) {
-      result = result.filter((p) =>
-        p.thickness.some((t) => filters.thickness.includes(t))
-      );
+      result = result.filter((p) => filters.thickness.includes(p.thickness));
+    }
+
+    if (filters.articleType.length > 0) {
+      result = result.filter((p) => filters.articleType.includes(p.articleType));
+    }
+
+    if (filters.style.length > 0) {
+      result = result.filter((p) => filters.style.includes(p.style));
+    }
+
+    if (filters.gloss.length > 0) {
+      result = result.filter((p) => filters.gloss.includes(p.gloss));
+    }
+
+    if (filters.grainType.length > 0) {
+      result = result.filter((p) => filters.grainType.includes(p.grainType));
     }
 
     // Sort by featured first, then by name
@@ -60,7 +61,7 @@ export function ProductGrid() {
   );
 
   const clearFilters = () => {
-    setFilters({ category: [], finish: [], thickness: [] });
+    setFilters({ thickness: [], articleType: [], style: [], gloss: [], grainType: [] });
     setCurrentPage(1);
   };
 
@@ -90,9 +91,7 @@ export function ProductGrid() {
                 setCurrentPage(1); // Reset page on filter change
               }}
               clearFilters={clearFilters}
-              availableCategories={availableCategories}
-              availableFinishes={availableFinishes}
-              availableThicknesses={availableThicknesses}
+              options={PRODUCT_FILTER_OPTIONS}
             />
           </aside>
 
@@ -130,4 +129,3 @@ export function ProductGrid() {
     </section>
   );
 }
-

@@ -38,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.name}
         </h3>
 
-        {/* Variants and Finish */}
+        {/* Variants and Article Type */}
         <div className="flex items-center gap-3 mb-3">
           <div className="flex -space-x-2">
             {product.variants.slice(0, 4).map((variant) => (
@@ -56,7 +56,7 @@ export function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
           <span className="text-xs text-white/70 font-sans">
-            {product.variants.length} colores • {product.finish}
+            {product.variants.length} colores • {product.articleType}
           </span>
         </div>
 
@@ -70,4 +70,5 @@ export function ProductCard({ product }: ProductCardProps) {
     </Link>
   );
 }
+
 
