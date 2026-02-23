@@ -30,29 +30,34 @@ const STORAGE_KEY = "malpe_quotation_cart";
 export function QuotationProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<QuotationItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isStorageHydrated, setIsStorageHydrated] = useState(false);
 
-  // Load from sessionStorage on mount
+  // Load from localStorage on mount (client-only).
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
-      const stored = sessionStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
-        setItems(JSON.parse(stored));
+        const loadedItems = JSON.parse(stored) as QuotationItem[];
+        // Don't clobber user interactions that could have happened before hydration finishes.
+        setItems((prevItems) => (prevItems.length > 0 ? prevItems : loadedItems));
       }
     } catch (error) {
       console.error("Failed to load quotation cart from storage:", error);
+    } finally {
+      setIsStorageHydrated(true);
     }
   }, []);
 
-  // Save to sessionStorage whenever items change
+  // Save to localStorage whenever items change after hydration is complete.
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !isStorageHydrated) return;
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch (error) {
       console.error("Failed to save quotation cart to storage:", error);
     }
-  }, [items]);
+  }, [items, isStorageHydrated]);
 
   const addToQuotation = (newItem: QuotationItem) => {
     setItems((prevItems) => {
@@ -83,7 +88,12 @@ export function QuotationProvider({ children }: { children: ReactNode }) {
 
   const clearQuotation = () => {
     setItems([]);
-    sessionStorage.removeItem(STORAGE_KEY);
+    if (typeof window === "undefined") return;
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (error) {
+      console.error("Failed to clear quotation cart from storage:", error);
+    }
   };
 
   const totalItems = items.length;

@@ -1,4 +1,5 @@
 import { Button } from "~/ui/button";
+import { Link } from "react-router";
 
 export function Cta() {
   const highlights = [
@@ -173,12 +174,14 @@ export function Cta() {
               ))}
             </div>
 
-            <Button
-              variant="primary"
-              className="tracking-wider text-sm"
-            >
-              Solicitar Muestras
-            </Button>
+            <Link to="/productos">
+              <Button
+                variant="primary"
+                className="tracking-wider text-sm"
+              >
+                Solicitar Muestras
+              </Button>
+            </Link>
           </div>
 
           {/* Right Content - Image Grid */}

@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+﻿import { Link } from "react-router";
 import { Button } from "~/ui/button";
 
 export function AboutCTA() {
@@ -40,12 +40,14 @@ export function AboutCTA() {
                 </p>
 
                 <div className="flex flex-wrap gap-5 pt-4 justify-center lg:justify-start">
-                  <Button 
-                    variant="primary" 
-                    className="bg-[#4A3728] hover:bg-[#A67C52] text-white px-8 md:px-10 py-7 rounded-2xl text-base md:text-lg font-bold transition-all duration-500 shadow-xl shadow-[#4A3728]/20 hover:shadow-[#4A3728]/40 hover:-translate-y-1"
-                  >
-                    Contáctanos
-                  </Button>
+                  <Link to="/contacto">
+                    <Button 
+                      variant="primary" 
+                      className="bg-[#4A3728] hover:bg-[#A67C52] text-white px-8 md:px-10 py-7 rounded-2xl text-base md:text-lg font-bold transition-all duration-500 shadow-xl shadow-[#4A3728]/20 hover:shadow-[#4A3728]/40 hover:-translate-y-1"
+                    >
+                      Contáctanos
+                    </Button>
+                  </Link>
                   <Link to="/productos">
                     <Button 
                       variant="glassmorphism" 
@@ -111,4 +113,5 @@ export function AboutCTA() {
     </section>
   );
 }
+
 

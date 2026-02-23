@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router";
 import { useQuotation } from "~/contexts/QuotationContext";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
@@ -24,6 +24,7 @@ export function Navbar() {
   const [isHidden, setIsHidden] = useState(false);
   const location = useLocation();
   const langDropdownRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const { totalItems, setIsOpen } = useQuotation();
 
   const { scrollY } = useScroll();
@@ -57,9 +58,31 @@ export function Navbar() {
     };
   }, [isLangOpen]);
 
+  // Cerrar menÃº mÃ³vil al hacer tap/click fuera
+  useEffect(() => {
+    const handleOutsideMenuClick = (event: MouseEvent | TouchEvent) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleOutsideMenuClick);
+      document.addEventListener("touchstart", handleOutsideMenuClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideMenuClick);
+      document.removeEventListener("touchstart", handleOutsideMenuClick);
+    };
+  }, [isMenuOpen]);
+
   const whatsappNumber = "524777785045";
   const whatsappMessage = encodeURIComponent(
-    "Hola, me gustaría obtener más información sobre sus productos."
+    "Hola, me gustarÃ­a obtener mÃ¡s informaciÃ³n sobre sus productos."
   );
 
   return (
@@ -75,6 +98,7 @@ export function Navbar() {
       {/* Glassmorphism Container */}
       <div className="mx-4 mt-4 md:mx-8 lg:mx-12">
         <div
+          ref={mobileMenuRef}
           className="relative rounded-2xl border border-white/10 px-4 py-3 md:px-6 md:py-4"
           style={{
             background: "rgba(15, 15, 15, 0.75)",
@@ -136,7 +160,7 @@ export function Navbar() {
                 <button
                   onClick={() => setIsOpen(true)}
                   className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-[#1A1816] bg-[#967D59] hover:bg-[#F2C94C] transition-all duration-300 shadow-lg shadow-[#967D59]/20 group"
-                  aria-label="Ver cotización"
+                  aria-label="Ver cotizaciÃ³n"
                 >
                   <span className="relative">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
@@ -227,7 +251,7 @@ export function Navbar() {
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300"
-                aria-label="Abrir menú"
+                aria-label="Abrir menÃº"
               >
                 <svg
                   className="w-5 h-5"
@@ -257,11 +281,13 @@ export function Navbar() {
 
           {/* Mobile Menu */}
           <div
-            className={`lg:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? "max-h-64 mt-4 pt-4 border-t border-white/10" : "max-h-0"
+            className={`lg:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? "max-h-96 mt-4 pt-4 border-t border-white/10" : "max-h-0"
               }`}
           >
             <div className="flex flex-col gap-1">
-              {navLinks.map((link) => {
+              {navLinks
+                .filter((link) => link.to !== "/contacto")
+                .map((link) => {
                 const isActive = location.pathname === link.to;
                 return (
                   <Link
@@ -277,6 +303,14 @@ export function Navbar() {
                   </Link>
                 );
               })}
+
+              <Link
+                to="/contacto"
+                onClick={() => setIsMenuOpen(false)}
+                className="mt-2 inline-flex items-center justify-center px-4 py-3 rounded-xl text-sm font-semibold tracking-wide text-[#1A1816] bg-[#967D59] hover:bg-[#F2C94C] transition-all duration-300 shadow-lg shadow-[#967D59]/20"
+              >
+                Contacto
+              </Link>
             </div>
           </div>
         </div>
@@ -284,4 +318,5 @@ export function Navbar() {
     </motion.nav>
   );
 }
+
 

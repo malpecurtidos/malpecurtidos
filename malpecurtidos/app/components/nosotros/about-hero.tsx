@@ -1,3 +1,4 @@
+﻿import { Link } from "react-router";
 import { Button } from "~/ui/button";
 
 export function AboutHero() {
@@ -33,18 +34,22 @@ export function AboutHero() {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button
-            variant="primary"
-            className="uppercase tracking-wider px-8 py-4 text-sm md:text-base bg-[#6A4B3F] hover:bg-[#5A3B2F]"
-          >
-            NUESTRA HISTORIA
-          </Button>
-          <Button
-            variant="secondary"
-            className="uppercase tracking-wider px-8 py-4 text-sm md:text-base"
-          >
-            CONOCE MÁS
-          </Button>
+          <Link to="/nosotros#historia">
+            <Button
+              variant="primary"
+              className="uppercase tracking-wider px-8 py-4 text-sm md:text-base bg-[#6A4B3F] hover:bg-[#5A3B2F]"
+            >
+              NUESTRA HISTORIA
+            </Button>
+          </Link>
+          <Link to="/productos">
+            <Button
+              variant="secondary"
+              className="uppercase tracking-wider px-8 py-4 text-sm md:text-base"
+            >
+              CONOCE MÁS
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

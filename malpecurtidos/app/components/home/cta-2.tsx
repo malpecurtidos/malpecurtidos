@@ -1,4 +1,5 @@
-import { Button } from "~/ui/button";
+﻿import { Button } from "~/ui/button";
+import { Link } from "react-router";
 
 export function Cta2() {
   return (
@@ -134,16 +135,20 @@ export function Cta2() {
 
           {/* CTA Button */}
           <div className="pt-6">
-            <Button
-              variant="primary"
-              className="hover:scale-110 hover:shadow-2xl hover:shadow-[#4A3728]/30 text-base md:text-lg px-8 py-4 tracking-wide"
-            >
-              Solicitar Cotización Gratuita
-            </Button>
+            <Link to="/productos">
+              <Button
+                variant="primary"
+                className="hover:scale-110 hover:shadow-2xl hover:shadow-[#4A3728]/30 text-base md:text-lg px-8 py-4 tracking-wide"
+              >
+                Solicitar Cotización Gratuita
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+
 

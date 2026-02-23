@@ -1,0 +1,265 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/nosotros": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/productos": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/productos.$id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/showroom": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/showroom.$id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/contacto": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/blog.list": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/blog.post": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/api.quotation": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {}
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "app/routes/home.tsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/nosotros": {
+        "id": "routes/nosotros",
+        "parentId": "root",
+        "file": "app/routes/nosotros.tsx",
+        "path": "nosotros",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/productos": {
+        "id": "routes/productos",
+        "parentId": "root",
+        "file": "app/routes/productos.tsx",
+        "path": "productos",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/productos.$id": {
+        "id": "routes/productos.$id",
+        "parentId": "root",
+        "file": "app/routes/productos.$id.tsx",
+        "path": "productos/:id",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/showroom": {
+        "id": "routes/showroom",
+        "parentId": "root",
+        "file": "app/routes/showroom.tsx",
+        "path": "showroom",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/showroom.$id": {
+        "id": "routes/showroom.$id",
+        "parentId": "root",
+        "file": "app/routes/showroom.$id.tsx",
+        "path": "showroom/:id",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/contacto": {
+        "id": "routes/contacto",
+        "parentId": "root",
+        "file": "app/routes/contacto.tsx",
+        "path": "contacto",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/blog.list": {
+        "id": "routes/blog.list",
+        "parentId": "root",
+        "file": "app/routes/blog.list.tsx",
+        "path": "blog",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/blog.post": {
+        "id": "routes/blog.post",
+        "parentId": "root",
+        "file": "app/routes/blog.post.tsx",
+        "path": "blog/:slug",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/api.quotation": {
+        "id": "routes/api.quotation",
+        "parentId": "root",
+        "file": "app/routes/api.quotation.tsx",
+        "path": "api/quotation",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "C:/Users/dario/Desktop/WebDev/MALPE/MALPE_CURTIDOS/malpecurtidos/app",
+    "basename": "/",
+    "buildDirectory": "C:/Users/dario/Desktop/WebDev/MALPE/MALPE_CURTIDOS/malpecurtidos/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_trailingSlashAwareDataRequests": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "routes/home.tsx",
+        "index": true
+      },
+      "routes/nosotros": {
+        "id": "routes/nosotros",
+        "parentId": "root",
+        "file": "routes/nosotros.tsx",
+        "path": "nosotros"
+      },
+      "routes/productos": {
+        "id": "routes/productos",
+        "parentId": "root",
+        "file": "routes/productos.tsx",
+        "path": "productos"
+      },
+      "routes/productos.$id": {
+        "id": "routes/productos.$id",
+        "parentId": "root",
+        "file": "routes/productos.$id.tsx",
+        "path": "productos/:id"
+      },
+      "routes/showroom": {
+        "id": "routes/showroom",
+        "parentId": "root",
+        "file": "routes/showroom.tsx",
+        "path": "showroom"
+      },
+      "routes/showroom.$id": {
+        "id": "routes/showroom.$id",
+        "parentId": "root",
+        "file": "routes/showroom.$id.tsx",
+        "path": "showroom/:id"
+      },
+      "routes/contacto": {
+        "id": "routes/contacto",
+        "parentId": "root",
+        "file": "routes/contacto.tsx",
+        "path": "contacto"
+      },
+      "routes/blog.list": {
+        "id": "routes/blog.list",
+        "parentId": "root",
+        "file": "routes/blog.list.tsx",
+        "path": "blog"
+      },
+      "routes/blog.post": {
+        "id": "routes/blog.post",
+        "parentId": "root",
+        "file": "routes/blog.post.tsx",
+        "path": "blog/:slug"
+      },
+      "routes/api.quotation": {
+        "id": "routes/api.quotation",
+        "parentId": "root",
+        "file": "routes/api.quotation.tsx",
+        "path": "api/quotation"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "routes/home.tsx",
+            "index": true
+          },
+          {
+            "file": "routes/nosotros.tsx",
+            "path": "nosotros"
+          },
+          {
+            "file": "routes/productos.tsx",
+            "path": "productos"
+          },
+          {
+            "file": "routes/productos.$id.tsx",
+            "path": "productos/:id"
+          },
+          {
+            "file": "routes/showroom.tsx",
+            "path": "showroom"
+          },
+          {
+            "file": "routes/showroom.$id.tsx",
+            "path": "showroom/:id"
+          },
+          {
+            "file": "routes/contacto.tsx",
+            "path": "contacto"
+          },
+          {
+            "file": "routes/blog.list.tsx",
+            "path": "blog"
+          },
+          {
+            "file": "routes/blog.post.tsx",
+            "path": "blog/:slug"
+          },
+          {
+            "file": "routes/api.quotation.tsx",
+            "path": "api/quotation"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
