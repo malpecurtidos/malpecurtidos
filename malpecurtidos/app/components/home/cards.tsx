@@ -2,13 +2,6 @@ import { Link } from "react-router";
 
 const cards = [
   {
-    id: "eventos",
-    label: "INTERNACIONAL",
-    title: "Eventos",
-    link: "/eventos",
-    image: "/home-imgs/cards/eventos.webp",
-  },
-  {
     id: "productos",
     label: "PRODUCTOS",
     title: "Productos",
@@ -21,6 +14,13 @@ const cards = [
     title: "Showroom",
     link: "/showroom",
     image: "/showroom-imgs/bota_dama/bota_dama.webp",
+  },
+  {
+    id: "blog",
+    label: "INTERNACIONAL",
+    title: "Blog",
+    link: "/blog",
+    image: "/home-imgs/cards/blog.webp",
   },
 ];
 

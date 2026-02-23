@@ -68,7 +68,7 @@ export function Hero() {
                   <h1
                     key={index}
                     style={{ gridArea: "1/1/2/2" }}
-                    className={`text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-none tracking-tighter text-white text-center sm:text-left lg:text-left transition-all duration-1000 ease-in-out ${index === currentSlide
+                    className={`text-7xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-none tracking-tighter text-white text-center md:text-left transition-all duration-1000 ease-in-out ${index === currentSlide
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-8"
                       }`}
@@ -94,7 +94,7 @@ export function Hero() {
 
             {/* Right Content - Descripción y botones con crossfade */}
             <div className="lg:flex-1 max-w-md w-full lg:w-auto order-3 lg:order-2 flex flex-col justify-start lg:justify-end items-center lg:items-end mb-8 lg:mb-12">
-              <div className="grid mb-6 md:mb-8 w-full text-center sm:text-left lg:text-right">
+              <div className="grid mb-6 md:mb-8 w-full text-center md:text-left lg:text-right">
                 {heroSlides.map((slide, index) => (
                   <div
                     key={index}
@@ -113,7 +113,7 @@ export function Hero() {
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center sm:justify-start lg:justify-end">
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center sm:justify-start lg:justify-end items-center">
                 <Link to="/productos">
                   <Button variant="glassmorphism">
                     Explorar Catálogo

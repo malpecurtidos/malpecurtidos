@@ -257,7 +257,7 @@ function CircularGalleryCore({ items, className, ...props }: CircularGalleryCore
 
     return (
         <div
-            className={cn("relative w-full h-full flex items-center justify-center overflow-hidden touch-pan-y", className)}
+            className={cn("relative w-full h-full pb-16 flex items-center justify-center overflow-hidden touch-pan-y", className)}
             {...props}
         >
             <motion.div className="relative select-none" style={{ perspective }}>
@@ -323,7 +323,7 @@ export const Circular3DShowroom = () => {
 
     return (
         <div className="w-full bg-[#121111] text-white overflow-hidden relative">
-            <div className="w-full min-h-[130vh] flex flex-col items-center relative pb-24 md:pb-32">
+            <div className="w-full min-h-[100vh] md:min-h-[130vh] flex flex-col items-center relative">
                 {/* Background gradient decor */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#967D59] rounded-full blur-[120px] opacity-10" />

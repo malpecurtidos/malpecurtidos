@@ -90,7 +90,7 @@ export function ProductFilters({
       </div>
 
       {renderFilterSection("Espesor", "thickness", options.thickness)}
-      {renderFilterSection("Tipo de Artículo", "articleType", options.articleType)}
+      {renderFilterSection("Tipo de ArtÃ­culo", "articleType", options.articleType)}
       {renderFilterSection("Estilo", "style", options.style)}
       {renderFilterSection("Brillo", "gloss", options.gloss)}
       {renderFilterSection("Tipo de Flor", "grainType", options.grainType)}
