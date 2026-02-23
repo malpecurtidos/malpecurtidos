@@ -19,6 +19,7 @@ interface ProductFiltersProps {
     gloss: readonly string[];
     grainType: readonly string[];
   };
+  className?: string;
 }
 
 export function ProductFilters({
@@ -26,6 +27,7 @@ export function ProductFilters({
   setFilters,
   clearFilters,
   options,
+  className = "",
 }: ProductFiltersProps) {
   const handleCheckboxChange = (section: keyof ProductFilterState, value: string) => {
     setFilters((prev) => {
@@ -74,7 +76,9 @@ export function ProductFilters({
   );
 
   return (
-    <div className="space-y-8 bg-zinc-900 backdrop-blur-sm rounded-xl p-6 border border-zinc-800 shadow-lg">
+    <div
+      className={`space-y-8 bg-zinc-900 backdrop-blur-sm rounded-xl p-6 border border-zinc-800 shadow-lg ${className}`}
+    >
       <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
         <h3 className="text-lg font-semibold text-white uppercase tracking-wider">Filtros</h3>
         <button
@@ -86,7 +90,7 @@ export function ProductFilters({
       </div>
 
       {renderFilterSection("Espesor", "thickness", options.thickness)}
-      {renderFilterSection("Tipo de ArtÃ­culo", "articleType", options.articleType)}
+      {renderFilterSection("Tipo de Artículo", "articleType", options.articleType)}
       {renderFilterSection("Estilo", "style", options.style)}
       {renderFilterSection("Brillo", "gloss", options.gloss)}
       {renderFilterSection("Tipo de Flor", "grainType", options.grainType)}

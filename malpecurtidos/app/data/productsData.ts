@@ -1,4 +1,4 @@
-﻿export interface ProductVariant {
+export interface ProductVariant {
   id: string;
   name: string;
   colorHex: string;
@@ -39,188 +39,301 @@ export const PRODUCT_FILTER_OPTIONS = {
     "2.0 - 2.2 mm",
   ],
   articleType: ["Nubuck", "Crazy", "Pull up", "Napa", "Grabado", "Crack", "Wax", "Vegetalizado"],
-  style: ["Western", "Rustic", "Tamboreado", "Exótico", "Fashion", "Especialidad", "Clásico"],
+  style: ["Western", "Rustic", "Tamboreado", "Exotico", "Fashion", "Especialidad", "Clasico"],
   gloss: ["Mate", "Semi mate", "Semi brillante", "Brillante", "Alto brillo"],
   grainType: ["Grabado", "Liso", "Grano natural", "Lado carne"],
 } as const;
 
-export const products: Product[] = [
+const THICKNESS_VALUES_BY_RANGE: Record<string, string[]> = {
+  "0.8 - 1.0 mm": ["0.80 mm", "0.85 mm", "0.90 mm", "0.95 mm", "1.00 mm"],
+  "1.0 - 1.2 mm": ["1.00 mm", "1.05 mm", "1.10 mm", "1.15 mm", "1.20 mm"],
+  "1.1 - 1.3 mm": ["1.10 mm", "1.15 mm", "1.20 mm", "1.25 mm", "1.30 mm"],
+  "1.2 - 1.4 mm": ["1.20 mm", "1.25 mm", "1.30 mm", "1.35 mm", "1.40 mm"],
+  "1.4 - 1.6 mm": ["1.40 mm", "1.45 mm", "1.50 mm", "1.55 mm", "1.60 mm"],
+  "1.6 - 1.8 mm": ["1.60 mm", "1.65 mm", "1.70 mm", "1.75 mm", "1.80 mm"],
+  "1.8 - 2.0 mm": ["1.80 mm", "1.85 mm", "1.90 mm", "1.95 mm", "2.00 mm"],
+  "2.0 - 2.2 mm": ["2.00 mm", "2.05 mm", "2.10 mm", "2.15 mm", "2.20 mm"],
+};
+
+interface VariantDefinition {
+  slug: string;
+  name: string;
+  colorHex: string;
+  fileSlug?: string;
+}
+
+interface ProductDefinition {
+  id: string;
+  sku: string;
+  name: string;
+  description: string;
+  category: string;
+  thickness: string;
+  articleType: string;
+  style: string;
+  gloss: string;
+  grainType: string;
+  imageFolder: string;
+  variants: VariantDefinition[];
+  featured?: boolean;
+}
+
+function buildVariantImagePath(folder: string, variantSlug: string) {
+  const filename = encodeURIComponent(`${folder}-${variantSlug}`);
+  return `/products-imgs/${folder}/${filename}.avif`;
+}
+
+function createProduct(definition: ProductDefinition): Product {
+  return {
+    id: definition.id,
+    sku: definition.sku,
+    name: definition.name,
+    description: definition.description,
+    category: definition.category,
+    thickness: definition.thickness,
+    thicknessRange: {
+      range: definition.thickness,
+      values: THICKNESS_VALUES_BY_RANGE[definition.thickness] ?? [definition.thickness],
+    },
+    articleType: definition.articleType,
+    style: definition.style,
+    gloss: definition.gloss,
+    grainType: definition.grainType,
+    variants: definition.variants.map((variant) => {
+      const fileSlug = variant.fileSlug ?? variant.slug;
+      return {
+        id: `${definition.id}-${variant.slug}`,
+        name: variant.name,
+        colorHex: variant.colorHex,
+        images: [buildVariantImagePath(definition.imageFolder, fileSlug)],
+      };
+    }),
+    featured: Boolean(definition.featured),
+  };
+}
+
+const PRODUCT_DEFINITIONS: ProductDefinition[] = [
   {
-    id: "pl-pu-002",
-    sku: "PL-PU-002",
-    name: "Pull-Up Efecto Vintage",
+    id: "atanado",
+    sku: "MAL-ATN-001",
+    name: "Atanado",
     description:
-      "Cuero curtido al vegetal con efecto pull-up auténtico. Desarrolla una hermosa patina con el tiempo. Ideal para artículos de cuero y calzado que buscan una apariencia envejecida y resistente.",
+      "Cuero napa suave con acabado uniforme y tacto flexible, pensado para proyectos de marroquineria y calzado contemporaneo.",
     category: "marroquineria",
-    thickness: "1.2 - 1.4 mm",
-    thicknessRange: { range: "1.2 - 1.4 mm", values: ["1.20 mm", "1.25 mm", "1.30 mm", "1.35 mm", "1.40 mm"] },
+    thickness: "1.0 - 1.2 mm",
+    articleType: "Napa",
+    style: "Clasico",
+    gloss: "Semi mate",
+    grainType: "Liso",
+    imageFolder: "atanado",
+    featured: true,
+    variants: [
+      { slug: "cafe", name: "Cafe", colorHex: "#6F4E37" },
+      { slug: "miel", name: "Miel", colorHex: "#B9894A" },
+      { slug: "negro", name: "Negro", colorHex: "#111111" },
+      { slug: "perla", name: "Perla", colorHex: "#D5D0C5" },
+    ],
+  },
+  {
+    id: "burgos",
+    sku: "MAL-BRG-002",
+    name: "Burgos",
+    description:
+      "Linea pull up de alto cuerpo con caracter natural. Ideal para botas y articulos que necesitan profundidad de tono y envejecimiento atractivo.",
+    category: "calzado",
+    thickness: "1.4 - 1.6 mm",
     articleType: "Pull up",
     style: "Rustic",
     gloss: "Semi brillante",
     grainType: "Grano natural",
-    variants: [
-      { id: "pu-brown", name: "Marrón", colorHex: "#8B5A2B", images: [""] },
-      { id: "pu-tan", name: "Beige", colorHex: "#D2B48C", images: [""] },
-      { id: "pu-chestnut", name: "Castaño", colorHex: "#954535", images: [""] },
-      { id: "pu-black", name: "Negro", colorHex: "#1A1A1A", images: [""] },
-      { id: "pu-navy", name: "Azul Marino", colorHex: "#1B2432", images: [""] },
-      { id: "pu-burgundy", name: "Borgoña", colorHex: "#4A0404", images: [""] },
-    ],
+    imageFolder: "burgos",
     featured: true,
+    variants: [
+      { slug: "beige", name: "Beige", colorHex: "#C8AD7F" },
+      { slug: "brandy", name: "Brandy", colorHex: "#874C05" },
+      { slug: "cognac", name: "Cognac", colorHex: "#9A5F2D" },
+      { slug: "miel", name: "Miel", colorHex: "#C08A4A" },
+      { slug: "negro", name: "Negro", colorHex: "#121212" },
+      { slug: "ochre", name: "Ochre", colorHex: "#B47E2E" },
+      { slug: "redearth", name: "Red Earth", colorHex: "#7D3A2F" },
+      { slug: "waxpaper", name: "Wax Paper", colorHex: "#B89E72" },
+    ],
   },
   {
-    id: "nb-sd-005",
-    sku: "NB-SD-005",
-    name: "Nubuck Gamuza Premium",
+    id: "golden",
+    sku: "MAL-GLD-003",
+    name: "Golden",
     description:
-      "Cuero nubuck aterciopelado y suave con estructura de grano fino. Ofrece un tacto lujoso y apariencia elegante para artículos de moda de alta gama.",
-    category: "confeccion",
-    thickness: "0.8 - 1.0 mm",
-    thicknessRange: { range: "0.8 - 1.0 mm", values: ["0.80 mm", "0.85 mm", "0.90 mm", "0.95 mm", "1.00 mm"] },
-    articleType: "Nubuck",
-    style: "Fashion",
+      "Articulo grabado con look fashion y brillo controlado, recomendado para lineas diferenciadas en bolsos, accesorios y calzado premium.",
+    category: "marroquineria",
+    thickness: "1.2 - 1.4 mm",
+    articleType: "Grabado",
+    style: "Exotico",
+    gloss: "Brillante",
+    grainType: "Grabado",
+    imageFolder: "golden",
+    featured: true,
+    variants: [
+      { slug: "cherry", name: "Cherry", colorHex: "#8D1D2C" },
+      { slug: "darkolive", name: "Dark Olive", colorHex: "#4B5320" },
+      { slug: "indigo", name: "Indigo", colorHex: "#33416F" },
+      { slug: "retro", name: "Retro", colorHex: "#8C5E3C" },
+      { slug: "shedron", name: "Shedron", colorHex: "#A25F2A" },
+    ],
+  },
+  {
+    id: "himalaya",
+    sku: "MAL-HIM-004",
+    name: "Himalaya",
+    description:
+      "Cuero crazy de alto rendimiento para calzado robusto, con tonos profundos y gran resistencia al uso continuo.",
+    category: "calzado",
+    thickness: "1.6 - 1.8 mm",
+    articleType: "Crazy",
+    style: "Western",
     gloss: "Mate",
-    grainType: "Liso",
+    grainType: "Grano natural",
+    imageFolder: "himalaya",
     variants: [
-      { id: "nb-sand", name: "Arena", colorHex: "#C2B280", images: [""] },
-      { id: "nb-chocolate", name: "Chocolate", colorHex: "#7B3F00", images: [""] },
-      { id: "nb-grey", name: "Gris", colorHex: "#808080", images: [""] },
-      { id: "nb-black", name: "Negro Profundo", colorHex: "#0F0F0F", images: [""] },
-      { id: "nb-navy", name: "Azul Medianoche", colorHex: "#101820", images: [""] },
-      { id: "nb-olive", name: "Oliva", colorHex: "#556B2F", images: [""] },
+      { slug: "cedro", name: "Cedro", colorHex: "#8A5A44" },
+      { slug: "darkolive", name: "Dark Olive", colorHex: "#556B2F" },
+      { slug: "ferrari", name: "Ferrari", colorHex: "#C21807" },
+      { slug: "negro", name: "Negro", colorHex: "#111111" },
+      { slug: "ochre", name: "Ochre", colorHex: "#B37A2C" },
+      { slug: "primalgreen", name: "Primal Green", colorHex: "#2E6B3B" },
+      { slug: "redearth", name: "Red Earth", colorHex: "#7A3B2E" },
+      { slug: "softgrass", name: "Soft Grass", colorHex: "#7A8B5B" },
+      { slug: "steelblue", name: "Steel Blue", colorHex: "#3E5C76" },
     ],
-    featured: true,
   },
   {
-    id: "wx-pu-008",
-    sku: "WX-PU-008",
-    name: "Pull-Up Waxy Heritage",
+    id: "milano",
+    sku: "MAL-MLN-005",
+    name: "Milano",
     description:
-      "Cuero pull-up ricamente encerado que muestra marcaciones naturales. Altamente resistente al agua y duradero, perfecto para equipo outdoor y botas.",
+      "Napa de perfil fashion con paleta vibrante. Funciona especialmente bien en colecciones modernas de bolsos y sneaker lifestyle.",
+    category: "confeccion",
+    thickness: "1.0 - 1.2 mm",
+    articleType: "Napa",
+    style: "Fashion",
+    gloss: "Semi brillante",
+    grainType: "Liso",
+    imageFolder: "milano",
+    variants: [
+      { slug: "electricorange", name: "Electric Orange", colorHex: "#F36F21" },
+      { slug: "freshpurple", name: "Fresh Purple", colorHex: "#6F42C1" },
+      { slug: "greenglow", name: "Green Glow", colorHex: "#4CAF50" },
+      { slug: "steelblue", name: "Steel Blue", colorHex: "#4682B4" },
+      { slug: "timberland", name: "Timberland", colorHex: "#A1703A" },
+      { slug: "turquoise", name: "Turquoise", colorHex: "#2CA6A4" },
+    ],
+  },
+  {
+    id: "phoenix",
+    sku: "MAL-PHX-006",
+    name: "Phoenix",
+    description:
+      "Articulo encerado de inspiracion western, con excelente respuesta al cepillado y gran presencia visual en botas y accesorios.",
     category: "calzado",
     thickness: "1.4 - 1.6 mm",
-    thicknessRange: { range: "1.4 - 1.6 mm", values: ["1.40 mm", "1.45 mm", "1.50 mm", "1.55 mm", "1.60 mm"] },
     articleType: "Wax",
     style: "Western",
     gloss: "Semi brillante",
     grainType: "Grano natural",
-    variants: [
-      { id: "wx-brandy", name: "Brandy", colorHex: "#874C05", images: [""] },
-      { id: "wx-olive", name: "Oliva", colorHex: "#556B2F", images: [""] },
-      { id: "wx-black", name: "Negro Humo", colorHex: "#2C2C2C", images: [""] },
-      { id: "wx-russet", name: "Rojizo", colorHex: "#80461B", images: [""] },
-      { id: "wx-tan", name: "Natural", colorHex: "#C69055", images: [""] },
-    ],
+    imageFolder: "phoenix",
     featured: true,
-  },
-  {
-    id: "auto-an-012",
-    sku: "AUTO-AN-012",
-    name: "Anilina Grado Automotriz",
-    description:
-      "Cuero anilina de alto rendimiento tratado para resistencia UV y durabilidad. Cumple con estándares de la industria automotriz mientras mantiene un tacto natural.",
-    category: "tapiceria-automotriz",
-    thickness: "1.0 - 1.2 mm",
-    thicknessRange: { range: "1.0 - 1.2 mm", values: ["1.00 mm", "1.05 mm", "1.10 mm", "1.15 mm", "1.20 mm"] },
-    articleType: "Napa",
-    style: "Especialidad",
-    gloss: "Semi mate",
-    grainType: "Liso",
     variants: [
-      { id: "auto-black", name: "Negro", colorHex: "#000000", images: [""] },
-      { id: "auto-beige", name: "Beige", colorHex: "#F5F5DC", images: [""] },
-      { id: "auto-red", name: "Rojo Deportivo", colorHex: "#FF0000", images: [""] },
-      { id: "auto-grey", name: "Gris Titanio", colorHex: "#545454", images: [""] },
-      { id: "auto-white", name: "Blanco Polar", colorHex: "#FDFDFD", images: [""] },
+      { slug: "cognac", name: "Cognac", colorHex: "#9A5F2D" },
+      { slug: "grass", name: "Grass", colorHex: "#5C7A3A" },
+      { slug: "negro", name: "Negro", colorHex: "#111111" },
+      { slug: "waxpaper", name: "Wax Paper", colorHex: "#B8A27A" },
     ],
-    featured: false,
   },
   {
-    id: "prem-an-015",
-    sku: "PREM-AN-015",
-    name: "Anilina Premium Grano Completo",
+    id: "seville",
+    sku: "MAL-SEV-007",
+    name: "Seville",
     description:
-      "El más fino cuero anilina de grano completo, mostrando la belleza natural de la piel. Procesamiento mínimo asegura máxima transpirabilidad y comodidad.",
+      "Napa clasica con tonos sobrios y consistencia de lote, adecuada para mobiliario, marroquineria fina y colecciones corporativas.",
     category: "tapiceria-muebles",
     thickness: "1.0 - 1.2 mm",
-    thicknessRange: { range: "1.0 - 1.2 mm", values: ["1.00 mm", "1.05 mm", "1.10 mm", "1.15 mm", "1.20 mm"] },
     articleType: "Napa",
-    style: "Clásico",
+    style: "Clasico",
     gloss: "Semi mate",
     grainType: "Grano natural",
+    imageFolder: "seville",
     variants: [
-      { id: "pa-cognac", name: "Cognac", colorHex: "#9A463D", images: [""] },
-      { id: "pa-mocha", name: "Moca", colorHex: "#3B2F2F", images: [""] },
-      { id: "pa-black", name: "Negro", colorHex: "#111111", images: [""] },
-      { id: "pa-honey", name: "Miel", colorHex: "#DDA0DD", images: [""] },
-      { id: "pa-navy", name: "Azul Real", colorHex: "#000080", images: [""] },
+      { slug: "cedro", name: "Cedro", colorHex: "#8C5A3C" },
+      { slug: "cherry", name: "Cherry", colorHex: "#7E2639" },
+      { slug: "darkchoco", name: "Dark Choco", colorHex: "#4A3428" },
+      { slug: "darkolive", name: "Dark Olive", colorHex: "#556B2F" },
+      { slug: "mahogany", name: "Mahogany", colorHex: "#5C2E2E" },
+      { slug: "negro", name: "Negro", colorHex: "#101010" },
     ],
-    featured: true,
   },
   {
-    id: "sa-soft-020",
-    sku: "SA-SOFT-020",
-    name: "Semi-Anilina Tacto Suave",
+    id: "taos",
+    sku: "MAL-TAS-008",
+    name: "Taos",
     description:
-      "Un equilibrio perfecto entre apariencia natural y protección. El acabado semi-anilina proporciona un color consistente y mayor resistencia al desgaste y manchas.",
-    category: "tapiceria-muebles",
-    thickness: "1.0 - 1.2 mm",
-    thicknessRange: { range: "1.0 - 1.2 mm", values: ["1.00 mm", "1.05 mm", "1.10 mm", "1.15 mm", "1.20 mm"] },
-    articleType: "Napa",
-    style: "Clásico",
-    gloss: "Semi mate",
-    grainType: "Liso",
-    variants: [
-      { id: "sa-cream", name: "Crema", colorHex: "#FFFDD0", images: [""] },
-      { id: "sa-taupe", name: "Taupe", colorHex: "#483C32", images: [""] },
-      { id: "sa-grey", name: "Gris Perla", colorHex: "#E5E4E2", images: [""] },
-      { id: "sa-chocolate", name: "Chocolate", colorHex: "#2B1B17", images: [""] },
-      { id: "sa-teal", name: "Azul Petróleo", colorHex: "#008080", images: [""] },
-    ],
-    featured: false,
-  },
-  {
-    id: "bl-belt-030",
-    sku: "BL-BELT-030",
-    name: "Cinturón Pesado",
-    description:
-      "Cuero de hombro grueso curtido al vegetal diseñado específicamente para cinturones y correas. Rígido pero flexible con excelentes propiedades de acabado de bordes.",
-    category: "cinturones",
-    thickness: "1.8 - 2.0 mm",
-    thicknessRange: { range: "1.8 - 2.0 mm", values: ["1.80 mm", "1.85 mm", "1.90 mm", "1.95 mm", "2.00 mm"] },
-    articleType: "Vegetalizado",
-    style: "Especialidad",
+      "Cuero wax de apariencia robusta para lineas outdoor y western, con excelente comportamiento en uso rudo y acabados artesanales.",
+    category: "calzado",
+    thickness: "1.4 - 1.6 mm",
+    articleType: "Wax",
+    style: "Rustic",
     gloss: "Mate",
-    grainType: "Lado carne",
+    grainType: "Grano natural",
+    imageFolder: "taos",
     variants: [
-      { id: "belt-natural", name: "Natural", colorHex: "#E6C288", images: [""] },
-      { id: "belt-black", name: "Negro", colorHex: "#111111", images: [""] },
-      { id: "belt-brown", name: "Café", colorHex: "#654321", images: [""] },
-      { id: "belt-tan", name: "Habano", colorHex: "#AB6F42", images: [""] },
+      { slug: "cocoa", name: "Cocoa", colorHex: "#6B4B3E" },
+      { slug: "cognac", name: "Cognac", colorHex: "#9A5F2D" },
+      { slug: "negro", name: "Negro", colorHex: "#111111" },
+      { slug: "ochre", name: "Ochre", colorHex: "#B67A2B" },
+      { slug: "waxpaper", name: "Wax Paper", colorHex: "#B39A72" },
     ],
-    featured: false,
   },
   {
-    id: "emb-croc-045",
-    sku: "EMB-CROC-045",
-    name: "Cocodrilo Grabado",
+    id: "wizard",
+    sku: "MAL-WZD-009",
+    name: "Wizard",
     description:
-      "Cuero de alta calidad grabado con patrón de escamas de cocodrilo realista. Añade un toque exótico a bolsos, billeteras y zapatos.",
+      "Pull up de identidad marcada y tonos contrastantes, orientado a colecciones con look vintage y personalidad fuerte.",
     category: "marroquineria",
     thickness: "1.2 - 1.4 mm",
-    thicknessRange: { range: "1.2 - 1.4 mm", values: ["1.20 mm", "1.25 mm", "1.30 mm", "1.35 mm", "1.40 mm"] },
-    articleType: "Grabado",
-    style: "Exótico",
-    gloss: "Brillante",
-    grainType: "Grabado",
+    articleType: "Pull up",
+    style: "Rustic",
+    gloss: "Semi brillante",
+    grainType: "Grano natural",
+    imageFolder: "wizard",
     variants: [
-      { id: "croc-black", name: "Black Gloss", colorHex: "#1A1A1A", images: [""] },
-      { id: "croc-brown", name: "Brown Matte", colorHex: "#5D4037", images: [""] },
-      { id: "croc-red", name: "Rojo Rubí", colorHex: "#9B111E", images: [""] },
-      { id: "croc-navy", name: "Azul Profundo", colorHex: "#000033", images: [""] },
-      { id: "croc-green", name: "Esmeralda", colorHex: "#50C878", images: [""] },
+      { slug: "deepblue", name: "Deep Blue", colorHex: "#223A5E" },
+      { slug: "ochre", name: "Ochre", colorHex: "#B37A2C" },
+      { slug: "primalgreen", name: "Primal Green", colorHex: "#2E6B3B" },
+      { slug: "redearth", name: "Red Earth", colorHex: "#7C3A2D" },
+      { slug: "waxpaper", name: "Wax Paper", colorHex: "#B89E78" },
     ],
-    featured: true,
+  },
+  {
+    id: "yellowstone",
+    sku: "MAL-YLW-010",
+    name: "Yellowstone",
+    description:
+      "Napa fashion de alto impacto visual, ideal para lineas urbanas y colecciones estacionales con colores expresivos.",
+    category: "confeccion",
+    thickness: "1.0 - 1.2 mm",
+    articleType: "Napa",
+    style: "Fashion",
+    gloss: "Semi mate",
+    grainType: "Liso",
+    imageFolder: "yellowstone",
+    variants: [
+      { slug: "electricorange", name: "Electric Orange", colorHex: "#F36F21" },
+      { slug: "freshpurple", name: "Fresh Purple", colorHex: "#7547CC" },
+      { slug: "greenglow", name: "Green Glow", colorHex: "#56B34D" },
+      { slug: "robustgrey", name: "Robust Grey", colorHex: "#6A6F73" },
+      { slug: "tranquilturquoise", name: "Tranquil Turquoise", colorHex: "#2BA7A0" },
+    ],
   },
 ];
 
+export const products: Product[] = PRODUCT_DEFINITIONS.map(createProduct);
