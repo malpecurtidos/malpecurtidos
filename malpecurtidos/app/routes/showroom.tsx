@@ -17,7 +17,9 @@ export default function Showroom() {
   return (
     <div className="bg-[#121111] min-h-screen">
       {/* ── Circular Gallery Hero Section (Modular) ── */}
+      <div className="hidden">
       <Circular3DShowroom />
+      </div>
 
       {/* ── Product Grid Section ── */}
       <ShowroomGrid />
