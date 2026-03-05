@@ -18,6 +18,7 @@ import { Footer } from "./layout/footer";
 import { Navbar } from "./layout/navbar";
 import { QuotationProvider } from "./contexts/QuotationContext";
 import { QuotationCart } from "./components/productos/QuotationCart";
+import { products } from "./data/productsData";
 import "lenis/dist/lenis.css";
 
 export const links: Route.LinksFunction = () => [
@@ -56,6 +57,44 @@ export function Layout({ children }: { children: React.ReactNode }) {
     return () => {
       lenis.destroy();
       setLenisInstance(null);
+    };
+  }, []);
+
+  useEffect(() => {
+    const imageUrls = products
+      .map((product) => product.variants[0]?.images[0])
+      .filter((url): url is string => Boolean(url))
+      .slice(0, 24);
+
+    if (!imageUrls.length) return;
+
+    let isCancelled = false;
+    let idleId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const preload = () => {
+      if (isCancelled) return;
+      imageUrls.forEach((url) => {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = url;
+      });
+    };
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(preload, { timeout: 1500 });
+    } else {
+      timeoutId = setTimeout(preload, 400);
+    }
+
+    return () => {
+      isCancelled = true;
+      if (idleId !== null && typeof window !== "undefined" && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     };
   }, []);
 
@@ -119,4 +158,3 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
-

@@ -130,6 +130,7 @@ export function Navbar() {
                   <Link
                     key={link.to}
                     to={link.to}
+                    prefetch={link.to === "/productos" ? "intent" : "none"}
                     className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-all duration-300 rounded-xl group ${isActive
                       ? "text-white"
                       : "text-gray-300 hover:text-white"

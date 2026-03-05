@@ -16,7 +16,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         variant="outline"
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="border-zinc-700 text-white hover:bg-zinc-800 hover:border-[#967D59] hover:text-[#967D59] disabled:opacity-40 disabled:cursor-not-allowed font-sans bg-transparent"
+        className="inline-flex items-center whitespace-nowrap border-zinc-700 text-white hover:bg-zinc-800 hover:border-[#967D59] hover:text-[#967D59] disabled:opacity-40 disabled:cursor-not-allowed font-sans bg-transparent"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="mr-2"
+          className="mr-2 shrink-0"
         >
           <path d="m15 18-6-6 6-6" />
         </svg>
@@ -43,7 +43,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         variant="outline"
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="border-zinc-700 text-white hover:bg-zinc-800 hover:border-[#967D59] hover:text-[#967D59] disabled:opacity-40 disabled:cursor-not-allowed font-sans bg-transparent"
+        className="inline-flex items-center whitespace-nowrap border-zinc-700 text-white hover:bg-zinc-800 hover:border-[#967D59] hover:text-[#967D59] disabled:opacity-40 disabled:cursor-not-allowed font-sans bg-transparent"
       >
         Siguiente
         <svg
@@ -56,7 +56,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="ml-2"
+          className="ml-2 shrink-0"
         >
           <path d="m9 18 6-6-6-6" />
         </svg>

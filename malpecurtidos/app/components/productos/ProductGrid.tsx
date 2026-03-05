@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+﻿import React, { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "./ProductCard";
 import { ProductFilters, type ProductFilterState } from "./ProductFilters";
 import { Pagination } from "./Pagination";
@@ -93,6 +93,11 @@ export function ProductGrid() {
     setCurrentPage(1);
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <section className="bg-[#121111] py-16 md:py-24 px-4 md:px-8">
       <div className="max-w-[85%] mx-auto">
@@ -157,7 +162,7 @@ export function ProductGrid() {
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
-              onPageChange={setCurrentPage}
+              onPageChange={handlePageChange}
             />
           </div>
         </div>
@@ -185,7 +190,7 @@ export function ProductGrid() {
         >
           <div className="flex h-full flex-col">
             <div className="flex items-center justify-between px-4 py-4 border-b border-zinc-800">
-              <p className="text-sm font-semibold uppercase tracking-wider text-white">Refinar b�squeda</p>
+              <p className="text-sm font-semibold uppercase tracking-wider text-white">Refinar búsqueda</p>
               <button
                 type="button"
                 className="text-zinc-400 hover:text-white transition-colors"
@@ -233,3 +238,4 @@ export function ProductGrid() {
     </section>
   );
 }
+
