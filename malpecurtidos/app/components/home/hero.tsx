@@ -34,7 +34,7 @@ export function Hero() {
   return (
     <div>
       {/* Hero Section */}
-      <main className="h-screen bg-black text-white overflow-hidden">
+      <main className="min-h-screen bg-black text-white overflow-hidden">
         <section className="relative min-h-screen pt-16 md:pt-20 overflow-hidden">
           {/* Image Carousel Background */}
           <div className="absolute inset-0 w-full h-full overflow-hidden">
