@@ -152,10 +152,10 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
               Productos Relacionados
             </p>
             <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
-              Explora materiales MALPE para esta aplicacion
+              Explora más materiales MALPE
             </h2>
             <p className="text-gray-400 text-base md:text-lg font-sans leading-relaxed">
-              Cada coleccion del showroom se conecta con referencias reales del catalogo. Selecciona una para continuar al detalle del material.
+              Selecciona una colección para continuar al detalle del material.
             </p>
           </div>
 
