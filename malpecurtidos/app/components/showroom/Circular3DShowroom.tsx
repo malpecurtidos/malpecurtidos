@@ -119,10 +119,10 @@ function GalleryRingCard({
   const desktopOpacity = useTransform(depth01, (d) => 0.18 + d * 0.82);
   const mobileOpacity = useTransform(a, (rad) => {
     const frontness = Math.cos(rad);
-    if (frontness > 0.92) return 1;
+    if (frontness > 0.97) return 1;
 
     const depth = (frontness + 1) / 2;
-    return 0.22 + depth * 0.66;
+    return 0.18 + depth * 0.7;
   });
   const opacity = isMobile ? mobileOpacity : desktopOpacity;
   const zIndex = useTransform(depth01, (d) => Math.round(d * 100));
@@ -177,7 +177,7 @@ function GalleryRingCard({
         onDragStart={(e) => e.preventDefault()}
       >
         <div className="absolute inset-x-0 top-10 md:top-14 bottom-[45%] md:bottom-[40%] flex items-center justify-center">
-          <div className="relative w-44 h-44 md:w-60 md:h-60 rounded-lg bg-white flex items-center justify-center overflow-hidden shadow-md">
+          <div className="relative w-44 h-44 md:w-60 md:h-60 lg:w-56 lg:h-56 rounded-lg bg-white flex items-center justify-center overflow-hidden shadow-md">
             <img
               src={item.photo.url}
               alt={item.photo.text}
@@ -197,7 +197,7 @@ function GalleryRingCard({
 
         <div className="absolute bottom-0 left-0 w-full h-[45%] md:h-[40%] p-4 md:p-8 flex flex-col justify-end">
           <div className="space-y-3 md:space-y-4 text-center">
-            <h2 className="text-lg md:text-xl lg:text-2xl font-semibold leading-tight text-white tracking-tight">
+            <h2 className="text-lg md:text-xl lg:text-xl font-semibold leading-tight text-white tracking-tight">
               {item.name}
             </h2>
 
@@ -239,17 +239,17 @@ function CircularGalleryCore({ items, className, ...props }: CircularGalleryCore
   const isMobile = useMediaQuery("(max-width: 640px)");
   const isTablet = useMediaQuery("(max-width: 1024px)");
 
-  const radius = isMobile ? 250 : isTablet ? 400 : 550;
+  const radius = isMobile ? 250 : isTablet ? 400 : 500;
   const radiusX = radius;
   const radiusZ = radius;
-  const cardW = isMobile ? 220 : isTablet ? 260 : 280;
-  const cardH = isMobile ? 360 : isTablet ? 420 : 480;
+  const cardW = isMobile ? 220 : isTablet ? 260 : 256;
+  const cardH = isMobile ? 360 : isTablet ? 420 : 440;
 
-  const perspective = isMobile ? 1700 : 2000;
+  const perspective = isMobile ? 1700 : 1900;
   const mobileRingScale = isMobile ? 0.9 : 1;
   const mobileRingZ = isMobile ? -140 : 0;
-  const stageWidth = isMobile ? 380 : isTablet ? 680 : 800;
-  const stageHeight = isMobile ? 430 : isTablet ? 620 : 700;
+  const stageWidth = isMobile ? 380 : isTablet ? 680 : 740;
+  const stageHeight = isMobile ? 430 : isTablet ? 620 : 640;
 
   const autoRotateSpeedDeg = 8;
   const angleRaw = useMotionValue(0);
@@ -370,7 +370,7 @@ function ShowroomFallbackStage({
   return (
     <div className="w-full flex items-center justify-center px-4">
       <div className="w-full max-w-[320px] rounded-[2rem] border border-white/10 bg-zinc-900/75 overflow-hidden shadow-[0_18px_40px_-24px_rgba(255,255,255,0.18)]">
-        <div className="aspect-[4/5] bg-[#111] overflow-hidden">
+        <div className="aspect-[4/5] overflow-hidden">
           <img
             src={item.photo.url}
             alt={item.photo.text}
@@ -473,7 +473,7 @@ export const Circular3DShowroom = () => {
 
   return (
     <div className="w-full bg-[#121111] text-white overflow-hidden relative">
-      <div className="w-full min-h-[100vh] md:min-h-[130vh] flex flex-col items-center relative">
+      <div className="w-full min-h-[100vh] md:min-h-[130vh] flex flex-col items-center relative md:pt-6">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.03] blur-3xl sm:hidden" />
           <div className="hidden sm:block absolute top-4 left-1/2 -translate-x-1/2 w-[680px] h-[680px] bg-[#967D59] rounded-full blur-[96px] opacity-[0.08]" />
