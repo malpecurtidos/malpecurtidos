@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { Route } from "./+types/showroom.$id";
 import { Link } from "react-router";
-import { showroomProducts, categoryLabels } from "~/data/showroomData";
+import { showroomProducts, categoryLabels, type ShowroomSkinOption } from "~/data/showroomData";
 import { ShowroomContactModal } from "~/components/showroom/ShowroomContactModal";
+import { products } from "~/data/productsData";
+import { preloadImages } from "~/lib/preloadImages";
 
 export function meta({ data }: Route.MetaArgs) {
   if (!data) {
@@ -24,13 +26,20 @@ export function loader({ params }: Route.LoaderArgs) {
 
 export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
   const product = loaderData;
-  // Initialize with first skin of first collection
-  const [selectedSkin, setSelectedSkin] = useState(product.collections[0].options[0]);
+  const [selectedSkin, setSelectedSkin] = useState<ShowroomSkinOption>(product.collections[0].options[0]);
+
+  const relatedCollections = useMemo(() => {
+    return product.collections.map((collection) => ({
+      ...collection,
+      relatedProducts: collection.relatedProductIds
+        .map((relatedId) => products.find((catalogProduct) => catalogProduct.id === relatedId))
+        .filter((catalogProduct): catalogProduct is NonNullable<typeof catalogProduct> => Boolean(catalogProduct)),
+    }));
+  }, [product.collections]);
 
   return (
     <div className="bg-[#121111] min-h-screen">
       <div className="max-w-[85%] mx-auto px-4 md:px-8 pt-24 md:pt-32 pb-12 md:pb-16">
-        {/* Breadcrumb */}
         <nav className="mb-10 md:mb-12" aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 md:gap-x-3 md:gap-y-1.5">
             <li className="flex items-center shrink-0">
@@ -50,12 +59,7 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
               </Link>
             </li>
             <li className="shrink-0">
-              <svg
-                className="w-4 h-4 text-zinc-700"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-4 h-4 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </li>
@@ -68,12 +72,7 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
               </Link>
             </li>
             <li className="shrink-0">
-              <svg
-                className="w-4 h-4 text-zinc-700"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-4 h-4 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </li>
@@ -86,7 +85,6 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
         </nav>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Left Column: Gallery */}
           <div>
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-[#111]">
               <img
@@ -94,12 +92,10 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
                 alt={`${product.name} con ${selectedSkin.skinName}`}
                 className="w-full h-full object-cover transition-all duration-500"
               />
-              {/* Badge */}
               <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
                 Producto Ejemplo
               </div>
             </div>
-            {/* Mobile Skin Selector */}
             <div className="mt-8 lg:hidden">
               <SkinSelector
                 product={product}
@@ -109,7 +105,6 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
             </div>
           </div>
 
-          {/* Right Column: Details & Skin Selector */}
           <div className="space-y-8">
             <div>
               <div className="mb-4">
@@ -129,7 +124,6 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
 
             <div className="h-px bg-zinc-800" />
 
-            {/* Skin Selector Groups */}
             <div className="hidden lg:block">
               <SkinSelector
                 product={product}
@@ -140,48 +134,130 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
 
             <div className="h-px bg-zinc-800 mt-8" />
 
-            {/* Contact Modal */}
             <ShowroomContactModal product={product} selectedSkin={selectedSkin} />
 
-            {/* Info box */}
             <div className="bg-zinc-900 p-4 rounded-lg text-sm text-gray-400 font-sans flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#967D59] shrink-0 mt-0.5"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="16" y2="12" /><line x1="12" x2="12.01" y1="8" y2="8" /></svg>
               <p>
                 Este es un producto ejemplo para mostrar aplicaciones de nuestras pieles.
-                Contáctanos para discutir tus necesidades específicas de fabricación.
+                Contactanos para discutir tus necesidades especificas de fabricacion.
               </p>
             </div>
           </div>
         </div>
+
+        <section className="mt-20 md:mt-24 space-y-10">
+          <div className="max-w-2xl">
+            <p className="text-[#967D59] text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+              Productos Relacionados
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
+              Explora materiales MALPE para esta aplicacion
+            </h2>
+            <p className="text-gray-400 text-base md:text-lg font-sans leading-relaxed">
+              Cada coleccion del showroom se conecta con referencias reales del catalogo. Selecciona una para continuar al detalle del material.
+            </p>
+          </div>
+
+          <div className="space-y-10">
+            {relatedCollections.map((collection) => (
+              <div key={collection.name} className="bg-zinc-900/70 border border-white/5 rounded-3xl p-6 md:p-8">
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#967D59] mb-2">
+                      Coleccion aplicada
+                    </p>
+                    <h3 className="text-2xl md:text-3xl font-semibold text-white">{collection.name}</h3>
+                  </div>
+                  <p className="text-sm text-gray-400 font-sans max-w-xl">
+                    Referencias del catalogo sugeridas para continuar tu seleccion con materiales reales MALPE.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {collection.relatedProducts.map((relatedProduct) => {
+                    const mainImage = relatedProduct.variants[0]?.images[0];
+
+                    return (
+                      <Link
+                        key={`${collection.name}-${relatedProduct.id}`}
+                        to={`/productos/${relatedProduct.id}`}
+                        className="group block rounded-2xl overflow-hidden border border-white/10 bg-[#151413] hover:border-[#967D59]/40 transition-colors"
+                        onMouseDown={() => preloadImages([mainImage])}
+                        onTouchStart={() => preloadImages([mainImage])}
+                        onFocus={() => preloadImages([mainImage])}
+                      >
+                        <div className="aspect-[4/3] bg-[#111] overflow-hidden">
+                          <img
+                            src={mainImage}
+                            alt={relatedProduct.name}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="p-5">
+                          <p className="text-xs uppercase tracking-[0.2em] text-[#967D59] mb-2">
+                            {relatedProduct.articleType}
+                          </p>
+                          <h4 className="text-xl font-semibold text-white mb-3">{relatedProduct.name}</h4>
+                          <div className="flex items-center gap-3 mb-4">
+                            <div className="flex -space-x-2">
+                              {relatedProduct.variants.slice(0, 4).map((variant) => (
+                                <span
+                                  key={variant.id}
+                                  className="w-5 h-5 rounded-full border-2 border-white/70"
+                                  style={{ backgroundColor: variant.colorHex }}
+                                  title={variant.name}
+                                />
+                              ))}
+                            </div>
+                            <span className="text-xs text-gray-400 font-sans">
+                              {relatedProduct.variants.length} colores
+                            </span>
+                          </div>
+                          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white group-hover:text-[#967D59] transition-colors">
+                            Ver material
+                          </span>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
 }
 
-function SkinSelector({ product, selectedSkin, setSelectedSkin }: { product: any, selectedSkin: any, setSelectedSkin: (skin: any) => void }) {
+function SkinSelector({
+  product,
+  selectedSkin,
+  setSelectedSkin,
+}: {
+  product: Route.ComponentProps["loaderData"];
+  selectedSkin: ShowroomSkinOption;
+  setSelectedSkin: (skin: ShowroomSkinOption) => void;
+}) {
   return (
     <div className="space-y-8">
       <label className="block text-sm font-medium text-white">
         Piel Aplicada: <span className="font-bold text-[#967D59]">{selectedSkin.skinName} - {selectedSkin.variantName}</span>
       </label>
 
-      {product.collections.map((collection: any, colIdx: number) => (
+      {product.collections.map((collection, colIdx) => (
         <div key={colIdx} className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="text-sm font-semibold text-gray-200 uppercase tracking-wider">
               {collection.name}
             </span>
             <div className="h-px bg-zinc-800 flex-grow"></div>
-            <Link
-              to={`/productos/${collection.skinId}`}
-              className="text-xs text-[#967D59] hover:underline font-medium"
-            >
-              Ver ficha técnica
-            </Link>
           </div>
 
           <div className="flex flex-wrap gap-4">
-            {collection.options.map((option: any) => (
+            {collection.options.map((option) => (
               <div key={`${option.skinId}-${option.variantId}`} className="flex flex-col items-center gap-2">
                 <button
                   onClick={() => setSelectedSkin(option)}
@@ -198,7 +274,6 @@ function SkinSelector({ product, selectedSkin, setSelectedSkin }: { product: any
                       }`}
                     style={{ backgroundColor: option.colorHex }}
                   />
-                  {/* Checkmark */}
                   {selectedSkin.skinId === option.skinId && selectedSkin.variantId === option.variantId && (
                     <span className="absolute inset-0 flex items-center justify-center text-white drop-shadow-md">
                       <svg
@@ -231,4 +306,3 @@ function SkinSelector({ product, selectedSkin, setSelectedSkin }: { product: any
     </div>
   );
 }
-

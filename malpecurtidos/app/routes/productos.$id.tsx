@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { Route } from "./+types/productos.$id";
-import { Link, useNavigate } from "react-router";
-import { products, type Product } from "~/data/productsData";
+import { Link } from "react-router";
+import { products } from "~/data/productsData";
 import { ProductGallery } from "~/components/productos/ProductGallery";
 import { ProductVariantSelector } from "~/components/productos/ProductVariantSelector";
 import { ProductSpecSelector } from "~/components/productos/ProductSpecSelector";
 import { Button } from "~/ui/button";
 import { ProductRequestModal } from "~/components/productos/ProductRequestModal";
 import { useQuotation } from "~/contexts/QuotationContext";
+import { preloadImages } from "~/lib/preloadImages";
 
 export function meta({ data }: Route.MetaArgs) {
   if (!data) {
@@ -29,7 +30,6 @@ export function loader({ params }: Route.LoaderArgs) {
 
 export default function ProductDetail({ loaderData }: Route.ComponentProps) {
   const product = loaderData;
-  const navigate = useNavigate();
   const [requestType, setRequestType] = useState<"sample" | "tech_sheet" | null>(null);
 
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
@@ -37,6 +37,19 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
   const [notes, setNotes] = useState("");
 
   const { addToQuotation } = useQuotation();
+
+  useEffect(() => {
+    const currentIndex = product.variants.findIndex((variant) => variant.id === selectedVariant.id);
+    const nextVariant =
+      currentIndex >= 0 && currentIndex + 1 < product.variants.length
+        ? product.variants[currentIndex + 1]
+        : undefined;
+
+    preloadImages([
+      selectedVariant.images[0],
+      nextVariant?.images[0],
+    ]);
+  }, [product.variants, selectedVariant]);
 
   const handleAddToSamples = () => {
     addToQuotation({

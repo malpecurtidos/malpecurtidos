@@ -4,6 +4,7 @@ import { ProductFilters, type ProductFilterState } from "./ProductFilters";
 import { Pagination } from "./Pagination";
 import { products, PRODUCT_FILTER_OPTIONS } from "~/data/productsData";
 import { Button } from "~/ui/button";
+import { preloadImages } from "~/lib/preloadImages";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -82,6 +83,22 @@ export function ProductGrid() {
       window.removeEventListener("keydown", handleEscape);
     };
   }, [isMobileFiltersOpen]);
+
+  useEffect(() => {
+    const firstVisibleImages = currentProducts
+      .slice(0, 4)
+      .map((product) => product.variants[0]?.images[0]);
+
+    if (!firstVisibleImages.length) return;
+
+    const timeoutId = window.setTimeout(() => {
+      preloadImages(firstVisibleImages);
+    }, 150);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [currentProducts]);
 
   const clearFilters = () => {
     setFilters({ thickness: [], articleType: [], style: [], gloss: [], grainType: [] });
