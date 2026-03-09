@@ -83,6 +83,10 @@ function loadImageAsset(url: string) {
   });
 }
 
+function stopGesturePropagation(event: React.SyntheticEvent) {
+  event.stopPropagation();
+}
+
 function GalleryRingCard({
   item,
   index,
@@ -112,42 +116,63 @@ function GalleryRingCard({
 
   const depth01 = useTransform(z, (zz) => (zz + radiusZ) / (2 * radiusZ));
   const scale = useTransform(depth01, (d) => 0.64 + d * 0.36);
-  const opacity = useTransform(depth01, (d) => 0.18 + d * 0.82);
+  const desktopOpacity = useTransform(depth01, (d) => 0.18 + d * 0.82);
+  const mobileOpacity = useTransform(a, (rad) => {
+    const frontness = Math.cos(rad);
+    if (frontness > 0.92) return 1;
+
+    const depth = (frontness + 1) / 2;
+    return 0.22 + depth * 0.66;
+  });
+  const opacity = isMobile ? mobileOpacity : desktopOpacity;
   const zIndex = useTransform(depth01, (d) => Math.round(d * 100));
 
-  const rotateYRaw = useTransform(a, (rad) => {
+  const desktopRotateY = useTransform(a, (rad) => (rad * 180) / Math.PI);
+  const mobileRotateYRaw = useTransform(a, (rad) => {
     const max = isMobile ? 16 : 22;
     return -Math.sin(rad) * max;
   });
-  const rotateY = useSpring(rotateYRaw, { stiffness: 260, damping: 34, mass: 0.9 });
+  const mobileRotateY = useSpring(mobileRotateYRaw, { stiffness: 260, damping: 34, mass: 0.9 });
+  const rotateY = isMobile ? mobileRotateY : desktopRotateY;
 
-  const shadow = useTransform(depth01, (d) =>
+  const desktopShadow = useTransform(depth01, (d) =>
+    d > 0.85
+      ? "0 24px 52px -18px rgba(255,255,255,0.14), 0 0 0 1px rgba(255,255,255,0.05)"
+      : "0 10px 28px -16px rgba(255,255,255,0.08)",
+  );
+  const mobileShadow = useTransform(depth01, (d) =>
     d > 0.85
       ? "0 24px 48px -18px rgba(255,255,255,0.14)"
       : "0 12px 28px -16px rgba(255,255,255,0.08)",
   );
+  const shadow = isMobile ? mobileShadow : desktopShadow;
+  const desktopBackgroundColor = useTransform(depth01, (d) =>
+    d > 0.9 ? "#111" : "rgba(24, 24, 27, 0.4)",
+  );
+  const backgroundColor = isMobile ? "#18181b" : (desktopBackgroundColor as unknown as string);
 
   return (
     <motion.div
       className="absolute flex items-center justify-center pointer-events-none"
-      style={{
-        transformStyle: "preserve-3d",
-        x,
-        y,
-        z,
-        scale,
-        opacity,
-        rotateY,
-        zIndex,
-      }}
-    >
+        style={{
+          transformStyle: "preserve-3d",
+          x,
+          y,
+          z,
+          scale,
+          opacity,
+          rotateY,
+          zIndex,
+          willChange: "transform, opacity",
+        }}
+      >
       <motion.div
         className="block relative overflow-hidden group border border-white/8 transition-colors duration-500 rounded-[2rem] pointer-events-auto"
         style={{
           width: cardW,
           height: cardH,
           boxShadow: shadow as unknown as string,
-          backgroundColor: "rgba(24, 24, 27, 0.72)",
+          backgroundColor,
         }}
         onDragStart={(e) => e.preventDefault()}
       >
@@ -178,11 +203,20 @@ function GalleryRingCard({
 
             <div className="w-8 h-0.5 bg-[#967D59] opacity-70 mx-auto transition-all duration-700 group-hover:w-24" />
 
-            <Link to={`/showroom/${item.id}`} className="block">
+            <Link
+              to={`/showroom/${item.id}`}
+              className="block"
+              onPointerDownCapture={stopGesturePropagation}
+              onTouchStartCapture={stopGesturePropagation}
+              onMouseDownCapture={stopGesturePropagation}
+            >
               <Button
                 size="sm"
                 variant="outline"
                 className="w-full border-white/10 text-white hover:bg-white hover:text-black transition-all duration-500 rounded-xl py-4 md:py-5 font-bold uppercase tracking-widest text-[10px]"
+                onPointerDownCapture={stopGesturePropagation}
+                onTouchStartCapture={stopGesturePropagation}
+                onMouseDownCapture={stopGesturePropagation}
               >
                 Ver producto
               </Button>
@@ -441,7 +475,11 @@ export const Circular3DShowroom = () => {
     <div className="w-full bg-[#121111] text-white overflow-hidden relative">
       <div className="w-full min-h-[100vh] md:min-h-[130vh] flex flex-col items-center relative">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.03] blur-3xl" />
+          <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.03] blur-3xl sm:hidden" />
+          <div className="hidden sm:block absolute top-4 left-1/2 -translate-x-1/2 w-[680px] h-[680px] bg-[#967D59] rounded-full blur-[96px] opacity-[0.08]" />
+          <div className="hidden sm:block absolute bottom-0 right-0 w-[520px] h-[520px] bg-white rounded-full blur-[120px] opacity-[0.02]" />
+          <div className="hidden sm:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[820px] h-[360px] bg-white rounded-[100%] blur-[140px] opacity-[0.04]" />
+          <div className="hidden sm:block absolute inset-0 bg-gradient-to-b from-[#121111] via-transparent to-[#121111]" />
         </div>
 
         <div className="text-center z-10 px-4 pt-28 pb-12 md:pt-28 md:pb-16 shrink-0 relative pointer-events-none">
