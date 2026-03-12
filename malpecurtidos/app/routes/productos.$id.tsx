@@ -221,6 +221,7 @@ export default function ProductDetail({ loaderData }: Route.ComponentProps) {
         isOpen={!!requestType}
         onClose={() => setRequestType(null)}
         type={requestType}
+        productId={product.id}
         productName={product.name}
         sku={product.sku}
         variantName={selectedVariant.name}

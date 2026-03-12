@@ -38,7 +38,7 @@ export function Navbar() {
     }
   });
 
-  // Cerrar dropdown al hacer click fuera
+  // Cerrar dropdown al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -58,7 +58,7 @@ export function Navbar() {
     };
   }, [isLangOpen]);
 
-  // Cerrar menÃº mÃ³vil al hacer tap/click fuera
+  // Cerrar menú móvil al hacer tap/click fuera
   useEffect(() => {
     const handleOutsideMenuClick = (event: MouseEvent | TouchEvent) => {
       if (
@@ -80,9 +80,9 @@ export function Navbar() {
     };
   }, [isMenuOpen]);
 
-  const whatsappNumber = "524777785045";
+  const whatsappNumber = "524771312276";
   const whatsappMessage = encodeURIComponent(
-    "Hola, me gustarÃ­a obtener mÃ¡s informaciÃ³n sobre sus productos."
+    "Hola, me gustaría obtener más información sobre sus productos."
   );
 
   return (
@@ -161,7 +161,7 @@ export function Navbar() {
                 <button
                   onClick={() => setIsOpen(true)}
                   className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-[#1A1816] bg-[#967D59] hover:bg-[#F2C94C] transition-all duration-300 shadow-lg shadow-[#967D59]/20 group"
-                  aria-label="Ver cotizaciÃ³n"
+                  aria-label="Ver cotización"
                 >
                   <span className="relative">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
@@ -252,7 +252,7 @@ export function Navbar() {
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300"
-                aria-label="Abrir menÃº"
+                aria-label="Abrir menú"
               >
                 <svg
                   className="w-5 h-5"

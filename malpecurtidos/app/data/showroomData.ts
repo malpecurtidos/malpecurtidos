@@ -41,7 +41,7 @@ export const showroomProducts: ShowroomProduct[] = [
     defaultImage: "/showroom-imgs/bota_western/bota_western.webp",
     name: "Bota Western",
     description:
-      "Bota estilo vaquero con acabados artesanales. Visualiza como nuestras pieles premium resaltan el diseno western tradicional.",
+      "Bota estilo vaquero con acabados artesanales. Visualiza cómo nuestras pieles premium resaltan el diseño western tradicional.",
     category: "calzado",
     collections: [
       {
@@ -77,7 +77,7 @@ export const showroomProducts: ShowroomProduct[] = [
     defaultImage: "/showroom-imgs/bota_dama/bota_dama.webp",
     name: "Bota de Dama",
     description:
-      "Calzado femenino elegante y versatil. Descubre la sofisticacion de nuestras pieles en disenos de moda contemporanea.",
+      "Calzado femenino elegante y versátil. Descubre la sofisticación de nuestras pieles en diseños de moda contemporánea.",
     category: "calzado",
     collections: [
       {
@@ -188,7 +188,7 @@ export const showroomProducts: ShowroomProduct[] = [
     defaultImage: "/showroom-imgs/sneaker_formal/sneaker_formal.webp",
     name: "Sneaker Formal",
     description:
-      "Diseno formal casual. Visualiza la aplicacion de nuestras pieles tecnicas en calzado dinamico.",
+      "Diseño formal casual. Visualiza la aplicación de nuestras pieles técnicas en calzado dinámico.",
     category: "calzado",
     collections: [
       {

@@ -19,54 +19,53 @@ import {
   validateSecureFormRequest,
 } from "~/lib/form-security.server";
 
-const REQUEST_TYPES = new Set(["sample", "tech_sheet"]);
-
 export function loader() {
   return methodNotAllowedLoader();
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const secureRequest = await validateSecureFormRequest(request, { routeKey: "product-request" });
+  const secureRequest = await validateSecureFormRequest(request, { routeKey: "showroom-request" });
   if (!secureRequest.ok) {
     return secureRequest.response;
   }
 
   const { formData } = secureRequest;
-  const type = parseFormField(formData, "type");
   const rawName = parseFormField(formData, "name");
   const rawEmail = parseFormField(formData, "email");
   const phone = parseFormField(formData, "phone");
   const company = parseFormField(formData, "company");
   const message = parseTextareaField(formData, "message");
-  const productId = parseFormField(formData, "productId");
   const productName = parseFormField(formData, "productName");
-  const variantName = parseFormField(formData, "variantName");
-  const thickness = parseFormField(formData, "thickness");
-  const sku = parseFormField(formData, "sku");
+  const productCategory = parseFormField(formData, "productCategory");
+  const skinName = parseFormField(formData, "skinName");
+  const skinVariant = parseFormField(formData, "skinVariant");
+  const skinId = parseFormField(formData, "skinId");
+  const variantId = parseFormField(formData, "variantId");
 
   const name = normalizeName(rawName);
   const email = normalizeEmail(rawEmail);
   const normalizedCompany = normalizeOptionalText(company);
 
   const validationError = validateFields([
-    REQUEST_TYPES.has(type) ? null : "Tipo de solicitud inválido.",
     validateRequired(name, "Nombre"),
     validateLength(name, "Nombre", 2, 120),
     validateEmail(email),
     validateLength(email, "Email", 6, 160),
     validatePhone(phone),
-    validateRequired(productId, "Producto"),
-    validateLength(productId, "Producto", 2, 120),
-    validateRequired(productName, "Producto"),
-    validateLength(productName, "Producto", 2, 120),
-    validateRequired(variantName, "Variante"),
-    validateLength(variantName, "Variante", 1, 120),
-    validateRequired(thickness, "Grosor"),
-    validateLength(thickness, "Grosor", 1, 60),
-    validateRequired(sku, "SKU"),
-    validateLength(sku, "SKU", 2, 60),
     validateLength(normalizedCompany, "Empresa", 0, 120),
     validateLength(message, "Mensaje", 0, 2000),
+    validateRequired(productName, "Producto"),
+    validateLength(productName, "Producto", 2, 120),
+    validateRequired(productCategory, "Categoría"),
+    validateLength(productCategory, "Categoría", 2, 80),
+    validateRequired(skinName, "Piel"),
+    validateLength(skinName, "Piel", 2, 120),
+    validateRequired(skinVariant, "Variante"),
+    validateLength(skinVariant, "Variante", 1, 120),
+    validateRequired(skinId, "ID de piel"),
+    validateLength(skinId, "ID de piel", 2, 120),
+    validateRequired(variantId, "ID de variante"),
+    validateLength(variantId, "ID de variante", 2, 120),
     validateCheckbox(formData, "privacy", "Debes aceptar la política de privacidad."),
   ]);
 
@@ -75,14 +74,8 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   try {
-    const subjectPrefix = type === "sample" ? "Solicitud de muestra" : "Solicitud de ficha técnica";
-    const manualFollowUp =
-      type === "tech_sheet"
-        ? "\nSeguimiento: el departamento de ventas enviará la ficha técnica manualmente."
-        : "";
-
     const emailContent = [
-      `Nueva ${subjectPrefix}`,
+      "Nueva solicitud desde showroom",
       "",
       "Datos del cliente",
       "-----------------",
@@ -91,24 +84,22 @@ export async function action({ request }: ActionFunctionArgs) {
       `Email: ${email}`,
       `Teléfono: ${phone}`,
       "",
-      "Producto solicitado",
-      "-------------------",
-      `Producto: ${productName}`,
-      `ID producto: ${productId}`,
-      `SKU: ${sku}`,
-      `Variante: ${variantName}`,
-      `Grosor: ${thickness}`,
+      "Selección de showroom",
+      "---------------------",
+      `Producto ejemplo: ${productName}`,
+      `Categoría: ${productCategory}`,
+      `Piel: ${skinName}`,
+      `Variante: ${skinVariant}`,
+      `ID piel: ${skinId}`,
+      `ID variante: ${variantId}`,
       "",
       "Mensaje",
       "-------",
       message || "N/A",
-      manualFollowUp,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    ].join("\n");
 
     await sendInternalEmail({
-      subject: `${subjectPrefix}: ${productName} - ${name}`,
+      subject: `Solicitud showroom: ${productName} - ${name}`,
       replyTo: email,
       text: emailContent,
     });

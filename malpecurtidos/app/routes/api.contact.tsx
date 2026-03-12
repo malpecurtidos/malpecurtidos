@@ -10,7 +10,6 @@ import {
   parseFormField,
   parseTextareaField,
   sendInternalEmail,
-  validateCheckbox,
   validateEmail,
   validateFields,
   validateLength,
@@ -19,55 +18,45 @@ import {
   validateSecureFormRequest,
 } from "~/lib/form-security.server";
 
-const REQUEST_TYPES = new Set(["sample", "tech_sheet"]);
+const SUBJECT_LABELS: Record<string, string> = {
+  ventas: "Ventas / Cotización",
+  informacion: "Información general",
+  proveedores: "Proveedores",
+  otro: "Otro",
+};
 
 export function loader() {
   return methodNotAllowedLoader();
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const secureRequest = await validateSecureFormRequest(request, { routeKey: "product-request" });
+  const secureRequest = await validateSecureFormRequest(request, { routeKey: "contact-request" });
   if (!secureRequest.ok) {
     return secureRequest.response;
   }
 
   const { formData } = secureRequest;
-  const type = parseFormField(formData, "type");
   const rawName = parseFormField(formData, "name");
   const rawEmail = parseFormField(formData, "email");
   const phone = parseFormField(formData, "phone");
   const company = parseFormField(formData, "company");
+  const subject = parseFormField(formData, "subject");
   const message = parseTextareaField(formData, "message");
-  const productId = parseFormField(formData, "productId");
-  const productName = parseFormField(formData, "productName");
-  const variantName = parseFormField(formData, "variantName");
-  const thickness = parseFormField(formData, "thickness");
-  const sku = parseFormField(formData, "sku");
 
   const name = normalizeName(rawName);
   const email = normalizeEmail(rawEmail);
   const normalizedCompany = normalizeOptionalText(company);
 
   const validationError = validateFields([
-    REQUEST_TYPES.has(type) ? null : "Tipo de solicitud inválido.",
     validateRequired(name, "Nombre"),
     validateLength(name, "Nombre", 2, 120),
     validateEmail(email),
     validateLength(email, "Email", 6, 160),
     validatePhone(phone),
-    validateRequired(productId, "Producto"),
-    validateLength(productId, "Producto", 2, 120),
-    validateRequired(productName, "Producto"),
-    validateLength(productName, "Producto", 2, 120),
-    validateRequired(variantName, "Variante"),
-    validateLength(variantName, "Variante", 1, 120),
-    validateRequired(thickness, "Grosor"),
-    validateLength(thickness, "Grosor", 1, 60),
-    validateRequired(sku, "SKU"),
-    validateLength(sku, "SKU", 2, 60),
     validateLength(normalizedCompany, "Empresa", 0, 120),
-    validateLength(message, "Mensaje", 0, 2000),
-    validateCheckbox(formData, "privacy", "Debes aceptar la política de privacidad."),
+    SUBJECT_LABELS[subject] ? null : "Selecciona un asunto válido.",
+    validateRequired(message, "Mensaje"),
+    validateLength(message, "Mensaje", 10, 2000),
   ]);
 
   if (validationError) {
@@ -75,14 +64,8 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   try {
-    const subjectPrefix = type === "sample" ? "Solicitud de muestra" : "Solicitud de ficha técnica";
-    const manualFollowUp =
-      type === "tech_sheet"
-        ? "\nSeguimiento: el departamento de ventas enviará la ficha técnica manualmente."
-        : "";
-
     const emailContent = [
-      `Nueva ${subjectPrefix}`,
+      "Nuevo mensaje de contacto",
       "",
       "Datos del cliente",
       "-----------------",
@@ -90,25 +73,15 @@ export async function action({ request }: ActionFunctionArgs) {
       `Empresa: ${normalizedCompany || "N/A"}`,
       `Email: ${email}`,
       `Teléfono: ${phone}`,
-      "",
-      "Producto solicitado",
-      "-------------------",
-      `Producto: ${productName}`,
-      `ID producto: ${productId}`,
-      `SKU: ${sku}`,
-      `Variante: ${variantName}`,
-      `Grosor: ${thickness}`,
+      `Asunto: ${SUBJECT_LABELS[subject]}`,
       "",
       "Mensaje",
       "-------",
-      message || "N/A",
-      manualFollowUp,
-    ]
-      .filter(Boolean)
-      .join("\n");
+      message,
+    ].join("\n");
 
     await sendInternalEmail({
-      subject: `${subjectPrefix}: ${productName} - ${name}`,
+      subject: `Contacto web: ${SUBJECT_LABELS[subject]} - ${name}`,
       replyTo: email,
       text: emailContent,
     });

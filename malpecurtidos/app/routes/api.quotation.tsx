@@ -1,89 +1,151 @@
 import type { ActionFunctionArgs } from "react-router";
+import {
+  createErrorResponse,
+  createServerErrorResponse,
+  createSuccessResponse,
+  methodNotAllowedLoader,
+  normalizeEmail,
+  normalizeName,
+  normalizeOptionalText,
+  parseFormField,
+  parseTextareaField,
+  sendInternalEmail,
+  validateCheckbox,
+  validateEmail,
+  validateFields,
+  validateLength,
+  validatePhone,
+  validateRequired,
+  validateSecureFormRequest,
+} from "~/lib/form-security.server";
 
-export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
+type QuotationItemPayload = {
+  productId: string;
+  productName: string;
+  variantId: string;
+  variantName: string;
+  thickness: string;
+  sku: string;
+  notes?: string;
+};
 
-  // Anti-spam check (honeypot)
-  const gotcha = formData.get("_gotcha");
-  if (gotcha) {
-    // Silently fail for bots
-    return { success: true };
-  }
+const MAX_QUOTATION_ITEMS = 12;
 
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const phone = formData.get("phone") as string;
-  const company = formData.get("company") as string;
-  const message = formData.get("message") as string;
-  const itemsJson = formData.get("items") as string;
-  const privacy = formData.get("privacy");
-
-  if (!privacy) {
-    return { error: "Debes aceptar la política de privacidad" };
-  }
-
-  let items = [];
-  try {
-    items = JSON.parse(itemsJson);
-  } catch (e) {
-    return { error: "Error procesando los productos" };
-  }
-
-  // Construct email body
-  const itemsList = items.map((item: any) =>
-    `- ${item.productName} (${item.variantName})\n  Grosor: ${item.thickness}\n  Notas: ${item.notes || "N/A"}`
-  ).join("\n\n");
-
-  const emailContent = `
-Nueva Solicitud de Muestras
-
-Cliente: ${name}
-Empresa: ${company || "Particular"}
-Email: ${email}
-Teléfono: ${phone}
-
-Mensaje:
-${message}
-
-Productos Solicitados (Muestras):
-------------------------
-${itemsList}
-------------------------
-  `;
-
-  console.log("=== NEW SAMPLE REQUEST ===");
-  console.log(emailContent);
-
-  // Example integration with Resend (if API key exists)
-  if (process.env.RESEND_API_KEY) {
-    try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from: "Solicitudes MALPE <onboarding@resend.dev>", // Update with verified domain
-          to: ["ventas@malpe.com.mx"], // Update with real email
-          subject: `Solicitud de Muestras: ${name} - ${company}`,
-          text: emailContent,
-        }),
-      });
-
-      if (!res.ok) {
-        console.error("Failed to send email via Resend", await res.text());
-      }
-    } catch (error) {
-      console.error("Error sending email:", error);
-    }
-  }
-
-  // Simulate network delay if dev
-  if (!process.env.RESEND_API_KEY) {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  }
-
-  return { success: true };
+export function loader() {
+  return methodNotAllowedLoader();
 }
 
+function isValidQuotationItem(item: unknown): item is QuotationItemPayload {
+  if (!item || typeof item !== "object") {
+    return false;
+  }
+
+  const candidate = item as Record<string, unknown>;
+  return [
+    candidate.productId,
+    candidate.productName,
+    candidate.variantId,
+    candidate.variantName,
+    candidate.thickness,
+    candidate.sku,
+  ].every((value) => typeof value === "string" && value.trim().length > 0);
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const secureRequest = await validateSecureFormRequest(request, { routeKey: "quotation-request" });
+  if (!secureRequest.ok) {
+    return secureRequest.response;
+  }
+
+  const { formData } = secureRequest;
+  const rawName = parseFormField(formData, "name");
+  const rawEmail = parseFormField(formData, "email");
+  const phone = parseFormField(formData, "phone");
+  const company = parseFormField(formData, "company");
+  const message = parseTextareaField(formData, "message");
+  const itemsJson = parseFormField(formData, "items");
+
+  const name = normalizeName(rawName);
+  const email = normalizeEmail(rawEmail);
+  const normalizedCompany = normalizeOptionalText(company);
+
+  const validationError = validateFields([
+    validateRequired(name, "Nombre"),
+    validateLength(name, "Nombre", 2, 120),
+    validateEmail(email),
+    validateLength(email, "Email", 6, 160),
+    validatePhone(phone),
+    validateLength(normalizedCompany, "Empresa", 0, 120),
+    validateLength(message, "Mensaje", 0, 2000),
+    validateRequired(itemsJson, "Productos"),
+    validateCheckbox(formData, "privacy", "Debes aceptar la política de privacidad."),
+  ]);
+
+  if (validationError) {
+    return createErrorResponse(validationError, 400);
+  }
+
+  let items: QuotationItemPayload[] = [];
+  try {
+    const parsed = JSON.parse(itemsJson) as unknown;
+    if (!Array.isArray(parsed) || parsed.length === 0 || parsed.length > MAX_QUOTATION_ITEMS) {
+      return createErrorResponse("La selección de muestras es inválida.", 400);
+    }
+
+    if (!parsed.every(isValidQuotationItem)) {
+      return createErrorResponse("La selección de muestras es inválida.", 400);
+    }
+
+    items = parsed.map((item) => ({
+      ...item,
+      notes: typeof item.notes === "string" ? item.notes.trim().slice(0, 500) : "",
+    }));
+  } catch {
+    return createErrorResponse("No pudimos procesar los productos seleccionados.", 400);
+  }
+
+  try {
+    const itemsList = items
+      .map((item, index) =>
+        [
+          `${index + 1}. ${item.productName}`,
+          `   ID producto: ${item.productId}`,
+          `   Variante: ${item.variantName}`,
+          `   ID variante: ${item.variantId}`,
+          `   SKU: ${item.sku}`,
+          `   Grosor: ${item.thickness}`,
+          `   Notas: ${item.notes || "N/A"}`,
+        ].join("\n"),
+      )
+      .join("\n\n");
+
+    const emailContent = [
+      "Nueva solicitud de muestras",
+      "",
+      "Datos del cliente",
+      "-----------------",
+      `Nombre: ${name}`,
+      `Empresa: ${normalizedCompany || "N/A"}`,
+      `Email: ${email}`,
+      `Teléfono: ${phone}`,
+      "",
+      "Mensaje",
+      "-------",
+      message || "N/A",
+      "",
+      "Productos solicitados",
+      "---------------------",
+      itemsList,
+    ].join("\n");
+
+    await sendInternalEmail({
+      subject: `Solicitud de muestras: ${name} - ${items.length} productos`,
+      replyTo: email,
+      text: emailContent,
+    });
+
+    return createSuccessResponse();
+  } catch {
+    return createServerErrorResponse();
+  }
+}

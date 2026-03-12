@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
-import { useFetcher } from "react-router";
+import { Link, useFetcher } from "react-router";
 import { useQuotation } from "~/contexts/QuotationContext";
 import { Button } from "~/ui/button";
+import { FormSecurityFields } from "~/components/forms/FormSecurityFields";
+import { FormStatusMessage } from "~/components/forms/FormStatusMessage";
+import { getLenisInstance } from "~/lib/lenis";
 
 export function QuotationCart() {
   const { items, isOpen, setIsOpen, removeFromQuotation, totalItems, clearQuotation } = useQuotation();
   const [showForm, setShowForm] = useState(false);
   const fetcher = useFetcher();
 
-  const isSubmitting = fetcher.state === "submitting";
-  const isSuccess = fetcher.data?.success;
+  const isSubmitting = fetcher.state !== "idle";
+  const isSuccess = Boolean(fetcher.data?.success);
+  const errorMessage = typeof fetcher.data?.error === "string" ? fetcher.data.error : "";
 
-  // Reset form view when sidebar closes
   useEffect(() => {
     if (!isOpen) {
-      // Delay reset slightly to avoid UI jump while closing
       const timer = setTimeout(() => {
         setShowForm(false);
       }, 300);
@@ -22,18 +24,36 @@ export function QuotationCart() {
     }
   }, [isOpen]);
 
-  // Handle success auto-close
   useEffect(() => {
-    if (isSuccess) {
-      const timer = setTimeout(() => {
-        clearQuotation();
-        setIsOpen(false);
-        // Reset form state is handled by the isOpen effect above effectively, 
-        // but we can ensure it's reset after the animation.
-      }, 3000);
-      return () => clearTimeout(timer);
+    if (!isSuccess) {
+      return;
     }
+
+    const timer = setTimeout(() => {
+      clearQuotation();
+      setIsOpen(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, [isSuccess, clearQuotation, setIsOpen]);
+
+  useEffect(() => {
+    const lenis = getLenisInstance();
+    const previousOverflow = document.body.style.overflow;
+
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      lenis?.stop();
+    } else {
+      document.body.style.overflow = previousOverflow;
+      lenis?.start();
+    }
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      lenis?.start();
+    };
+  }, [isOpen]);
 
   if (items.length === 0 && !isOpen) {
     return null;
@@ -41,7 +61,6 @@ export function QuotationCart() {
 
   return (
     <>
-      {/* Floating Action Button */}
       {!isOpen && items.length > 0 && (
         <button
           onClick={() => setIsOpen(true)}
@@ -57,19 +76,14 @@ export function QuotationCart() {
         </button>
       )}
 
-      {/* Slide-in Panel Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 backdrop-blur-sm ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-          }`}
+        className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 backdrop-blur-sm ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={() => setIsOpen(false)}
       />
 
-      {/* Slide-in Panel */}
       <div
-        className={`fixed inset-y-0 right-0 w-full md:w-[480px] bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+        className={`fixed inset-y-0 right-0 w-full md:w-[480px] bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        {/* Header */}
         <div className="p-6 bg-black text-white flex items-center justify-between shadow-lg border-b border-white/10">
           <div className="flex items-center gap-3">
             {showForm && !isSuccess && (
@@ -97,11 +111,9 @@ export function QuotationCart() {
           </button>
         </div>
 
-        {/* Content */}
         {!showForm ? (
-          // --- CART VIEW ---
           <>
-            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            <div data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain p-6 space-y-6">
               {items.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50">
                   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
@@ -139,9 +151,8 @@ export function QuotationCart() {
                           </button>
                         </div>
                         <p className="text-xs text-gray-600 mb-3 font-sans font-medium">
-                          {item.variantName} • {item.thickness}
+                          {item.variantName} - {item.thickness}
                         </p>
-
                       </div>
                     </div>
                   ))}
@@ -163,9 +174,7 @@ export function QuotationCart() {
             )}
           </>
         ) : (
-          // --- FORM VIEW ---
-          <div className="flex-1 overflow-y-auto p-6">
-            {/* Resumen */}
+          <div data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain p-6">
             <div className="mb-6 p-4 bg-[#F5F2ED] rounded-lg border border-[#4A3728]/20">
               <p className="text-sm font-semibold text-[#1A1816] mb-1 font-sans">Solicitud de Muestras</p>
               <p className="text-base text-[#4A3728] font-bold font-sans">{items.length} productos seleccionados</p>
@@ -174,32 +183,21 @@ export function QuotationCart() {
             {isSuccess ? (
               <div className="text-center py-8">
                 <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-green-600"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-600">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
                 <p className="text-lg font-semibold text-[#1A1816] mb-2 font-sans">
-                  ¡Solicitud Enviada!
+                  Solicitud enviada
                 </p>
                 <p className="text-gray-600 font-sans">Te contactaremos pronto para coordinar el envío de tus muestras.</p>
               </div>
             ) : (
               <fetcher.Form method="post" action="/api/quotation" className="space-y-6">
-                {/* Hidden field for items JSON */}
+                <FormSecurityFields />
                 <input type="hidden" name="items" value={JSON.stringify(items)} />
-                {/* Honeypot */}
-                <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
+                {errorMessage ? <FormStatusMessage tone="error" message={errorMessage} /> : null}
 
                 <div className="space-y-4">
                   <div className="space-y-2">
@@ -222,7 +220,7 @@ export function QuotationCart() {
 
                 <div className="space-y-2">
                   <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider font-sans">Mensaje Adicional</label>
-                  <textarea name="message" rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] resize-none font-sans transition-all text-black placeholder:text-gray-400" placeholder="¿Alguna especificación o duda particular?"></textarea>
+                  <textarea name="message" rows={3} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4A3728] focus:border-[#4A3728] resize-none font-sans transition-all text-black placeholder:text-gray-400" placeholder="¿Alguna especificación o duda particular?" />
                 </div>
 
                 <div className="flex items-start gap-3 p-4 bg-[#F5F2ED] rounded-lg border border-[#4A3728]/20">
@@ -234,7 +232,10 @@ export function QuotationCart() {
                     className="mt-1 w-4 h-4 text-[#4A3728] border-gray-300 rounded focus:ring-2 focus:ring-[#4A3728]"
                   />
                   <label htmlFor="privacy-cart" className="text-xs text-gray-600 font-sans leading-relaxed">
-                    Acepto que mis datos sean procesados por MALPE Curtidos para gestionar esta solicitud, de acuerdo con su <a href="#" className="underline hover:text-[#4A3728] transition-colors">Política de Privacidad</a>.
+                    Acepto que mis datos sean procesados por MALPE Curtidos para gestionar esta solicitud, de acuerdo con el{" "}
+                    <Link to="/aviso-de-privacidad" className="underline hover:text-[#4A3728] transition-colors">Aviso de Privacidad</Link>
+                    {" "}y los{" "}
+                    <Link to="/terminos-y-condiciones" className="underline hover:text-[#4A3728] transition-colors">Términos y Condiciones</Link>.
                   </label>
                 </div>
 
@@ -253,4 +254,3 @@ export function QuotationCart() {
     </>
   );
 }
-

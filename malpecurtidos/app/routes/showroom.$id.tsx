@@ -165,12 +165,12 @@ export default function ShowroomDetail({ loaderData }: Route.ComponentProps) {
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#967D59] mb-2">
-                      Coleccion aplicada
+                      Colección aplicada
                     </p>
                     <h3 className="text-2xl md:text-3xl font-semibold text-white">{collection.name}</h3>
                   </div>
                   <p className="text-sm text-gray-400 font-sans max-w-xl">
-                    Referencias del catalogo sugeridas para continuar tu seleccion con materiales reales MALPE.
+                    Referencias del catálogo sugeridas para continuar tu selección con materiales reales MALPE.
                   </p>
                 </div>
 
