@@ -20,7 +20,7 @@ const cards = [
     label: "INTERNACIONAL",
     title: "Blog",
     link: "/blog",
-    image: "/home-imgs/hero/hero-2.webp",
+    image: "/home-imgs/blog-card.avif",
   },
 ];
 
