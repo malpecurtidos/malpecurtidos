@@ -6,7 +6,7 @@ const cards = [
     label: "PRODUCTOS",
     title: "Productos",
     link: "/productos",
-    image: "/home-imgs/cards/productos.webp",
+    image: "/home-imgs/home-products-card.avif",
   },
   {
     id: "showroom",
@@ -20,7 +20,7 @@ const cards = [
     label: "INTERNACIONAL",
     title: "Blog",
     link: "/blog",
-    image: "/home-imgs/cards/blog.webp",
+    image: "/home-imgs/hero/hero-2.webp",
   },
 ];
 
